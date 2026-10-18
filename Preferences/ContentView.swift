@@ -44,19 +44,12 @@ struct ContentView: View {
                     }
                     
                     Section {
-                        Button {
-                            if model.isConnected {
-                                showingSignInSheet.toggle()
-                            } else {
-                                SettingsLogger.info("Presenting Network Alert.")
-                                showingSignInError.toggle()
-                            }
+                        NavigationLink {
+                            AppleAccountView()
                         } label: {
-                            NavigationLink {} label: {
-                                AppleAccountSection()
-                            }
-                            .navigationLinkIndicatorVisibility(UIDevice.iPad && !model.isCompact ? .hidden : .visible)
+                            AppleAccountSection()
                         }
+                        .navigationLinkIndicatorVisibility(UIDevice.iPad && !model.isCompact ? .hidden : .visible)
                     }
                     
                     NavigationLink {
