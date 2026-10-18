@@ -19,10 +19,10 @@ struct AppleAccountSection: View {
             .frame(width: 60, height: 60)
             
             VStack(alignment: .leading) {
-                Text("Alex Morgan")
+                Text("88")
                     .bold()
                     .font(.title3)
-                Text("alex.morgan27@icloud.com")
+                Text("amamamam9777@icloud.com")
                     .foregroundStyle(.secondary)
                     .font(.footnote)
                 Text("Apple Account, iCloud and more")
