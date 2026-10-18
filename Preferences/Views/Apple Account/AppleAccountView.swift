@@ -224,7 +224,7 @@ struct DemoDeviceInfoView: View {
                 DemoAccountRow(item: .init(title: "iCloud Backup", symbol: "arrow.clockwise.icloud.fill", tint: .cyan, status: "Off", destination: .detail("iCloud Backup", "arrow.clockwise.icloud.fill")))
                 DemoAccountRow(item: .init(title: "AppleCare & Warranty", symbol: "apple.logo", tint: .red, destination: .detail("AppleCare & Warranty", "apple.logo")))
             }
-            Section("Device Info") {
+            Section(header: Text("Device Info")) {
                 LabeledContent("Model", value: "iPhone 13 Pro")
                 LabeledContent("Version", value: "iOS 26.5")
                 LabeledContent("Serial Number", value: "DEMO-SERIAL-0000")
