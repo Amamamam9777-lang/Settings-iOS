@@ -154,9 +154,15 @@ struct BatteryView: View {
                             VStack(spacing: 6) {
                                 Spacer(minLength: 0)
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
-                                    .fill(index == 6 ? blue : LinearGradient(
-                                        colors: [Color(white: 0.48), Color(white: 0.30)],
-                                        startPoint: .top, endPoint: .bottom))
+                                    .fill(
+                                        index == 6
+                                        ? AnyShapeStyle(blue)
+                                        : AnyShapeStyle(LinearGradient(
+                                            colors: [Color(white: 0.48), Color(white: 0.30)],
+                                            startPoint: .top,
+                                            endPoint: .bottom
+                                        ))
+                                    )
                                     .frame(height: max(2, height * value))
                                 Text(["M", "T", "W", "T", "F", "S", "S", "M"][index])
                                     .font(.system(size: 13))
