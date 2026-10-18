@@ -22,21 +22,20 @@ struct BatteryView: View {
     private struct AppUsage: Identifiable {
         let id: String
         let name: String
-        let symbol: String
+        let assetName: String
         let percent: Int
         let screen: String
         let background: String?
-        let style: Int
     }
 
     private let apps: [AppUsage] = [
-        .init(id: "swiftgram", name: "Swiftgram", symbol: "paperplane.fill", percent: 31, screen: "1h 24m", background: "10m", style: 0),
-        .init(id: "safari", name: "Safari", symbol: "safari.fill", percent: 9, screen: "22m", background: nil, style: 1),
-        .init(id: "tiktok", name: "TikTok", symbol: "music.note", percent: 9, screen: "42m", background: "6m", style: 2),
-        .init(id: "happ", name: "Happ", symbol: "bolt.fill", percent: 8, screen: "1m", background: "3h 12m", style: 3),
-        .init(id: "instagram", name: "Instagram", symbol: "camera.fill", percent: 7, screen: "31m", background: "12m", style: 4),
-        .init(id: "youtube", name: "YouTube", symbol: "play.fill", percent: 5, screen: "27m", background: nil, style: 5),
-        .init(id: "messages", name: "Messages", symbol: "message.fill", percent: 3, screen: "14m", background: nil, style: 6)
+        .init(id: "pubg", name: "PUBG MOBILE", assetName: "BatteryAppPUBG", percent: 32, screen: "46m", background: nil),
+        .init(id: "safari", name: "Safari", assetName: "BatteryAppSafari", percent: 31, screen: "52m", background: nil),
+        .init(id: "swiftgram", name: "Swiftgram", assetName: "BatteryAppSwiftgram", percent: 30, screen: "1h 19m", background: "10m"),
+        .init(id: "tiktok", name: "TikTok", assetName: "BatteryAppTikTok", percent: 22, screen: "1h 10m", background: "4m"),
+        .init(id: "happ", name: "Happ", assetName: "BatteryAppHapp", percent: 14, screen: "1m", background: "4h 40m"),
+        .init(id: "whatsapp", name: "WhatsApp", assetName: "BatteryAppWhatsApp", percent: 6, screen: "15m", background: "9m"),
+        .init(id: "files", name: "Files", assetName: "BatteryAppFiles", percent: 5, screen: "8m", background: "1m")
     ]
 
     private var visibleApps: [AppUsage] {
@@ -341,124 +340,15 @@ struct BatteryView: View {
         .padding(.vertical, 18)
     }
 
-    @ViewBuilder
     private func appIcon(_ app: AppUsage) -> some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 11, style: .continuous)
-                .fill(iconBackground(app.style))
-
-            switch app.style {
-            case 0:
-                // Swiftgram-style monochrome lightning icon from the reference.
-                ZStack {
-                    Image(systemName: "bolt.fill")
-                        .font(.system(size: 34, weight: .black))
-                        .foregroundStyle(Color.white.opacity(0.12))
-                        .offset(x: 1, y: 1)
-                    Image(systemName: "bolt.fill")
-                        .font(.system(size: 32, weight: .black))
-                        .foregroundStyle(
-                            LinearGradient(
-                                colors: [Color.white, Color(red: 0.72, green: 0.73, blue: 0.75)],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-                }
-            case 1:
-                // Safari-like blue compass icon.
-                ZStack {
-                    Circle()
-                        .fill(LinearGradient(
-                            colors: [Color(red: 0.28, green: 0.78, blue: 1.0),
-                                     Color(red: 0.04, green: 0.35, blue: 0.82)],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        ))
-                        .padding(2)
-                    Circle().stroke(Color.white.opacity(0.75), lineWidth: 1).padding(5)
-                    Image(systemName: "safari.fill")
-                        .font(.system(size: 36, weight: .regular))
-                        .foregroundStyle(.white)
-                    Image(systemName: "location.north.fill")
-                        .font(.system(size: 17, weight: .black))
-                        .foregroundStyle(Color(red: 1.0, green: 0.25, blue: 0.28))
-                        .rotationEffect(.degrees(35))
-                }
-            case 2:
-                // TikTok-like note with cyan and pink offset accents.
-                ZStack {
-                    Image(systemName: "music.note")
-                        .font(.system(size: 31, weight: .black))
-                        .foregroundStyle(Color.cyan)
-                        .offset(x: -2, y: -1)
-                    Image(systemName: "music.note")
-                        .font(.system(size: 31, weight: .black))
-                        .foregroundStyle(Color(red: 1.0, green: 0.12, blue: 0.38))
-                        .offset(x: 2, y: 1)
-                    Image(systemName: "music.note")
-                        .font(.system(size: 30, weight: .black))
-                        .foregroundStyle(.white)
-                }
-            case 3:
-                // Dark monochrome Happ-style lightning mark.
-                ZStack {
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(LinearGradient(
-                            colors: [Color(white: 0.25), Color(white: 0.07)],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        ))
-                    Image(systemName: "bolt.fill")
-                        .font(.system(size: 34, weight: .black))
-                        .foregroundStyle(Color.white.opacity(0.16))
-                        .rotationEffect(.degrees(-8))
-                    Image(systemName: "bolt.slash.fill")
-                        .font(.system(size: 29, weight: .black))
-                        .foregroundStyle(Color(white: 0.34))
-                        .rotationEffect(.degrees(8))
-                }
-                .padding(1)
-            case 4:
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(LinearGradient(colors: [.purple, .pink, .orange],
-                                             startPoint: .bottomLeading,
-                                             endPoint: .topTrailing))
-                    Image(systemName: "camera")
-                        .font(.system(size: 25, weight: .semibold))
-                        .foregroundStyle(.white)
-                }
-            case 5:
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10).fill(Color.white)
-                    Image(systemName: "play.rectangle.fill")
-                        .font(.system(size: 29, weight: .bold))
-                        .foregroundStyle(Color.red)
-                }
-            default:
-                Image(systemName: app.symbol)
-                    .font(.system(size: 23, weight: .semibold))
-                    .foregroundStyle(.white)
-            }
-        }
-        .clipShape(RoundedRectangle(cornerRadius: 11, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 11, style: .continuous)
-                .stroke(Color.white.opacity(0.20), lineWidth: 1)
-        )
-    }
-
-    private func iconBackground(_ style: Int) -> Color {
-        switch style {
-        case 0: return Color(white: 0.28)
-        case 1: return Color(white: 0.08)
-        case 2: return Color.black
-        case 3: return Color(white: 0.18)
-        case 4: return Color.purple.opacity(0.75)
-        case 5: return Color.red.opacity(0.85)
-        default: return Color.green.opacity(0.8)
-        }
+        Image(app.assetName)
+            .resizable()
+            .scaledToFit()
+            .clipShape(RoundedRectangle(cornerRadius: 11, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 11, style: .continuous)
+                    .stroke(Color.white.opacity(0.18), lineWidth: 0.7)
+            )
     }
 
     private var otherUsageCard: some View {
