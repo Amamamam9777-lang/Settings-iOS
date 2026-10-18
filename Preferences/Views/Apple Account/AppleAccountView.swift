@@ -29,9 +29,13 @@ struct AppleAccountView: View {
             }
             
             Section {
-                SLink("ICLOUD_SERVICE_STORAGE_TITLE".localized(path: path), icon: "iCloud", status: "Set Up") {}
+                SLink("iCloud", icon: "iCloud") {}
+                SLink("iCloud Drive", icon: "icloud.and.arrow.down") {}
+                SLink("Photos", icon: "photo") {}
+                SLink("Find My", icon: "location") {}
             }
             
+            // Demo-only account presentation. This does not sign in to Apple services.
             Button("Sign Out") {}
                 .tint(.red)
                 .frame(maxWidth: .infinity, alignment: .center)
