@@ -1,43 +1,25 @@
-//
-//  AppleAccountSection.swift
-//  Preferences
-//
-//  Settings
-//
-
 import SwiftUI
 
-/// Apple Account Button Label
 struct AppleAccountSection: View {
     var body: some View {
-        HStack {
-            Image(
-                "AppleAccount_Icon_Blue",
-                bundle: Bundle(path: "\(UIDevice.RuntimePath)/System/Library/PrivateFrameworks/AppleAccountUI.framework")
-            )
-            .resizable()
-            .frame(width: 60, height: 60)
-            
-            VStack(alignment: .leading) {
-                Text("Alex Morgan")
-                    .bold()
-                    .font(.title3)
-                Text("alex.morgan27@icloud.com")
+        HStack(spacing: 14) {
+            Circle()
+                .fill(LinearGradient(colors: [Color(white: 0.72), Color(white: 0.20)], startPoint: .topLeading, endPoint: .bottomTrailing))
+                .frame(width: 60, height: 60)
+            VStack(alignment: .leading, spacing: 4) {
+                Text("88")
+                    .font(.title3.weight(.semibold))
+                Text("Apple Account, iCloud\nand more")
                     .foregroundStyle(.secondary)
                     .font(.footnote)
-                Text("Apple Account, iCloud and more")
-                    .foregroundStyle(.secondary)
-                    .font(.footnote)
+                    .fixedSize(horizontal: false, vertical: true)
             }
-            .padding(.leading, 0)
         }
     }
 }
 
 #Preview {
     NavigationStack {
-        List {
-            AppleAccountSection()
-        }
+        List { AppleAccountSection() }
     }
 }
