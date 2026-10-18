@@ -1,1 +1,18 @@
- 
+
+name: Build Settings-iOS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: List project files
+        run: find . -name '*.xcodeproj' -o -name '*.xcworkspace' -o -name 'Package.swift'
