@@ -224,14 +224,20 @@ struct DemoDeviceInfoView: View {
                 DemoAccountRow(item: .init(title: "iCloud Backup", symbol: "arrow.clockwise.icloud.fill", tint: .cyan, status: "Off", destination: .detail("iCloud Backup", "arrow.clockwise.icloud.fill")))
                 DemoAccountRow(item: .init(title: "AppleCare & Warranty", symbol: "apple.logo", tint: .red, destination: .detail("AppleCare & Warranty", "apple.logo")))
             }
-            Section(header: Text("Device Info")) {
-                LabeledContent("Model", value: "iPhone 13 Pro")
-                LabeledContent("Version", value: "iOS 26.5")
-                LabeledContent("Serial Number", value: "DEMO-SERIAL-0000")
-                LabeledContent("IMEI", value: "Not provided")
-            } footer: {
-                Text("Demo device information. These values are not read from the actual device.")
-            }
+            Section(
+                content: {
+                    LabeledContent("Model", value: "iPhone 13 Pro")
+                    LabeledContent("Version", value: "iOS 26.5")
+                    LabeledContent("Serial Number", value: "DEMO-SERIAL-0000")
+                    LabeledContent("IMEI", value: "Not provided")
+                },
+                header: {
+                    Text("Device Info")
+                },
+                footer: {
+                    Text("Demo device information. These values are not read from the actual device.")
+                }
+            )
             Section {
                 Text("This is a demo interface. No real Apple Account is signed in.")
                     .font(.footnote)
