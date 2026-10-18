@@ -11,8 +11,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Show Xcode version
-        run: xcodebuild -version
+      - name: Find build scheme
+        run: xcodebuild -list -project Preferences.xcodeproj
 
-      - name: List project files
-        run: find . -name '*.xcodeproj' -o -name '*.xcworkspace' -o -name 'Package.swift'
+      - name: Build for simulator
+        run: |
+          xcodebuild \
+            -project Preferences.xcodeproj \
+            -scheme Preferences \
+            -sdk iphonesimulator \
+            -configuration Debug \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      - name: Upload simulator app
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Settings-iOS-Simulator
+          path: build/Build/Products/Debug-iphonesimulator/*.app
