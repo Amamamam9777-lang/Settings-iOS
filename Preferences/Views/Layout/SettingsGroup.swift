@@ -35,14 +35,11 @@ struct SettingsGroup: View {
         Section {
             ForEach(group) { setting in
                 if setting.type == .iCloud {
-                    // Demo mode: open the mock signed-in Apple Account screen instead of
-                    // presenting the real Apple ID sign-in flow.
                     NavigationLink {
-                        AppleAccountView()
+                        DemoICloudView()
                     } label: {
-                        SLabel("88", icon: setting.icon)
+                        SLabel(setting.title, icon: setting.icon)
                     }
-                    .navigationLinkIndicatorVisibility(UIDevice.iPad && !model.isCompact ? .hidden : .visible)
                     .padding(.vertical, -5)
                 } else if requiredCapabilities(capabilities: setting.capabilities) {
                     switch setting.kind {
