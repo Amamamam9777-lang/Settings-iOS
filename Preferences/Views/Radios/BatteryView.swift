@@ -346,26 +346,107 @@ struct BatteryView: View {
         ZStack {
             RoundedRectangle(cornerRadius: 11, style: .continuous)
                 .fill(iconBackground(app.style))
-            if app.style == 1 {
-                Circle().fill(Color(red: 0.12, green: 0.58, blue: 0.91)).padding(3)
-                Image(systemName: "safari.fill").font(.system(size: 37)).foregroundStyle(.white)
-            } else if app.style == 2 {
-                Image(systemName: "music.note")
-                    .font(.system(size: 30, weight: .bold))
-                    .foregroundStyle(.white)
-                    .shadow(color: .cyan, radius: 2, x: -2, y: 0)
-                    .shadow(color: .pink, radius: 2, x: 2, y: 0)
-            } else if app.style == 3 {
-                Image(systemName: "bolt.fill")
-                    .font(.system(size: 29, weight: .black))
-                    .foregroundStyle(Color.white.opacity(0.35))
-            } else {
+
+            switch app.style {
+            case 0:
+                // Swiftgram-style monochrome lightning icon from the reference.
+                ZStack {
+                    Image(systemName: "bolt.fill")
+                        .font(.system(size: 34, weight: .black))
+                        .foregroundStyle(Color.white.opacity(0.12))
+                        .offset(x: 1, y: 1)
+                    Image(systemName: "bolt.fill")
+                        .font(.system(size: 32, weight: .black))
+                        .foregroundStyle(
+                            LinearGradient(
+                                colors: [Color.white, Color(red: 0.72, green: 0.73, blue: 0.75)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                }
+            case 1:
+                // Safari-like blue compass icon.
+                ZStack {
+                    Circle()
+                        .fill(LinearGradient(
+                            colors: [Color(red: 0.28, green: 0.78, blue: 1.0),
+                                     Color(red: 0.04, green: 0.35, blue: 0.82)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ))
+                        .padding(2)
+                    Circle().stroke(Color.white.opacity(0.75), lineWidth: 1).padding(5)
+                    Image(systemName: "safari.fill")
+                        .font(.system(size: 36, weight: .regular))
+                        .foregroundStyle(.white)
+                    Image(systemName: "location.north.fill")
+                        .font(.system(size: 17, weight: .black))
+                        .foregroundStyle(Color(red: 1.0, green: 0.25, blue: 0.28))
+                        .rotationEffect(.degrees(35))
+                }
+            case 2:
+                // TikTok-like note with cyan and pink offset accents.
+                ZStack {
+                    Image(systemName: "music.note")
+                        .font(.system(size: 31, weight: .black))
+                        .foregroundStyle(Color.cyan)
+                        .offset(x: -2, y: -1)
+                    Image(systemName: "music.note")
+                        .font(.system(size: 31, weight: .black))
+                        .foregroundStyle(Color(red: 1.0, green: 0.12, blue: 0.38))
+                        .offset(x: 2, y: 1)
+                    Image(systemName: "music.note")
+                        .font(.system(size: 30, weight: .black))
+                        .foregroundStyle(.white)
+                }
+            case 3:
+                // Dark monochrome Happ-style lightning mark.
+                ZStack {
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(LinearGradient(
+                            colors: [Color(white: 0.25), Color(white: 0.07)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ))
+                    Image(systemName: "bolt.fill")
+                        .font(.system(size: 34, weight: .black))
+                        .foregroundStyle(Color.white.opacity(0.16))
+                        .rotationEffect(.degrees(-8))
+                    Image(systemName: "bolt.slash.fill")
+                        .font(.system(size: 29, weight: .black))
+                        .foregroundStyle(Color(white: 0.34))
+                        .rotationEffect(.degrees(8))
+                }
+                .padding(1)
+            case 4:
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(LinearGradient(colors: [.purple, .pink, .orange],
+                                             startPoint: .bottomLeading,
+                                             endPoint: .topTrailing))
+                    Image(systemName: "camera")
+                        .font(.system(size: 25, weight: .semibold))
+                        .foregroundStyle(.white)
+                }
+            case 5:
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10).fill(Color.white)
+                    Image(systemName: "play.rectangle.fill")
+                        .font(.system(size: 29, weight: .bold))
+                        .foregroundStyle(Color.red)
+                }
+            default:
                 Image(systemName: app.symbol)
                     .font(.system(size: 23, weight: .semibold))
                     .foregroundStyle(.white)
             }
         }
-        .overlay(RoundedRectangle(cornerRadius: 11).stroke(Color.white.opacity(0.22), lineWidth: 1))
+        .clipShape(RoundedRectangle(cornerRadius: 11, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 11, style: .continuous)
+                .stroke(Color.white.opacity(0.20), lineWidth: 1)
+        )
     }
 
     private func iconBackground(_ style: Int) -> Color {
