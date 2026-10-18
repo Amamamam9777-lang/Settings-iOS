@@ -1,5 +1,5 @@
 
-name: Build Settings-iOS
+name: Build Settings-iOS for iPhone
 
 on:
   workflow_dispatch:
@@ -11,23 +11,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Find build scheme
-        run: xcodebuild -list -project Preferences.xcodeproj
-
-      - name: Build for simulator
+      - name: Build for iPhone
         run: |
           xcodebuild \
             -project Preferences.xcodeproj \
             -scheme Preferences \
-            -sdk iphonesimulator \
-            -configuration Debug \
+            -sdk iphoneos \
+            -configuration Release \
             -derivedDataPath build \
             CODE_SIGNING_ALLOWED=NO \
             build
 
-      - name: Upload simulator app
-        if: success()
+      - name: Package IPA
+        run: |
+          mkdir -p Payload
+          cp -R build/Build/Products/Release-iphoneos/Preferences.app Payload/
+          /usr/bin/zip -qr Settings-iOS-unsigned.ipa Payload
+
+      - name: Upload IPA
         uses: actions/upload-artifact@v4
         with:
-          name: Settings-iOS-Simulator
-          path: build/Build/Products/Debug-iphonesimulator/*.app
+          name: Settings-iOS-iPhone
+          path: Settings-iOS-unsigned.ipa
