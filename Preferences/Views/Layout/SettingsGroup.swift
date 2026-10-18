@@ -35,29 +35,15 @@ struct SettingsGroup: View {
         Section {
             ForEach(group) { setting in
                 if setting.type == .iCloud {
-                    Button {
-                        if model.isConnected {
-                            showingSignInSheet.toggle()
-                        } else {
-                            SettingsLogger.info("Presenting Network Alert.")
-                            showingSignInError.toggle()
-                        }
+                    // Demo mode: open the mock signed-in Apple Account screen instead of
+                    // presenting the real Apple ID sign-in flow.
+                    NavigationLink {
+                        AppleAccountView()
                     } label: {
-                        NavigationLink {} label: {
-                            SLabel(setting.title, icon: setting.icon)
-                        }
-                        .navigationLinkIndicatorVisibility(UIDevice.iPad && !model.isCompact ? .hidden : .visible)
+                        SLabel("88", icon: setting.icon)
                     }
+                    .navigationLinkIndicatorVisibility(UIDevice.iPad && !model.isCompact ? .hidden : .visible)
                     .padding(.vertical, -5)
-                    .alert(.connectToTheInternetToSignInToYourDevice, isPresented: $showingSignInError) {
-                        Button(.ok) {}
-                    }
-                    .sheet(isPresented: $showingSignInSheet) {
-                        NavigationStack {
-                            SelectSignInOptionView()
-                                .interactiveDismissDisabled()
-                        }
-                    }
                 } else if requiredCapabilities(capabilities: setting.capabilities) {
                     switch setting.kind {
                     case .link:
