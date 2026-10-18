@@ -23,16 +23,6 @@ struct AppleAccountView: View {
             .frame(maxWidth: .infinity, alignment: .center)
             .listRowBackground(Color.clear)
             
-            VStack(spacing: 4) {
-                Text("88")
-                    .font(.title2.weight(.semibold))
-                Text("amamamam9777@icloud.com")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-            }
-            .frame(maxWidth: .infinity, alignment: .center)
-            .listRowBackground(Color.clear)
-
             Section {
                 SLink("SPYGLASS_SPECIFIER_PAYMENT_AND_SHIPPING".localized(path: path), icon: "person.text.rectangle.fill") {}
                 SLink("SPYGLASS_SPECIFIER_SIGNIN_AND_SECURITY".localized(path: path), icon: "custom.key.shield.fill") {}
