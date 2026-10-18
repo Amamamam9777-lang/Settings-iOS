@@ -64,10 +64,10 @@ struct AppleAccountView: View {
                 }
             }
 
-            Section {
-                Text("Это демонстрационный интерфейс. Вход в настоящий Apple ID не выполняется.")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
+            Section("Устройства") {
+                SLink("iPhone (8)", icon: "iphone.gen3", status: "Этот iPhone") {
+                    DemoDeviceInfoView()
+                }
             }
         }
     }
@@ -126,6 +126,49 @@ struct DemoICloudView: View {
                 Text("Настройки на этом экране демонстрационные и не изменяют данные настоящего iCloud.")
                     .font(.footnote)
                     .foregroundStyle(.secondary)
+            }
+        }
+    }
+}
+
+
+struct DemoDeviceInfoView: View {
+    var body: some View {
+        CustomList(title: "Информация об устройстве") {
+            VStack(spacing: 8) {
+                Image(systemName: "iphone.gen3")
+                    .font(.system(size: 54))
+                    .foregroundStyle(.blue)
+                Text("iPhone (8)")
+                    .font(.title2.weight(.semibold))
+                Text("Этот iPhone 13 Pro")
+                    .foregroundStyle(.secondary)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 20)
+            .listRowBackground(Color.clear)
+
+            Section {
+                SLink("Найти iPhone", icon: "location.fill", status: "Выкл.") {
+                    DemoAccountDetailView(title: "Найти iPhone", symbol: "location.fill")
+                }
+                SLink("Резервная копия в iCloud", icon: "arrow.clockwise.icloud", status: "Выкл.") {
+                    DemoAccountDetailView(title: "Резервная копия в iCloud", symbol: "arrow.clockwise.icloud")
+                }
+                SLink("AppleCare и гарантия", icon: "apple.logo") {
+                    DemoAccountDetailView(title: "AppleCare и гарантия", symbol: "apple.logo")
+                }
+            }
+
+            Section {
+                LabeledContent("Модель", value: "iPhone 13 Pro")
+                LabeledContent("Версия", value: "iOS 26.5")
+                LabeledContent("Серийный номер", value: "DEMO-SERIAL-0000")
+                LabeledContent("IMEI", value: "Не указан")
+            } header: {
+                Text("Информация об устройстве")
+            } footer: {
+                Text("Это демонстрационные данные. Сведения не получены с настоящего устройства и не связаны с Apple ID.")
             }
         }
     }
