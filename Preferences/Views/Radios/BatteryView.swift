@@ -214,14 +214,22 @@ private struct MiniWeekChart: View {
     private let values: [CGFloat] = [0.48, 0.75, 0.38, 0.64, 0.30, 0.53, 0.42]
     var body: some View {
         GeometryReader { proxy in
-            HStack(alignment: .bottom, spacing: 8) {
-                ForEach(Array(values.enumerated()), id: \.offset) { index, value in
-                    RoundedRectangle(cornerRadius: 3)
-                        .fill(index == 6 ? BatteryPalette.blue : Color.white.opacity(0.22))
-                        .frame(maxWidth: .infinity).frame(height: proxy.size.height * value)
+            ZStack(alignment: .bottom) {
+                VStack(spacing: 0) {
+                    ForEach(0..<3, id: \.self) { _ in
+                        Rectangle().fill(Color.white.opacity(0.13)).frame(height: 0.7)
+                        Spacer(minLength: 0)
+                    }
                 }
+                HStack(alignment: .bottom, spacing: 8) {
+                    ForEach(Array(values.enumerated()), id: \.offset) { index, value in
+                        RoundedRectangle(cornerRadius: 3, style: .continuous)
+                            .fill(index == 6 ? BatteryPalette.blue : Color.white.opacity(0.22))
+                            .frame(maxWidth: .infinity).frame(height: proxy.size.height * value)
+                    }
+                }
+                Rectangle().fill(Color.white.opacity(0.14)).frame(height: 1)
             }
-            .overlay(alignment: .bottom) { Rectangle().fill(Color.white.opacity(0.14)).frame(height: 1) }
         }
     }
 }
@@ -246,22 +254,8 @@ private struct BatteryUsageDetailView: View {
                         Text(selectedDay == 6 ? "18 Oct 2026" : "Selected Day")
                             .font(.system(size: 16)).foregroundStyle(BatteryPalette.muted)
                     }.frame(maxWidth: .infinity, alignment: .trailing).padding(.trailing, 70)
-                    VStack(spacing: 5) {
-                        HStack(alignment: .bottom, spacing: 7) {
-                            ForEach(0..<8, id: \.self) { i in
-                                VStack(spacing: 5) {
-                                    Spacer(minLength: 0)
-                                    Button { selectedDay = min(i, 6) } label: {
-                                        RoundedRectangle(cornerRadius: 5).fill(i == selectedDay ? AnyShapeStyle(BatteryPalette.blue) : AnyShapeStyle(LinearGradient(colors: [Color(white: 0.48), Color(white: 0.30)], startPoint: .top, endPoint: .bottom)))
-                                            .frame(height: max(3, 150 * weekly[i]))
-                                    }.buttonStyle(.plain)
-                                    Text(["M","T","W","T","F","S","S","M"][i]).font(.system(size: 13)).foregroundStyle(i == selectedDay ? BatteryPalette.blue : BatteryPalette.muted)
-                                }.frame(maxWidth: .infinity)
-                            }
-                        }
-                        .frame(height: 175)
-                        HStack { Text("12/10"); Spacer() }.font(.system(size: 12)).foregroundStyle(BatteryPalette.muted)
-                    }
+                    WeeklyUsageColumns(values: weekly, selectedDay: $selectedDay)
+                        .frame(height: 218)
                     HStack(spacing: 14) {
                         legendDot("All Day")
                         legendDot("Usage by End of Day")
@@ -312,34 +306,139 @@ private struct BatteryUsageDetailView: View {
     }
 }
 
+private struct WeeklyUsageColumns: View {
+    let values: [CGFloat]
+    @Binding var selectedDay: Int
+    private let days = ["M", "T", "W", "T", "F", "S", "S", "M"]
+    private let labels = ["72%", "164%", "119%", "148%", "91%", "132%", "109%", "0%"]
+
+    var body: some View {
+        GeometryReader { proxy in
+            let axisWidth: CGFloat = 42
+            let labelsHeight: CGFloat = 27
+            let plotHeight = proxy.size.height - labelsHeight - 12
+            let plotWidth = proxy.size.width - axisWidth
+            ZStack(alignment: .topLeading) {
+                // iOS-style horizontal percentage grid.
+                ForEach(0..<3, id: \.self) { line in
+                    let y = plotHeight * CGFloat(line) / 2
+                    Path { path in
+                        path.move(to: CGPoint(x: 0, y: y))
+                        path.addLine(to: CGPoint(x: plotWidth, y: y))
+                    }
+                    .stroke(Color.white.opacity(0.19), lineWidth: 0.8)
+                }
+                HStack(alignment: .bottom, spacing: 6) {
+                    ForEach(0..<8, id: \.self) { i in
+                        VStack(spacing: 6) {
+                            Spacer(minLength: 0)
+                            Button { if i < 7 { selectedDay = i } } label: {
+                                RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                    .fill(i == selectedDay
+                                          ? AnyShapeStyle(BatteryPalette.blue)
+                                          : AnyShapeStyle(LinearGradient(colors: [Color(white: 0.43), Color(white: 0.27)], startPoint: .top, endPoint: .bottom)))
+                                    .frame(height: max(2, plotHeight * values[i]))
+                            }
+                            .buttonStyle(.plain)
+                            Text(days[i])
+                                .font(.system(size: 13, weight: .regular))
+                                .foregroundStyle(i == selectedDay ? BatteryPalette.blue : BatteryPalette.muted)
+                        }
+                        .frame(maxWidth: .infinity)
+                    }
+                }
+                .frame(width: plotWidth, height: plotHeight + labelsHeight, alignment: .bottom)
+                VStack {
+                    Text("200%")
+                    Spacer()
+                    Text("100%")
+                    Spacer()
+                    Text("0%")
+                }
+                .font(.system(size: 12))
+                .foregroundStyle(BatteryPalette.muted)
+                .frame(width: axisWidth - 3, height: plotHeight, alignment: .leading)
+                .position(x: plotWidth + axisWidth / 2, y: plotHeight / 2)
+                Text("12/10")
+                    .font(.system(size: 12))
+                    .foregroundStyle(BatteryPalette.muted)
+                    .position(x: 19, y: plotHeight + labelsHeight + 5)
+            }
+        }
+    }
+}
+
 private struct BatteryTimelineChart: View {
     let values: [CGFloat]
-    private let charging: Set<Int> = [0, 1, 2, 3, 7, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    // Hour ranges during which the demo device is shown charging.
+    private let chargingRanges: [ClosedRange<Int>] = [0...3, 7...9, 10...21]
+    private let boltHours: [Int] = [2, 8, 15]
+
     var body: some View {
         VStack(spacing: 8) {
             GeometryReader { proxy in
-                VStack(spacing: 0) {
-                    HStack(spacing: 0) {
-                        ForEach(0..<3, id: \.self) { _ in Capsule().fill(BatteryPalette.green).frame(height: 5).frame(maxWidth: .infinity) }
+                let plotHeight = proxy.size.height - 4
+                ZStack(alignment: .bottomLeading) {
+                    // Soft background blocks make charging periods distinct, as in the reference.
+                    ForEach(Array(chargingRanges.enumerated()), id: \.offset) { _, range in
+                        let startX = proxy.size.width * CGFloat(range.lowerBound) / CGFloat(values.count)
+                        let width = proxy.size.width * CGFloat(range.count) / CGFloat(values.count)
+                        Rectangle()
+                            .fill(BatteryPalette.green.opacity(0.18))
+                            .frame(width: width, height: plotHeight * 0.78)
+                            .position(x: startX + width / 2, y: plotHeight * 0.61)
                     }
-                    HStack(alignment: .bottom, spacing: 2) {
-                        ForEach(Array(values.enumerated()), id: \.offset) { index, value in
-                            RoundedRectangle(cornerRadius: 2).fill(barColor(index)).frame(maxWidth: .infinity).frame(height: max(7, (proxy.size.height - 12) * value))
+                    // Percentage guide lines.
+                    VStack(spacing: 0) {
+                        ForEach(0..<3, id: \.self) { _ in
+                            Rectangle().fill(Color.white.opacity(0.18)).frame(height: 0.8)
+                            Spacer(minLength: 0)
                         }
                     }
-                    .frame(height: proxy.size.height - 12, alignment: .bottom)
-                    .overlay(alignment: .top) {
-                        VStack(spacing: 0) { ForEach(0..<3, id: \.self) { _ in Rectangle().fill(Color.white.opacity(0.16)).frame(height: 1); Spacer(minLength: 0) } }.allowsHitTesting(false)
+                    .frame(height: plotHeight * 0.88)
+                    .frame(maxHeight: .infinity, alignment: .top)
+                    HStack(alignment: .bottom, spacing: 2) {
+                        ForEach(Array(values.enumerated()), id: \.offset) { index, value in
+                            RoundedRectangle(cornerRadius: 2, style: .continuous)
+                                .fill(barColor(index))
+                                .frame(maxWidth: .infinity)
+                                .frame(height: max(3, (plotHeight * 0.78) * value))
+                        }
                     }
-                    .overlay(alignment: .top) {
-                        HStack { ForEach([2, 7, 15], id: \.self) { _ in Image(systemName: "bolt.fill").font(.system(size: 16, weight: .black)).foregroundStyle(.black).padding(2).background(BatteryPalette.green, in: Circle()); Spacer() } }.offset(y: -9)
+                    .frame(height: plotHeight * 0.78, alignment: .bottom)
+                    // Charging level segments, deliberately separated rather than one continuous bar.
+                    ForEach(Array(chargingRanges.enumerated()), id: \.offset) { _, range in
+                        let startX = proxy.size.width * CGFloat(range.lowerBound) / CGFloat(values.count) + 1
+                        let width = proxy.size.width * CGFloat(range.count) / CGFloat(values.count) - 2
+                        Capsule()
+                            .fill(BatteryPalette.green)
+                            .frame(width: max(5, width), height: 5)
+                            .position(x: startX + width / 2, y: plotHeight * 0.13)
+                    }
+                    ForEach(boltHours, id: \.self) { hour in
+                        Image(systemName: "bolt.fill")
+                            .font(.system(size: 17, weight: .black))
+                            .foregroundStyle(.black)
+                            .padding(2)
+                            .background(BatteryPalette.green, in: Circle())
+                            .position(x: proxy.size.width * (CGFloat(hour) + 0.5) / CGFloat(values.count), y: plotHeight * 0.13)
                     }
                 }
             }
-            HStack { Text("00"); Spacer(); Text("06"); Spacer(); Text("12"); Spacer(); Text("18"); Spacer() }.font(.system(size: 12)).foregroundStyle(BatteryPalette.muted)
+            HStack {
+                Text("00"); Spacer(); Text("06"); Spacer(); Text("12"); Spacer(); Text("18"); Spacer()
+            }
+            .font(.system(size: 12))
+            .foregroundStyle(BatteryPalette.muted)
         }
     }
-    private func barColor(_ index: Int) -> Color { [4,5,6,9,21,22].contains(index) ? BatteryPalette.yellow : BatteryPalette.green }
+
+    private func barColor(_ index: Int) -> Color {
+        // Yellow bars represent discharge; green bars correspond to charging/recovery periods.
+        if [4, 5, 6, 9, 21, 22].contains(index) { return BatteryPalette.yellow }
+        if chargingRanges.contains(where: { $0.contains(index) }) { return BatteryPalette.green }
+        return Color(white: 0.34)
+    }
 }
 
 private struct BatteryAppRow: View {
