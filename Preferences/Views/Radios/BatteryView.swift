@@ -23,10 +23,10 @@ private struct BatteryDemoApp: Identifiable {
     let background: String?
 
     static let all: [BatteryDemoApp] = [
+        .init(id: "tiktok", name: "TikTok", asset: "BatteryAppTikTok", percent: 18, screen: "50m", background: "5m"),
+        .init(id: "swiftgram", name: "Swiftgram", asset: "BatteryAppSwiftgram", percent: 8, screen: "27m", background: "3m"),
+        .init(id: "safari", name: "Safari", asset: "BatteryAppSafari", percent: 7, screen: "17m", background: nil),
         .init(id: "pubg", name: "PUBG MOBILE", asset: "BatteryAppPUBG", percent: 32, screen: "46m", background: nil),
-        .init(id: "safari", name: "Safari", asset: "BatteryAppSafari", percent: 31, screen: "52m", background: nil),
-        .init(id: "swiftgram", name: "Swiftgram", asset: "BatteryAppSwiftgram", percent: 30, screen: "1h 19m", background: "10m"),
-        .init(id: "tiktok", name: "TikTok", asset: "BatteryAppTikTok", percent: 22, screen: "1h 10m", background: "4m"),
         .init(id: "happ", name: "Happ", asset: "BatteryAppHapp", percent: 14, screen: "1m", background: "4h 40m"),
         .init(id: "whatsapp", name: "WhatsApp", asset: "BatteryAppWhatsApp", percent: 6, screen: "15m", background: "9m"),
         .init(id: "Files", name: "Files", asset: "BatteryAppFiles", percent: 5, screen: "8m", background: "1m")
@@ -44,7 +44,6 @@ struct BatteryView: View {
                 batteryLevelCard
                 autoBrightnessCard
                 dailySummaryCard
-                appAndSystemActivityCard
                 healthCard
                 settingsTogglesCard
                 Text("Demonstration interface. Battery values and activity are fictional and do not read actual device statistics.")
@@ -107,43 +106,82 @@ struct BatteryView: View {
     }
 
     private var dailySummaryCard: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            HStack {
-                Text("Daily Usage").font(.system(size: 17, weight: .semibold)).foregroundStyle(.white)
-                Spacer()
-                NavigationLink { BatteryUsageDetailView() } label: {
-                    Image(systemName: "chevron.right").font(.system(size: 13, weight: .semibold)).foregroundStyle(BatteryPalette.muted)
+        VStack(alignment: .leading, spacing: 0) {
+            // Match the reference: paired Average/Today values above a layered 8-day chart.
+            HStack(alignment: .firstTextBaseline, spacing: 34) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Average")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(BatteryPalette.muted)
+                    Text("73%")
+                        .font(.system(size: 28, weight: .regular))
+                        .foregroundStyle(BatteryPalette.muted)
                 }
-            }
-            Text("You're using less battery today than you usually do by 13:53.")
-                .font(.system(size: 12, weight: .medium)).foregroundStyle(.white)
-            HStack(alignment: .firstTextBaseline, spacing: 20) {
-                VStack(alignment: .leading, spacing: 3) {
-                    Text("Average").font(.system(size: 12)).foregroundStyle(BatteryPalette.muted)
-                    Text("59%").font(.system(size: 20)).foregroundStyle(BatteryPalette.muted)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Today")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(BatteryPalette.blue)
+                    Text("46%")
+                        .font(.system(size: 28, weight: .regular))
+                        .foregroundStyle(BatteryPalette.blue)
                 }
-                VStack(alignment: .leading, spacing: 3) {
-                    Text("Today").font(.system(size: 12)).foregroundStyle(BatteryPalette.blue)
-                    Text("41%").font(.system(size: 20, weight: .semibold)).foregroundStyle(BatteryPalette.blue)
-                }
-            }
-            MiniWeekChart()
-                .frame(height: 88)
-            HStack {
-                Text("M      T      W      T      F      S      S")
                 Spacer()
             }
-            .font(.system(size: 10)).foregroundStyle(BatteryPalette.muted)
+            .padding(.horizontal, 2)
+            .padding(.top, 5)
+
+            BatteryOverviewWeekChart()
+                .frame(height: 214)
+                .padding(.top, 18)
+
+            HStack(spacing: 16) {
+                HStack(spacing: 6) {
+                    Circle().fill(Color.white.opacity(0.20)).frame(width: 9, height: 9)
+                    Text("All Day")
+                }
+                HStack(spacing: 6) {
+                    Circle().fill(Color.white.opacity(0.34)).frame(width: 9, height: 9)
+                    Text("Daily by 15:18")
+                }
+                Spacer(minLength: 0)
+            }
+            .font(.system(size: 12))
+            .foregroundStyle(BatteryPalette.muted)
+            .padding(.top, 9)
+            .padding(.bottom, 21)
+
+            Text("App and System Activity")
+                .font(.system(size: 17, weight: .semibold))
+                .foregroundStyle(BatteryPalette.muted)
+                .padding(.bottom, 9)
+
+            Rectangle().fill(BatteryPalette.separator).frame(height: 1)
+
+            ForEach(Array(BatteryDemoApp.all.prefix(3))) { app in
+                NavigationLink { BatteryAppDetailView(app: app) } label: {
+                    BatteryAppRow(app: app, compact: false)
+                }
+                .buttonStyle(.plain)
+                Rectangle().fill(BatteryPalette.separator).frame(height: 1).padding(.leading, 78)
+            }
+
             NavigationLink { BatteryUsageDetailView() } label: {
                 HStack {
-                    Text("View All Battery Usage").font(.system(size: 14)).foregroundStyle(BatteryPalette.blue)
+                    Text("View All Battery Usage")
+                        .font(.system(size: 16))
+                        .foregroundStyle(.white)
                     Spacer()
-                    Image(systemName: "chevron.right").font(.system(size: 12, weight: .semibold)).foregroundStyle(BatteryPalette.muted)
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(BatteryPalette.muted)
                 }
+                .padding(.top, 17)
+                .padding(.bottom, 3)
             }
         }
-        .padding(17)
-        .background(BatteryPalette.card, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+        .padding(.horizontal, 20)
+        .padding(.vertical, 18)
+        .background(BatteryPalette.card, in: RoundedRectangle(cornerRadius: 27, style: .continuous))
         .padding(.horizontal, 20)
     }
 
@@ -179,18 +217,21 @@ struct BatteryView: View {
 
     private var healthCard: some View {
         NavigationLink { BatteryHealthDetailView() } label: {
-            HStack(spacing: 12) {
-                Image(systemName: "battery.100percent").font(.system(size: 20)).foregroundStyle(BatteryPalette.green)
-                    .frame(width: 30)
-                VStack(alignment: .leading, spacing: 3) {
-                    Text("Battery Health & Charging").font(.system(size: 16)).foregroundStyle(.white)
-                    Text("Service recommended").font(.system(size: 12)).foregroundStyle(BatteryPalette.muted)
-                }
-                Spacer()
-                Image(systemName: "chevron.right").font(.system(size: 13, weight: .semibold)).foregroundStyle(BatteryPalette.muted)
+            HStack(spacing: 10) {
+                Text("Battery Health & Charging")
+                    .font(.system(size: 16))
+                    .foregroundStyle(.white)
+                Spacer(minLength: 8)
+                Text("Service")
+                    .font(.system(size: 15))
+                    .foregroundStyle(BatteryPalette.muted)
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(BatteryPalette.muted)
             }
-            .padding(17)
-            .background(BatteryPalette.card, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .padding(.horizontal, 18)
+            .padding(.vertical, 20)
+            .background(BatteryPalette.card, in: RoundedRectangle(cornerRadius: 25, style: .continuous))
             .padding(.horizontal, 20)
         }
         .buttonStyle(.plain)
@@ -207,6 +248,63 @@ struct BatteryView: View {
         .font(.system(size: 15))
         .background(BatteryPalette.card, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
         .padding(.horizontal, 20)
+    }
+}
+
+private struct BatteryOverviewWeekChart: View {
+    // Demo values reproduce the two overlapping series shown in the reference:
+    // full-day usage behind the lighter progress recorded by the current time.
+    private let allDay: [CGFloat] = [0.73, 0.98, 0.60, 0.84, 0.56, 0.76, 0.61, 0.34]
+    private let dailySoFar: [CGFloat] = [0.48, 0.69, 0.35, 0.58, 0.36, 0.42, 0.41, 0.30]
+    private let days = ["M", "T", "W", "T", "F", "S", "S", "M"]
+
+    var body: some View {
+        GeometryReader { proxy in
+            let labelHeight: CGFloat = 27
+            let plotHeight = proxy.size.height - labelHeight
+            ZStack(alignment: .topLeading) {
+                HStack(alignment: .bottom, spacing: 13) {
+                    ForEach(0..<days.count, id: \.self) { index in
+                        VStack(spacing: 7) {
+                            ZStack(alignment: .bottom) {
+                                if index != 7 {
+                                    RoundedRectangle(cornerRadius: 7, style: .continuous)
+                                        .fill(Color.white.opacity(0.13))
+                                        .frame(height: max(4, plotHeight * allDay[index]))
+                                }
+                                RoundedRectangle(cornerRadius: 7, style: .continuous)
+                                    .fill(index == 7
+                                          ? LinearGradient(colors: [BatteryPalette.blue, Color(red: 0.02, green: 0.42, blue: 0.82)], startPoint: .top, endPoint: .bottom)
+                                          : LinearGradient(colors: [Color.white.opacity(0.34), Color.white.opacity(0.23)], startPoint: .top, endPoint: .bottom))
+                                    .frame(height: max(4, plotHeight * dailySoFar[index]))
+                            }
+                            .frame(maxWidth: .infinity)
+                            .frame(height: plotHeight, alignment: .bottom)
+                            Text(days[index])
+                                .font(.system(size: 13, weight: index == 7 ? .medium : .regular))
+                                .foregroundStyle(index == 7 ? BatteryPalette.blue : BatteryPalette.muted)
+                        }
+                        .frame(maxWidth: .infinity)
+                    }
+                }
+                .frame(height: proxy.size.height, alignment: .bottom)
+
+                // Average reference line and label.
+                let averageY = plotHeight * 0.60
+                Path { path in
+                    path.move(to: CGPoint(x: 0, y: averageY))
+                    path.addLine(to: CGPoint(x: proxy.size.width, y: averageY))
+                }
+                .stroke(Color.white.opacity(0.14), lineWidth: 1)
+
+                Text("Average")
+                    .font(.system(size: 13, weight: .medium))
+                    .foregroundStyle(BatteryPalette.muted)
+                    .padding(.horizontal, 5)
+                    .background(BatteryPalette.card)
+                    .position(x: proxy.size.width - 36, y: averageY - 13)
+            }
+        }
     }
 }
 
