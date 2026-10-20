@@ -6,22 +6,12 @@ on:
 jobs:
   build:
     runs-on: macos-26
-    timeout-minutes: 20
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Show Xcode and project information
-        run: |
-          set -e
-          xcodebuild -version
-          xcodebuild -list -project Preferences.xcodeproj
-
       - name: Build for iPhone
-        timeout-minutes: 12
         run: |
-          set -o pipefail
           xcodebuild \
             -project Preferences.xcodeproj \
             -scheme Preferences \
@@ -29,37 +19,16 @@ jobs:
             -configuration Release \
             -derivedDataPath build \
             CODE_SIGNING_ALLOWED=NO \
-            build 2>&1 | tee xcodebuild.log
-
-      - name: Show build log if build failed
-        if: failure()
-        run: |
-          if [ -f xcodebuild.log ]; then
-            tail -n 250 xcodebuild.log
-          fi
+            build
 
       - name: Package IPA
         run: |
-          set -e
-          APP_PATH="build/Build/Products/Release-iphoneos/Preferences.app"
-
-          if [ ! -d "$APP_PATH" ]; then
-            echo "ERROR: Built app not found at: $APP_PATH"
-            find build/Build/Products -maxdepth 4 -print || true
-            exit 1
-          fi
-
-          rm -rf Payload Settings-iOS-unsigned.ipa
           mkdir -p Payload
-          cp -R "$APP_PATH" Payload/
+          cp -R build/Build/Products/Release-iphoneos/Preferences.app Payload/
           /usr/bin/zip -qr Settings-iOS-unsigned.ipa Payload
-          ls -lh Settings-iOS-unsigned.ipa
 
       - name: Upload IPA
-        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: Settings-iOS-iPhone
           path: Settings-iOS-unsigned.ipa
-          if-no-files-found: error
-          retention-days: 7
