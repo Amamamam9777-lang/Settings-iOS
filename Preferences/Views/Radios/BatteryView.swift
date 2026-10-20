@@ -3,46 +3,6 @@
 // All battery statistics below are fictional UI demo data, not device telemetry.
 
 import SwiftUI
-import UIKit
-
-
-/// Reads the actual battery level reported by iOS.
-private final class BatteryLevelMonitor: ObservableObject {
-    @Published private(set) var level: Int?
-    @Published private(set) var isCharging = false
-
-    init() {
-        UIDevice.current.isBatteryMonitoringEnabled = true
-        refresh()
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(refresh),
-            name: UIDevice.batteryLevelDidChangeNotification,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(refresh),
-            name: UIDevice.batteryStateDidChangeNotification,
-            object: nil
-        )
-    }
-
-    @objc private func refresh() {
-        let rawLevel = UIDevice.current.batteryLevel
-        let state = UIDevice.current.batteryState
-        DispatchQueue.main.async {
-            self.level = rawLevel >= 0 ? Int((rawLevel * 100).rounded()) : nil
-            self.isCharging = state == .charging || state == .full
-        }
-    }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-        UIDevice.current.isBatteryMonitoringEnabled = false
-    }
-}
 
 private enum BatteryPalette {
     static let background = Color.black
@@ -74,7 +34,6 @@ private struct BatteryDemoApp: Identifiable {
 }
 
 struct BatteryView: View {
-    @StateObject private var batteryMonitor = BatteryLevelMonitor()
     @State private var batteryPercentage = true
     @State private var lowPowerMode = false
     @State private var optimizedCharging = true
@@ -87,7 +46,7 @@ struct BatteryView: View {
                 dailySummaryCard
                 healthCard
                 settingsTogglesCard
-                Text("The charge percentage is read from this iPhone. Usage charts, app activity and other battery statistics are demonstration data.")
+                Text("Demonstration interface. Battery values and activity are fictional and do not read actual device statistics.")
                     .font(.footnote)
                     .foregroundStyle(BatteryPalette.muted)
                     .padding(.horizontal, 22)
@@ -104,10 +63,8 @@ struct BatteryView: View {
     private var batteryLevelCard: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .firstTextBaseline, spacing: 4) {
-                Text(batteryMonitor.level.map(String.init) ?? "—")
-                    .font(.system(size: 34, weight: .regular))
-                Text(batteryMonitor.level == nil ? "" : "%")
-                    .font(.system(size: 18))
+                Text("35").font(.system(size: 34, weight: .regular))
+                Text("% ").font(.system(size: 18))
                 Spacer()
                 Image(systemName: "info.circle").foregroundStyle(BatteryPalette.muted)
             }
@@ -116,9 +73,7 @@ struct BatteryView: View {
             GeometryReader { proxy in
                 ZStack(alignment: .leading) {
                     Capsule().fill(Color.white.opacity(0.12))
-                    Capsule()
-                        .fill(Color.white.opacity(0.62))
-                        .frame(width: proxy.size.width * CGFloat(batteryMonitor.level ?? 0) / 100)
+                    Capsule().fill(Color.white.opacity(0.62)).frame(width: proxy.size.width * 0.35)
                 }
             }
             .frame(height: 6)
