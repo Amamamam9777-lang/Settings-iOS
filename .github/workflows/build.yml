@@ -11,7 +11,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build for iPhone
+        timeout-minutes: 30
         run: |
+          set -o pipefail
           xcodebuild \
             -project Preferences.xcodeproj \
             -scheme Preferences \
@@ -19,7 +21,20 @@ jobs:
             -configuration Release \
             -derivedDataPath build \
             CODE_SIGNING_ALLOWED=NO \
-            build
+            build 2>&1 | tee build.log
+          
+          RESULT=${PIPESTATUS[0]}
+          echo "BUILD_EXIT_CODE=$RESULT"
+          echo "===== ERROR SUMMARY ====="
+          grep -n -i -E 'error:|fatal error:|failed frontend command|swift compiler error|signal [0-9]+' build.log | head -40 || true
+          exit "$RESULT"
+
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Build-Error-Log
+          path: build.log
 
       - name: Package IPA
         run: |
