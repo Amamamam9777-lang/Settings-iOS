@@ -52,22 +52,12 @@ struct BatteryView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: 22) {
                 batteryLevelCard
-                    .scaleEffect(0.7, anchor: .center)
-                    .frame(maxWidth: .infinity, alignment: .center)
                 autoBrightnessCard
-                    .scaleEffect(0.7, anchor: .center)
-                    .frame(maxWidth: .infinity, alignment: .center)
                 dailySummaryCard
-                    .scaleEffect(0.7, anchor: .center)
-                    .frame(maxWidth: .infinity, alignment: .center)
                 healthCard
-                    .scaleEffect(0.7, anchor: .center)
-                    .frame(maxWidth: .infinity, alignment: .center)
                 settingsTogglesCard
-                    .scaleEffect(0.7, anchor: .center)
-                    .frame(maxWidth: .infinity, alignment: .center)
                 Text("Battery percentage is read from this device. App usage charts and battery health details are illustrative because iOS does not expose those statistics to ordinary apps.")
                     .font(.footnote)
                     .foregroundStyle(BatteryPalette.muted)
