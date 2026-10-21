@@ -336,29 +336,38 @@ private struct BatteryOverviewWeekChart: View {
             let labelHeight: CGFloat = 27
             let plotHeight = proxy.size.height - labelHeight
             ZStack(alignment: .topLeading) {
-                HStack(alignment: .bottom, spacing: 13) {
-                    ForEach(0..<days.count, id: \.self) { index in
-                        VStack(spacing: 7) {
+                // Keep every bar anchored to the same baseline, with a separate
+                // fixed-height label row underneath so shortening bars never moves labels.
+                VStack(spacing: 8) {
+                    HStack(alignment: .bottom, spacing: 13) {
+                        ForEach(0..<days.count, id: \.self) { index in
                             ZStack(alignment: .bottom) {
                                 if index != 7 {
                                     RoundedRectangle(cornerRadius: 7, style: .continuous)
                                         .fill(Color.white.opacity(0.13))
-                                        .frame(height: max(4, plotHeight * allDay[index]))
+                                        .frame(height: max(4, plotHeight * allDay[index] * 0.70))
                                 }
                                 RoundedRectangle(cornerRadius: 7, style: .continuous)
                                     .fill(index == 7
                                           ? LinearGradient(colors: [Color.orange, Color(red: 0.90, green: 0.35, blue: 0.05)], startPoint: .top, endPoint: .bottom)
                                           : LinearGradient(colors: [Color.white.opacity(0.34), Color.white.opacity(0.23)], startPoint: .top, endPoint: .bottom))
-                                    .frame(height: max(4, plotHeight * dailySoFar[index]))
+                                    .frame(height: max(4, plotHeight * dailySoFar[index] * 0.70))
                             }
                             .frame(maxWidth: .infinity)
                             .frame(height: plotHeight, alignment: .bottom)
+                        }
+                    }
+                    .frame(height: plotHeight, alignment: .bottom)
+
+                    HStack(spacing: 13) {
+                        ForEach(0..<days.count, id: \.self) { index in
                             Text(days[index])
                                 .font(.system(size: 13, weight: index == 7 ? .medium : .regular))
                                 .foregroundStyle(index == 7 ? Color.orange : BatteryPalette.muted)
+                                .frame(maxWidth: .infinity)
                         }
-                        .frame(maxWidth: .infinity)
                     }
+                    .frame(height: labelHeight, alignment: .top)
                 }
                 .frame(height: proxy.size.height, alignment: .bottom)
 
