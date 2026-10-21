@@ -52,7 +52,7 @@ struct BatteryView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 22) {
+            VStack(alignment: .leading, spacing: 18) {
                 batteryLevelCard
                 autoBrightnessCard
                 dailySummaryCard
@@ -64,6 +64,7 @@ struct BatteryView: View {
                     .padding(.horizontal, 22)
                     .padding(.bottom, 24)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.top, 12)
         }
         .background(BatteryPalette.background.ignoresSafeArea())
@@ -80,27 +81,50 @@ struct BatteryView: View {
     }
 
     private var batteryLevelCard: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 9) {
             HStack(alignment: .firstTextBaseline, spacing: 4) {
                 Text("\(actualBatteryLevel)")
-                    .font(.system(size: 34, weight: .regular))
-                Text("%").font(.system(size: 18))
+                    .font(.system(size: 32, weight: .regular))
+                Text("%").font(.system(size: 17))
                 Spacer()
-                Image(systemName: "info.circle").foregroundStyle(BatteryPalette.muted)
+                Image(systemName: "info.circle")
+                    .font(.system(size: 13))
+                    .foregroundStyle(BatteryPalette.muted)
             }
-            Text(batteryIsCharging ? "Charging" : "Current battery level")
-                .font(.system(size: 13)).foregroundStyle(BatteryPalette.muted)
+
+            HStack(spacing: 4) {
+                Image(systemName: batteryIsCharging ? "bolt.fill" : "battery.100")
+                    .font(.system(size: 11, weight: .semibold))
+                Text(batteryIsCharging ? "Slow Charger" : "Battery Level")
+                    .font(.system(size: 12, weight: .medium))
+                Spacer()
+                Text("90%     100%")
+                    .font(.system(size: 10))
+                    .foregroundStyle(BatteryPalette.muted)
+            }
+            .foregroundStyle(batteryIsCharging ? Color.orange : BatteryPalette.muted)
+
             GeometryReader { proxy in
                 ZStack(alignment: .leading) {
                     Capsule().fill(Color.white.opacity(0.12))
-                    Capsule().fill(batteryIsCharging ? BatteryPalette.green : Color.white.opacity(0.62))
+                    Capsule()
+                        .fill(batteryIsCharging ? Color.orange : Color.white.opacity(0.62))
                         .frame(width: proxy.size.width * CGFloat(actualBatteryLevel) / 100)
                 }
             }
-            .frame(height: 6)
+            .frame(height: 5)
+
+            HStack {
+                Text(batteryIsCharging ? "1h+" : " ")
+                Spacer()
+                Text(batteryIsCharging ? "2h+" : " ")
+            }
+            .font(.system(size: 10))
+            .foregroundStyle(BatteryPalette.muted)
         }
-        .padding(18)
-        .background(BatteryPalette.card, in: RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .padding(.horizontal, 18)
+        .padding(.vertical, 13)
+        .background(BatteryPalette.card, in: RoundedRectangle(cornerRadius: 23, style: .continuous))
         .padding(.horizontal, 20)
     }
 
@@ -128,84 +152,110 @@ struct BatteryView: View {
 
     private var dailySummaryCard: some View {
         VStack(alignment: .leading, spacing: 0) {
-            // Match the reference: paired Average/Today values above a layered 8-day chart.
-            HStack(alignment: .firstTextBaseline, spacing: 34) {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Average")
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundStyle(BatteryPalette.muted)
-                    Text("73%")
-                        .font(.system(size: 28, weight: .regular))
-                        .foregroundStyle(BatteryPalette.muted)
-                }
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Today")
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundStyle(BatteryPalette.blue)
-                    Text("46%")
-                        .font(.system(size: 28, weight: .regular))
-                        .foregroundStyle(BatteryPalette.blue)
-                }
-                Spacer()
-            }
-            .padding(.horizontal, 2)
-            .padding(.top, 5)
-
-            BatteryOverviewWeekChart()
-                .frame(height: 214)
-                .padding(.top, 18)
-
-            HStack(spacing: 16) {
-                HStack(spacing: 6) {
-                    Circle().fill(Color.white.opacity(0.20)).frame(width: 9, height: 9)
-                    Text("All Day")
-                }
-                HStack(spacing: 6) {
-                    Circle().fill(Color.white.opacity(0.34)).frame(width: 9, height: 9)
-                    TimelineView(.periodic(from: .now, by: 60)) { context in
-                        Text("Daily by " + context.date.formatted(Date.FormatStyle(date: .omitted, time: .shortened)))
-                    }
-                }
-                Spacer(minLength: 0)
-            }
-            .font(.system(size: 12))
-            .foregroundStyle(BatteryPalette.muted)
-            .padding(.top, 9)
-            .padding(.bottom, 21)
-
-            Text("App and System Activity")
+            Text("Daily Usage")
                 .font(.system(size: 17, weight: .semibold))
                 .foregroundStyle(BatteryPalette.muted)
-                .padding(.bottom, 9)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 12)
 
-            Rectangle().fill(BatteryPalette.separator).frame(height: 1)
-
-            ForEach(Array(BatteryDemoApp.all.prefix(3))) { app in
-                NavigationLink { BatteryAppDetailView(app: app) } label: {
-                    BatteryAppRow(app: app, compact: false)
-                }
-                .buttonStyle(.plain)
-                Rectangle().fill(BatteryPalette.separator).frame(height: 1).padding(.leading, 78)
-            }
-
-            NavigationLink { BatteryUsageDetailView() } label: {
-                HStack {
-                    Text("View All Battery Usage")
-                        .font(.system(size: 16))
+            VStack(alignment: .leading, spacing: 17) {
+                TimelineView(.periodic(from: .now, by: 60)) { context in
+                    Text("You're using more battery today than you usually do by "
+                         + context.date.formatted(Date.FormatStyle(date: .omitted, time: .shortened)) + ".")
+                        .font(.system(size: 15, weight: .semibold))
                         .foregroundStyle(.white)
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(BatteryPalette.muted)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
-                .padding(.top, 17)
-                .padding(.bottom, 3)
+
+                Rectangle().fill(BatteryPalette.separator).frame(height: 1)
+
+                HStack(alignment: .firstTextBaseline, spacing: 42) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Average")
+                            .font(.system(size: 14, weight: .semibold))
+                            .foregroundStyle(BatteryPalette.muted)
+                        Text("8%")
+                            .font(.system(size: 28, weight: .regular))
+                            .foregroundStyle(BatteryPalette.muted)
+                    }
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Today")
+                            .font(.system(size: 14, weight: .semibold))
+                            .foregroundStyle(Color.orange)
+                        Text("16%")
+                            .font(.system(size: 28, weight: .regular))
+                            .foregroundStyle(Color.orange)
+                    }
+                    Spacer(minLength: 0)
+                }
+
+                BatteryOverviewWeekChart()
+                    .frame(height: 175)
+
+                HStack(spacing: 14) {
+                    HStack(spacing: 6) {
+                        Circle().fill(Color.white.opacity(0.20)).frame(width: 9, height: 9)
+                        Text("All Day")
+                    }
+                    HStack(spacing: 6) {
+                        Circle().fill(Color.white.opacity(0.34)).frame(width: 9, height: 9)
+                        TimelineView(.periodic(from: .now, by: 60)) { context in
+                            Text("Daily by " + context.date.formatted(Date.FormatStyle(date: .omitted, time: .shortened)))
+                        }
+                    }
+                    Spacer(minLength: 0)
+                }
+                .font(.system(size: 12))
+                .foregroundStyle(BatteryPalette.muted)
+
+                BatteryTimelineChart(values: [0.08,0.14,0.35,0.45,0.47,0.47,0.46,0.46,0.45,0.45,0.46,0.54,0.42,0.18,0.26,0.50,0.47,0.49,0.59,0.75,0.82,0.64,0.45])
+                    .frame(height: 150)
+
+                HStack {
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text("Screen On").foregroundStyle(BatteryPalette.muted)
+                        Text("1h 7m").font(.system(size: 25)).foregroundStyle(.white)
+                    }
+                    Spacer()
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text("Screen Off").foregroundStyle(BatteryPalette.muted)
+                        Text("1m").font(.system(size: 25)).foregroundStyle(.white)
+                    }
+                    .frame(width: 120, alignment: .leading)
+                }
+                .font(.system(size: 15))
+
+                Rectangle().fill(BatteryPalette.separator).frame(height: 1)
+
+                Text("App and System Activity")
+                    .font(.system(size: 17, weight: .semibold))
+                    .foregroundStyle(BatteryPalette.muted)
+
+                ForEach(Array(BatteryDemoApp.all.prefix(3))) { app in
+                    NavigationLink { BatteryAppDetailView(app: app) } label: {
+                        BatteryAppRow(app: app, compact: false)
+                    }
+                    .buttonStyle(.plain)
+                    Rectangle().fill(BatteryPalette.separator).frame(height: 1).padding(.leading, 60)
+                }
+
+                NavigationLink { BatteryUsageDetailView() } label: {
+                    HStack {
+                        Text("View All Battery Usage")
+                            .font(.system(size: 16))
+                            .foregroundStyle(BatteryPalette.blue)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundStyle(BatteryPalette.muted)
+                    }
+                    .padding(.top, 8)
+                }
             }
+            .padding(18)
+            .background(BatteryPalette.card, in: RoundedRectangle(cornerRadius: 27, style: .continuous))
+            .padding(.horizontal, 20)
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 18)
-        .background(BatteryPalette.card, in: RoundedRectangle(cornerRadius: 27, style: .continuous))
-        .padding(.horizontal, 20)
     }
 
     private var appAndSystemActivityCard: some View {
@@ -297,7 +347,7 @@ private struct BatteryOverviewWeekChart: View {
                                 }
                                 RoundedRectangle(cornerRadius: 7, style: .continuous)
                                     .fill(index == 7
-                                          ? LinearGradient(colors: [BatteryPalette.blue, Color(red: 0.02, green: 0.42, blue: 0.82)], startPoint: .top, endPoint: .bottom)
+                                          ? LinearGradient(colors: [Color.orange, Color(red: 0.90, green: 0.35, blue: 0.05)], startPoint: .top, endPoint: .bottom)
                                           : LinearGradient(colors: [Color.white.opacity(0.34), Color.white.opacity(0.23)], startPoint: .top, endPoint: .bottom))
                                     .frame(height: max(4, plotHeight * dailySoFar[index]))
                             }
@@ -305,7 +355,7 @@ private struct BatteryOverviewWeekChart: View {
                             .frame(height: plotHeight, alignment: .bottom)
                             Text(days[index])
                                 .font(.system(size: 13, weight: index == 7 ? .medium : .regular))
-                                .foregroundStyle(index == 7 ? BatteryPalette.blue : BatteryPalette.muted)
+                                .foregroundStyle(index == 7 ? Color.orange : BatteryPalette.muted)
                         }
                         .frame(maxWidth: .infinity)
                     }
