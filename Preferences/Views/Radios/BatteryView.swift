@@ -37,6 +37,18 @@ struct BatteryView: View {
     @State private var batteryPercentage = true
     @State private var lowPowerMode = false
     @State private var optimizedCharging = true
+    @State private var actualBatteryLevel: Int = 0
+    @State private var batteryIsCharging = false
+
+    private func refreshBatteryStatus() {
+        UIDevice.current.isBatteryMonitoringEnabled = true
+        let level = UIDevice.current.batteryLevel
+        if level >= 0 {
+            actualBatteryLevel = Int((level * 100).rounded())
+        }
+        batteryIsCharging = UIDevice.current.batteryState == .charging
+            || UIDevice.current.batteryState == .full
+    }
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -46,7 +58,7 @@ struct BatteryView: View {
                 dailySummaryCard
                 healthCard
                 settingsTogglesCard
-                Text("Demonstration interface. Battery values and activity are fictional and do not read actual device statistics.")
+                Text("Battery percentage is read from this device. App usage charts and battery health details are illustrative because iOS does not expose those statistics to ordinary apps.")
                     .font(.footnote)
                     .foregroundStyle(BatteryPalette.muted)
                     .padding(.horizontal, 22)
@@ -58,22 +70,31 @@ struct BatteryView: View {
         .navigationTitle("Battery")
         .navigationBarTitleDisplayMode(.inline)
         .preferredColorScheme(.dark)
+        .onAppear(perform: refreshBatteryStatus)
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.batteryLevelDidChangeNotification)) { _ in
+            refreshBatteryStatus()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.batteryStateDidChangeNotification)) { _ in
+            refreshBatteryStatus()
+        }
     }
 
     private var batteryLevelCard: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .firstTextBaseline, spacing: 4) {
-                Text("35").font(.system(size: 34, weight: .regular))
-                Text("% ").font(.system(size: 18))
+                Text(batteryPercentage ? "\\(actualBatteryLevel)" : "\\(actualBatteryLevel)")
+                    .font(.system(size: 34, weight: .regular))
+                Text("%").font(.system(size: 18))
                 Spacer()
                 Image(systemName: "info.circle").foregroundStyle(BatteryPalette.muted)
             }
-            Text("Last Charged to 51%: 54m ago")
+            Text(batteryIsCharging ? "Charging" : "Current battery level")
                 .font(.system(size: 13)).foregroundStyle(BatteryPalette.muted)
             GeometryReader { proxy in
                 ZStack(alignment: .leading) {
                     Capsule().fill(Color.white.opacity(0.12))
-                    Capsule().fill(Color.white.opacity(0.62)).frame(width: proxy.size.width * 0.35)
+                    Capsule().fill(batteryIsCharging ? BatteryPalette.green : Color.white.opacity(0.62))
+                        .frame(width: proxy.size.width * CGFloat(actualBatteryLevel) / 100)
                 }
             }
             .frame(height: 6)
@@ -565,6 +586,18 @@ private struct BatteryAppRow: View {
 
 private struct BatteryHealthDetailView: View {
     @State private var optimizedCharging = true
+    @State private var actualBatteryLevel: Int = 0
+    @State private var batteryIsCharging = false
+
+    private func refreshBatteryStatus() {
+        UIDevice.current.isBatteryMonitoringEnabled = true
+        let level = UIDevice.current.batteryLevel
+        if level >= 0 {
+            actualBatteryLevel = Int((level * 100).rounded())
+        }
+        batteryIsCharging = UIDevice.current.batteryState == .charging
+            || UIDevice.current.batteryState == .full
+    }
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 22) {
