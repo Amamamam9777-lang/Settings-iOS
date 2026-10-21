@@ -82,7 +82,9 @@ struct BatteryView: View {
     private var batteryLevelCard: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .firstTextBaseline, spacing: 4) {
-                Text(batteryPercentage ? "\\(actualBatteryLevel)" : "\\(actualBatteryLevel)")
+                
+Text("\(actualBatteryLevel)")
+    .font(.system(size: 34, weight: .regular))
                     .font(.system(size: 34, weight: .regular))
                 Text("%").font(.system(size: 18))
                 Spacer()
