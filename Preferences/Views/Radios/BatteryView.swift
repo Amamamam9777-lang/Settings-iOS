@@ -54,10 +54,20 @@ struct BatteryView: View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 22) {
                 batteryLevelCard
+                    .scaleEffect(0.7, anchor: .topLeading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 autoBrightnessCard
+                    .scaleEffect(0.7, anchor: .topLeading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 dailySummaryCard
+                    .scaleEffect(0.7, anchor: .topLeading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 healthCard
+                    .scaleEffect(0.7, anchor: .topLeading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 settingsTogglesCard
+                    .scaleEffect(0.7, anchor: .topLeading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 Text("Battery percentage is read from this device. App usage charts and battery health details are illustrative because iOS does not expose those statistics to ordinary apps.")
                     .font(.footnote)
                     .foregroundStyle(BatteryPalette.muted)
@@ -82,9 +92,7 @@ struct BatteryView: View {
     private var batteryLevelCard: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .firstTextBaseline, spacing: 4) {
-                
-Text("\(actualBatteryLevel)")
-    .font(.system(size: 34, weight: .regular))
+                Text("\(actualBatteryLevel)")
                     .font(.system(size: 34, weight: .regular))
                 Text("%").font(.system(size: 18))
                 Spacer()
@@ -164,7 +172,9 @@ Text("\(actualBatteryLevel)")
                 }
                 HStack(spacing: 6) {
                     Circle().fill(Color.white.opacity(0.34)).frame(width: 9, height: 9)
-                    Text("Daily by 15:18")
+                    TimelineView(.periodic(from: .now, by: 60)) { context in
+                        Text("Daily by " + context.date.formatted(Date.FormatStyle(date: .omitted, time: .shortened)))
+                    }
                 }
                 Spacer(minLength: 0)
             }
