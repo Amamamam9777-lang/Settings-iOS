@@ -330,8 +330,8 @@ private struct BatteryOverviewWeekChart: View {
     private let days = ["M", "T", "W", "T", "F", "S", "S", "M"]
 
     // Narrow, left-aligned columns with a fixed label row underneath.
-    private let barWidth: CGFloat = 24
-    private let barSpacing: CGFloat = 28
+    private let barWidth: CGFloat = 16
+    private let barSpacing: CGFloat = 18
 
     var body: some View {
         GeometryReader { proxy in
@@ -347,13 +347,13 @@ private struct BatteryOverviewWeekChart: View {
                                 if index != 7 {
                                     RoundedRectangle(cornerRadius: 7, style: .continuous)
                                         .fill(Color.white.opacity(0.13))
-                                        .frame(width: barWidth, height: max(4, plotHeight * allDay[index] * 0.84))
+                                        .frame(width: barWidth, height: max(4, plotHeight * allDay[index] * 1.0))
                                 }
                                 RoundedRectangle(cornerRadius: 7, style: .continuous)
                                     .fill(index == 7
                                           ? LinearGradient(colors: [BatteryPalette.blue, Color(red: 0.02, green: 0.42, blue: 0.82)], startPoint: .top, endPoint: .bottom)
                                           : LinearGradient(colors: [Color.white.opacity(0.34), Color.white.opacity(0.23)], startPoint: .top, endPoint: .bottom))
-                                    .frame(width: barWidth, height: max(4, plotHeight * dailySoFar[index] * 0.84))
+                                    .frame(width: barWidth, height: max(4, plotHeight * dailySoFar[index] * 1.0))
                             }
                             .frame(width: barWidth, height: plotHeight, alignment: .bottom)
                         }
@@ -642,7 +642,7 @@ private struct BatteryAppRow: View {
             Spacer(minLength: 4)
             Text("\(app.percent)%").font(.system(size: compact ? 14 : 17)).foregroundStyle(BatteryPalette.muted)
             Image(systemName: "chevron.right").font(.system(size: 13, weight: .semibold)).foregroundStyle(Color.white.opacity(0.35))
-        }.padding(.horizontal, 10).padding(.vertical, compact ? 12 : 17)
+        }.padding(.leading, 2).padding(.trailing, 10).padding(.vertical, compact ? 12 : 17)
     }
 }
 
