@@ -325,53 +325,54 @@ struct BatteryView: View {
 }
 
 private struct BatteryOverviewWeekChart: View {
-    // Demo values reproduce the two overlapping series shown in the reference:
-    // full-day usage behind the lighter progress recorded by the current time.
     private let allDay: [CGFloat] = [0.73, 0.98, 0.60, 0.84, 0.56, 0.76, 0.61, 0.34]
     private let dailySoFar: [CGFloat] = [0.48, 0.69, 0.35, 0.58, 0.36, 0.42, 0.41, 0.30]
     private let days = ["M", "T", "W", "T", "F", "S", "S", "M"]
+
+    // Narrow, left-aligned columns with a fixed label row underneath.
+    private let barWidth: CGFloat = 24
+    private let barSpacing: CGFloat = 28
 
     var body: some View {
         GeometryReader { proxy in
             let labelHeight: CGFloat = 27
             let plotHeight = proxy.size.height - labelHeight
+            let chartWidth = barWidth * CGFloat(days.count) + barSpacing * CGFloat(days.count - 1)
+
             ZStack(alignment: .topLeading) {
-                // Keep every bar anchored to the same baseline, with a separate
-                // fixed-height label row underneath so shortening bars never moves labels.
-                VStack(spacing: 8) {
-                    HStack(alignment: .bottom, spacing: 13) {
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack(alignment: .bottom, spacing: barSpacing) {
                         ForEach(0..<days.count, id: \.self) { index in
                             ZStack(alignment: .bottom) {
                                 if index != 7 {
                                     RoundedRectangle(cornerRadius: 7, style: .continuous)
                                         .fill(Color.white.opacity(0.13))
-                                        .frame(height: max(4, plotHeight * allDay[index] * 0.70))
+                                        .frame(width: barWidth, height: max(4, plotHeight * allDay[index] * 0.84))
                                 }
                                 RoundedRectangle(cornerRadius: 7, style: .continuous)
                                     .fill(index == 7
-                                          ? LinearGradient(colors: [Color.orange, Color(red: 0.90, green: 0.35, blue: 0.05)], startPoint: .top, endPoint: .bottom)
+                                          ? LinearGradient(colors: [BatteryPalette.blue, Color(red: 0.02, green: 0.42, blue: 0.82)], startPoint: .top, endPoint: .bottom)
                                           : LinearGradient(colors: [Color.white.opacity(0.34), Color.white.opacity(0.23)], startPoint: .top, endPoint: .bottom))
-                                    .frame(height: max(4, plotHeight * dailySoFar[index] * 0.70))
+                                    .frame(width: barWidth, height: max(4, plotHeight * dailySoFar[index] * 0.84))
                             }
-                            .frame(maxWidth: .infinity)
-                            .frame(height: plotHeight, alignment: .bottom)
+                            .frame(width: barWidth, height: plotHeight, alignment: .bottom)
                         }
                     }
-                    .frame(height: plotHeight, alignment: .bottom)
+                    .frame(width: chartWidth, height: plotHeight, alignment: .bottomLeading)
 
-                    HStack(spacing: 13) {
+                    HStack(spacing: barSpacing) {
                         ForEach(0..<days.count, id: \.self) { index in
                             Text(days[index])
                                 .font(.system(size: 13, weight: index == 7 ? .medium : .regular))
-                                .foregroundStyle(index == 7 ? Color.orange : BatteryPalette.muted)
-                                .frame(maxWidth: .infinity)
+                                .foregroundStyle(index == 7 ? BatteryPalette.blue : BatteryPalette.muted)
+                                .frame(width: barWidth, alignment: .center)
                         }
                     }
-                    .frame(height: labelHeight, alignment: .top)
+                    .frame(width: chartWidth, height: labelHeight, alignment: .topLeading)
                 }
-                .frame(height: proxy.size.height, alignment: .bottom)
+                .padding(.leading, 12)
+                .frame(height: proxy.size.height, alignment: .bottomLeading)
 
-                // Average reference line and label.
                 let averageY = plotHeight * 0.60
                 Path { path in
                     path.move(to: CGPoint(x: 0, y: averageY))
@@ -456,7 +457,7 @@ private struct BatteryUsageDetailView: View {
                     VStack(spacing: 0) {
                         ForEach(showAllApps ? apps : Array(apps.prefix(4))) { app in
                             NavigationLink { BatteryAppDetailView(app: app) } label: { BatteryAppRow(app: app, compact: false) }.buttonStyle(.plain)
-                            Rectangle().fill(BatteryPalette.separator).frame(height: 1).padding(.leading, 78)
+                            Rectangle().fill(BatteryPalette.separator).frame(height: 1).padding(.leading, 71)
                         }
                         Button { withAnimation(.easeInOut(duration: 0.2)) { showAllApps.toggle() } } label: {
                             HStack { Text(showAllApps ? "Show Less" : "Show More"); Spacer() }.font(.system(size: 16)).foregroundStyle(BatteryPalette.blue).padding(20)
@@ -641,7 +642,7 @@ private struct BatteryAppRow: View {
             Spacer(minLength: 4)
             Text("\(app.percent)%").font(.system(size: compact ? 14 : 17)).foregroundStyle(BatteryPalette.muted)
             Image(systemName: "chevron.right").font(.system(size: 13, weight: .semibold)).foregroundStyle(Color.white.opacity(0.35))
-        }.padding(.horizontal, 17).padding(.vertical, compact ? 12 : 17)
+        }.padding(.horizontal, 10).padding(.vertical, compact ? 12 : 17)
     }
 }
 
