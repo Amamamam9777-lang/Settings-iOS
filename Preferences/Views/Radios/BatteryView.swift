@@ -23,13 +23,13 @@ private struct BatteryDemoApp: Identifiable {
     let background: String?
 
     static let all: [BatteryDemoApp] = [
-        .init(id: "tiktok", name: "TikTok", asset: "BatteryAppTikTok", percent: 18, screen: "50m", background: "5m"),
-        .init(id: "swiftgram", name: "Swiftgram", asset: "BatteryAppSwiftgram", percent: 8, screen: "27m", background: "3m"),
-        .init(id: "safari", name: "Safari", asset: "BatteryAppSafari", percent: 7, screen: "17m", background: nil),
-        .init(id: "pubg", name: "PUBG MOBILE", asset: "BatteryAppPUBG", percent: 32, screen: "46m", background: nil),
-        .init(id: "happ", name: "Happ", asset: "BatteryAppHapp", percent: 14, screen: "1m", background: "4h 40m"),
-        .init(id: "whatsapp", name: "WhatsApp", asset: "BatteryAppWhatsApp", percent: 6, screen: "15m", background: "9m"),
-        .init(id: "Files", name: "Files", asset: "BatteryAppFiles", percent: 5, screen: "8m", background: "1m")
+        .init(id: "pubg", name: "PUBG MOBILE", asset: "BatteryAppPUBG", percent: 68, screen: "4h 32m", background: "12m"),
+        .init(id: "tiktok", name: "TikTok", asset: "BatteryAppTikTok", percent: 17, screen: "1h 18m", background: "8m"),
+        .init(id: "swiftgram", name: "Swiftgram", asset: "BatteryAppSwiftgram", percent: 9, screen: "42m", background: "6m"),
+        .init(id: "safari", name: "Safari", asset: "BatteryAppSafari", percent: 6, screen: "31m", background: nil),
+        .init(id: "happ", name: "Happ", asset: "BatteryAppHapp", percent: 11, screen: "24m", background: "2h 10m"),
+        .init(id: "whatsapp", name: "WhatsApp", asset: "BatteryAppWhatsApp", percent: 5, screen: "26m", background: "9m"),
+        .init(id: "Files", name: "Files", asset: "BatteryAppFiles", percent: 3, screen: "12m", background: "1m")
     ]
 }
 
@@ -419,8 +419,51 @@ private struct MiniWeekChart: View {
 private struct BatteryUsageDetailView: View {
     @State private var showAllApps = false
     @State private var selectedDay = 6
-    private let apps = BatteryDemoApp.all
-    private let weekly: [CGFloat] = [0.68, 0.83, 0.48, 0.75, 0.45, 0.64, 0.43, 0.0]
+    private let weekly: [CGFloat] = [0.68, 0.83, 0.48, 0.75, 0.45, 0.64, 0.43]
+
+    // Each selected day has its own fictional app-usage snapshot.
+    private var appsForSelectedDay: [BatteryDemoApp] {
+        let pubgPercent = [56, 73, 64, 80, 51, 68, 76]
+        let pubgScreen = ["4h 18m", "5h 42m", "4h 56m", "5h 51m", "4h 07m", "5h 16m", "5h 34m"]
+        let pubgBackground = ["8m", "14m", "11m", "6m", "18m", "12m", "9m"]
+        let perAppPercent = [
+            [56, 73, 64, 80, 51, 68, 76],
+            [17, 12, 19, 9, 21, 15, 13],
+            [9, 7, 6, 4, 8, 5, 7],
+            [6, 3, 5, 2, 4, 3, 2],
+            [11, 8, 12, 7, 10, 9, 11],
+            [5, 4, 3, 4, 3, 4, 3],
+            [3, 2, 2, 1, 3, 2, 2]
+        ]
+        let perAppScreen = [
+            pubgScreen,
+            ["1h 18m", "54m", "1h 32m", "42m", "1h 46m", "1h 09m", "58m"],
+            ["42m", "35m", "51m", "28m", "46m", "39m", "44m"],
+            ["31m", "22m", "36m", "18m", "29m", "25m", "21m"],
+            ["24m", "31m", "19m", "37m", "28m", "34m", "26m"],
+            ["26m", "18m", "23m", "20m", "31m", "24m", "19m"],
+            ["12m", "9m", "14m", "7m", "16m", "11m", "10m"]
+        ]
+        let perAppBackground = [
+            pubgBackground,
+            ["8m", "12m", "6m", "15m", "9m", "11m", "7m"],
+            ["6m", "4m", "8m", "5m", "7m", "6m", "4m"],
+            [nil, nil, nil, nil, nil, nil, nil],
+            ["2h 10m", "1h 42m", "2h 26m", "1h 55m", "2h 34m", "2h 02m", "1h 48m"],
+            ["9m", "7m", "11m", "8m", "12m", "10m", "6m"],
+            ["1m", "2m", "1m", "3m", "1m", "2m", "1m"]
+        ]
+        return BatteryDemoApp.all.enumerated().map { index, app in
+            BatteryDemoApp(
+                id: app.id,
+                name: app.name,
+                asset: app.asset,
+                percent: perAppPercent[index][selectedDay],
+                screen: perAppScreen[index][selectedDay],
+                background: perAppBackground[index][selectedDay]
+            )
+        }
+    }
     private let hourly: [CGFloat] = [0.08,0.14,0.35,0.45,0.47,0.47,0.46,0.46,0.45,0.45,0.46,0.54,0.42,0.18,0.26,0.50,0.47,0.49,0.59,0.75,0.82,0.64,0.45]
 
     var body: some View {
@@ -431,9 +474,9 @@ private struct BatteryUsageDetailView: View {
                     Text("You used less battery on Sunday than you usually do.").font(.system(size: 16, weight: .semibold)).foregroundStyle(.white)
                     Rectangle().fill(BatteryPalette.separator).frame(height: 1)
                     VStack(alignment: .trailing, spacing: 2) {
-                        Text(selectedDay == 6 ? "109%" : ["72%", "164%", "119%", "148%", "91%", "132%", "109%"][selectedDay])
+                        Text(["72%", "164%", "119%", "148%", "91%", "132%", "109%"][selectedDay])
                             .font(.system(size: 37)).foregroundStyle(BatteryPalette.blue)
-                        Text(selectedDay == 6 ? "18 Oct 2026" : "Selected Day")
+                        Text(["12 Oct 2026", "13 Oct 2026", "14 Oct 2026", "15 Oct 2026", "16 Oct 2026", "17 Oct 2026", "18 Oct 2026"][selectedDay])
                             .font(.system(size: 16)).foregroundStyle(BatteryPalette.muted)
                     }.frame(maxWidth: .infinity, alignment: .trailing).padding(.trailing, 70)
                     WeeklyUsageColumns(values: weekly, selectedDay: $selectedDay)
@@ -445,9 +488,9 @@ private struct BatteryUsageDetailView: View {
                     BatteryTimelineChart(values: hourly).frame(height: 175)
                     Rectangle().fill(BatteryPalette.separator).frame(height: 1).padding(.top, 3)
                     HStack {
-                        VStack(alignment: .leading, spacing: 5) { Text("Screen On").foregroundStyle(BatteryPalette.muted); Text("5h 7m").font(.system(size: 25)).foregroundStyle(.white) }
+                        VStack(alignment: .leading, spacing: 5) { Text("Screen On").foregroundStyle(BatteryPalette.muted); Text(["3h 42m", "6h 18m", "4h 26m", "5h 51m", "2h 58m", "6h 42m", "5h 7m"][selectedDay]).font(.system(size: 25)).foregroundStyle(.white) }
                         Spacer()
-                        VStack(alignment: .leading, spacing: 5) { Text("Screen Off").foregroundStyle(BatteryPalette.muted); Text("38m").font(.system(size: 25)).foregroundStyle(.white) }.frame(width: 140, alignment: .leading)
+                        VStack(alignment: .leading, spacing: 5) { Text("Screen Off").foregroundStyle(BatteryPalette.muted); Text(["24m", "51m", "32m", "46m", "19m", "57m", "38m"][selectedDay]).font(.system(size: 25)).foregroundStyle(.white) }.frame(width: 140, alignment: .leading)
                     }.font(.system(size: 15))
                 }
                 .padding(19).background(BatteryPalette.card, in: RoundedRectangle(cornerRadius: 28, style: .continuous)).padding(.horizontal, 20)
@@ -456,8 +499,8 @@ private struct BatteryUsageDetailView: View {
                     Text("App and System Activity Usage").font(.system(size: 18, weight: .semibold)).foregroundStyle(.white).padding(.horizontal, 20).padding(.top, 6)
                     Text("Get an idea of how much battery has been used by apps and system activity.").font(.system(size: 12)).foregroundStyle(BatteryPalette.muted).padding(.horizontal, 20).padding(.vertical, 8)
                     VStack(spacing: 0) {
-                        ForEach(showAllApps ? apps : Array(apps.prefix(4))) { app in
-                            NavigationLink { BatteryAppDetailView(app: app) } label: { BatteryAppRow(app: app, compact: false) }.buttonStyle(.plain)
+                        ForEach(showAllApps ? appsForSelectedDay : Array(appsForSelectedDay.prefix(4))) { app in
+                            NavigationLink { BatteryAppDetailView(app: app, date: ["12 Oct 2026", "13 Oct 2026", "14 Oct 2026", "15 Oct 2026", "16 Oct 2026", "17 Oct 2026", "18 Oct 2026"][selectedDay]) } label: { BatteryAppRow(app: app, compact: false) }.buttonStyle(.plain)
                             Rectangle().fill(BatteryPalette.separator).frame(height: 1).padding(.leading, 71)
                         }
                         Button { withAnimation(.easeInOut(duration: 0.2)) { showAllApps.toggle() } } label: {
@@ -491,8 +534,7 @@ private struct BatteryUsageDetailView: View {
 private struct WeeklyUsageColumns: View {
     let values: [CGFloat]
     @Binding var selectedDay: Int
-    private let days = ["M", "T", "W", "T", "F", "S", "S", "M"]
-    private let labels = ["72%", "164%", "119%", "148%", "91%", "132%", "109%", "0%"]
+    private let days = ["M", "T", "W", "T", "F", "S", "S"]
 
     var body: some View {
         GeometryReader { proxy in
@@ -511,10 +553,10 @@ private struct WeeklyUsageColumns: View {
                     .stroke(Color.white.opacity(0.19), lineWidth: 0.8)
                 }
                 HStack(alignment: .bottom, spacing: 6) {
-                    ForEach(0..<8, id: \.self) { i in
+                    ForEach(0..<7, id: \.self) { i in
                         VStack(spacing: 6) {
                             Spacer(minLength: 0)
-                            Button { if i < 7 { selectedDay = i } } label: {
+                            Button { selectedDay = i } label: {
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                                     .fill(i == selectedDay
                                           ? AnyShapeStyle(BatteryPalette.blue)
@@ -691,12 +733,13 @@ private struct BatteryHealthDetailView: View {
 
 private struct BatteryAppDetailView: View {
     let app: BatteryDemoApp
+    var date: String = "18 Oct 2026"
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 20) {
                 VStack(alignment: .leading, spacing: 12) {
                     HStack(alignment: .top) {
-                        VStack(alignment: .leading, spacing: 4) { Text("\(app.percent)%").font(.system(size: 32)).foregroundStyle(BatteryPalette.blue); Text("18 Oct 2026").font(.system(size: 15)).foregroundStyle(BatteryPalette.muted) }
+                        VStack(alignment: .leading, spacing: 4) { Text("\(app.percent)%").font(.system(size: 32)).foregroundStyle(BatteryPalette.blue); Text(date).font(.system(size: 15)).foregroundStyle(BatteryPalette.muted) }
                         Spacer()
                     }
                     MiniWeekChart().frame(height: 95)
