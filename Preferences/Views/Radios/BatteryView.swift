@@ -444,7 +444,7 @@ private struct BatteryUsageDetailView: View {
             ["26m", "18m", "23m", "20m", "31m", "24m", "19m"],
             ["12m", "9m", "14m", "7m", "16m", "11m", "10m"]
         ]
-        let perAppBackground = [
+        let perAppBackground: [[String?]] = [
             pubgBackground,
             ["8m", "12m", "6m", "15m", "9m", "11m", "7m"],
             ["6m", "4m", "8m", "5m", "7m", "6m", "4m"],
