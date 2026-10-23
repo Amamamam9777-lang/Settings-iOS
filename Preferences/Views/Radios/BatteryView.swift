@@ -331,8 +331,8 @@ private struct BatteryOverviewWeekChart: View {
     private let days = ["M", "T", "W", "T", "F", "S", "S", "M"]
 
     // Narrow, left-aligned columns with a fixed label row underneath.
-    private let barWidth: CGFloat = 12
-    private let barSpacing: CGFloat = 15
+    private let barWidth: CGFloat = 10
+    private let barSpacing: CGFloat = 12
 
     var body: some View {
         GeometryReader { proxy in
@@ -348,13 +348,13 @@ private struct BatteryOverviewWeekChart: View {
                                 if index != 7 {
                                     RoundedRectangle(cornerRadius: 7, style: .continuous)
                                         .fill(Color.white.opacity(0.13))
-                                        .frame(width: barWidth, height: max(4, plotHeight * allDay[index] * 0.90))
+                                        .frame(width: barWidth, height: max(4, plotHeight * allDay[index] * 0.80))
                                 }
                                 RoundedRectangle(cornerRadius: 7, style: .continuous)
                                     .fill(index == 7
                                           ? LinearGradient(colors: [BatteryPalette.blue, Color(red: 0.02, green: 0.42, blue: 0.82)], startPoint: .top, endPoint: .bottom)
                                           : LinearGradient(colors: [Color.white.opacity(0.34), Color.white.opacity(0.23)], startPoint: .top, endPoint: .bottom))
-                                    .frame(width: barWidth, height: max(4, plotHeight * dailySoFar[index] * 0.90))
+                                    .frame(width: barWidth, height: max(4, plotHeight * dailySoFar[index] * 0.80))
                             }
                             .frame(width: barWidth, height: plotHeight, alignment: .bottom)
                         }
@@ -635,11 +635,12 @@ private struct BatteryAppRow: View {
                     Image(app.asset).resizable().scaledToFit().clipShape(RoundedRectangle(cornerRadius: 11, style: .continuous)).overlay(RoundedRectangle(cornerRadius: 11).stroke(Color.white.opacity(0.16), lineWidth: 0.7))
                 }
             }.frame(width: compact ? 38 : 48, height: compact ? 38 : 48)
+                .offset(x: -8)
             VStack(alignment: .leading, spacing: 3) {
                 Text(app.name).font(.system(size: compact ? 15 : 17)).foregroundStyle(.white)
                 Text("On screen: \(app.screen)").font(.system(size: compact ? 12 : 14)).foregroundStyle(BatteryPalette.muted)
                 if let background = app.background { Text("Background: \(background)").font(.system(size: compact ? 12 : 14)).foregroundStyle(BatteryPalette.muted) }
-            }
+            }.offset(x: -8)
             Spacer(minLength: 4)
             Text("\(app.percent)%").font(.system(size: compact ? 14 : 17)).foregroundStyle(BatteryPalette.muted)
             Image(systemName: "chevron.right").font(.system(size: 13, weight: .semibold)).foregroundStyle(Color.white.opacity(0.35))
