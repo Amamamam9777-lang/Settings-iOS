@@ -635,12 +635,12 @@ private struct BatteryAppRow: View {
                     Image(app.asset).resizable().scaledToFit().clipShape(RoundedRectangle(cornerRadius: 11, style: .continuous)).overlay(RoundedRectangle(cornerRadius: 11).stroke(Color.white.opacity(0.16), lineWidth: 0.7))
                 }
             }.frame(width: compact ? 38 : 48, height: compact ? 38 : 48)
-                .offset(x: -8)
+                .offset(x: 12)
             VStack(alignment: .leading, spacing: 3) {
                 Text(app.name).font(.system(size: compact ? 15 : 17)).foregroundStyle(.white)
                 Text("On screen: \(app.screen)").font(.system(size: compact ? 12 : 14)).foregroundStyle(BatteryPalette.muted)
                 if let background = app.background { Text("Background: \(background)").font(.system(size: compact ? 12 : 14)).foregroundStyle(BatteryPalette.muted) }
-            }.offset(x: -8)
+            }.offset(x: 12)
             Spacer(minLength: 4)
             Text("\(app.percent)%").font(.system(size: compact ? 14 : 17)).foregroundStyle(BatteryPalette.muted)
             Image(systemName: "chevron.right").font(.system(size: 13, weight: .semibold)).foregroundStyle(Color.white.opacity(0.35))
