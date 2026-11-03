@@ -425,49 +425,7 @@ final class PrimarySettingsListModel {
             )
         ]
         
-        developerSettings = [
-            SettingsItem(
-                type: .developer,
-                icon: "com.apple.graphic-icon.developer-tools",
-                destination: AnyView(DeveloperView())
-            ),
-            SettingsItem(
-                type: .carrier,
-                icon: "com.apple.graphic-icon.carrier-settings",
-                capabilities: [.carrierInstall, .isInternal],
-                destination: AnyView(CarrierSettingsView())
-            ),
-            SettingsItem(
-                type: .`internal`,
-                icon: "com.apple.graphic-icon.internal-settings",
-                capabilities: [.isInternal],
-                destination: AnyView(InternalSettingsView())
-            ),
-            SettingsItem(
-                type: .faceTimeDebugging,
-                icon: "com.apple.graphic-icon.tap-to-radar",
-                capabilities: [.faceTimeDebugging],
-                destination: AnyView(FaceTimeDebuggingView())
-            ),
-            SettingsItem(
-                type: .iMessageDebugging,
-                icon: "com.apple.graphic-icon.tap-to-radar",
-                capabilities: [.iMessageDebugging],
-                destination: AnyView(iMessageDebuggingView())
-            ),
-            SettingsItem(
-                type: .continuityDebugging,
-                icon: "com.apple.graphic-icon.tap-to-radar",
-                capabilities: [.continuityDebugging],
-                destination: AnyView(ContinuityDebuggingView())
-            ),
-            SettingsItem(
-                type: .accessoryDeveloper,
-                icon: "com.apple.graphic-icon.tap-to-radar",
-                capabilities: [.accessoryDeveloper],
-                destination: AnyView(AccessoryDeveloperView())
-            )
-        ]
+        developerSettings = []
         
         monitor.pathUpdateHandler = { [weak self] path in
             Task { @MainActor in
