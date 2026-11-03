@@ -308,18 +308,6 @@ struct PrivacySecurityView: View {
 
                 // MARK: Security
                 Section {
-                    if configuration.developerMode {
-                        SLink(
-                            "Developer Mode".localized(path: privacy),
-                            icon: "com.apple.graphic-icon.developer-tools",
-                            status: "Off".localized(path: privacy),
-                            destination: ControllerBridgeView(
-                                "SecuritySettings",
-                                controller: "DeveloperModeViewController",
-                                title: "Developer Mode".localized(path: privacy)
-                            )
-                        )
-                    }
                     SLink(
                         "Wired Accessories".localized(path: privacy),
                         icon: "com.apple.graphic-icon.usb-c-port",
