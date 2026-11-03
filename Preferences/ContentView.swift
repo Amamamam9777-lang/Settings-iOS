@@ -52,13 +52,6 @@ struct ContentView: View {
                         .navigationLinkIndicatorVisibility(UIDevice.iPad && !model.isCompact ? .hidden : .visible)
                     }
                     
-                    NavigationLink {
-                        IndexingView()
-                    } label: {
-                        IconView("com.apple.graphic-icon.indexing-progress")
-                        Text("Optimizing Search and Siri".localized(path: "/System/Library/PreferenceBundles/SpotlightIndexingProgressSettings.bundle"))
-                    }
-                    
                     if !followUpDismissed {
                         SettingsGroup(model.followUpSettings)
                     }
@@ -69,7 +62,6 @@ struct ContentView: View {
                     SettingsGroup(model.securitySettings)
                     SettingsGroup(model.serviceSettings)
                     SettingsGroup(model.appsSettings)
-                    SettingsGroup(model.developerSettings)
                 }
             }
             .navigationTitle(UIDevice.iPhone || model.isCompact ? .settings : "")
