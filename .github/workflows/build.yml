@@ -10,7 +10,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: macos-26-intel-ubuntu-windows-2025
+    runs-on: macos-27-intel
 
     steps:
       - name: Checkout repository
