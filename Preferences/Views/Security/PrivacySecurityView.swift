@@ -581,15 +581,15 @@ struct AnalyticsDataView: View {
     }
 }
 
-private struct AnalyticsLogRowButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
+private struct AnalyticsLogRowButtonStyle: SwiftUI.ButtonStyle {
+    func makeBody(configuration: SwiftUI.ButtonStyle.Configuration) -> some SwiftUI.View {
         configuration.label
             .background {
                 RoundedRectangle(cornerRadius: 13, style: .continuous)
                     .fill(configuration.isPressed ? Color.white.opacity(0.15) : Color.clear)
                     .padding(.horizontal, 4)
             }
-            .animation(.easeOut(duration: 0.12), value: configuration.isPressed)
+            .animation(SwiftUI.Animation.easeOut(duration: 0.12), value: configuration.isPressed)
     }
 }
 
