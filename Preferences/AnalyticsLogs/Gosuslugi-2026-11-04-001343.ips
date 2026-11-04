@@ -1,0 +1,747 @@
+{"app_name":"Gosuslugi","timestamp":"2026-11-04 00:13:43.00 +0300","app_version":"27.1.0","slice_uuid":"3150e18c-bd2b-3735-a642-ef4cf1ba74c7","adam_id":"1367959794","build_version":"7932","bundleID":"com.minsvyaz.gosuslugi","platform":2,"share_with_app_devs":0,"is_first_party":0,"bug_type":"309","os_version":"iPhone OS 26.5 (23F77)","roots_installed":0,"incident_id":"1CE77D8A-2C71-4FA4-971D-B7DAC2AD1940","name":"Gosuslugi"}
+{
+  "uptime" : 130000,
+  "procRole" : "Foreground",
+  "version" : 2,
+  "userID" : 501,
+  "deployVersion" : 210,
+  "modelCode" : "iPhone14,2",
+  "coalitionID" : 3524,
+  "osVersion" : {
+    "isEmbedded" : true,
+    "train" : "iPhone OS 26.5",
+    "releaseType" : "User",
+    "build" : "23F77"
+  },
+  "captureTime" : "2026-11-04 00:13:41.3891 +0300",
+  "codeSigningMonitor" : 2,
+  "incident" : "1CE77D8A-2C71-4FA4-971D-B7DAC2AD1940",
+  "pid" : 8997,
+  "translated" : false,
+  "cpuType" : "ARM-64",
+  "procLaunch" : "2026-11-04 00:13:39.5277 +0300",
+  "procStartAbsTime" : 3209265040803,
+  "procExitAbsTime" : 3209308322602,
+  "procName" : "Gosuslugi",
+  "procPath" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Gosuslugi",
+  "bundleInfo" : {"CFBundleShortVersionString":"27.1.0","CFBundleVersion":"7932","CFBundleIdentifier":"com.minsvyaz.gosuslugi","DTAppStoreToolsBuild":"27A261"},
+  "storeInfo" : {"itemID":"1367959794","storeCohortMetadata":"10|date=1790875800000&sf=143441&cmp=announcement&cpr=126511626&cid=6471879502&app=com.apple.AppStore&pgtp=Search&pgid=SearchTopResults&prpg=SearchLanding_SearchLanding&ctxt=Search&issrch=1&imptyp=card&kind=iosSoftware&lngid=16","distributorID":"com.apple.AppStore","deviceIdentifierForVendor":"C478C4CD-6E32-4377-9BF4-DEAF6FE6FF8C","softwareVersionExternalIdentifier":"892269332","applicationVariant":"1:iPhone14,2:18","thirdParty":true},
+  "parentProc" : "launchd",
+  "parentPid" : 1,
+  "coalitionName" : "com.minsvyaz.gosuslugi",
+  "crashReporterKey" : "d34ab18afb234a029b9f650fb3a55359eade0b2b",
+  "lowPowerMode" : 1,
+  "appleIntelligenceStatus" : {"reasons":["deviceNotCapable"],"state":"unavailable"},
+  "developerMode" : 1,
+  "bootProgressRegister" : "0x20800004",
+  "wasUnlockedSinceBoot" : 1,
+  "isLocked" : 0,
+  "codeSigningID" : "com.minsvyaz.gosuslugi",
+  "codeSigningTeamID" : "8S43LUUB62",
+  "codeSigningFlags" : 570450689,
+  "codeSigningValidationCategory" : 4,
+  "codeSigningTrustLevel" : 5,
+  "codeSigningAuxiliaryInfo" : 0,
+  "instructionByteStream" : {"beforePC":"YR4A0CEQFZHgAxWqcQEAlL\/DANH9e0Op9E9CqfZXQan4X8SowANf1g==","atPC":"IAAg1Ppnu6n4XwGp9lcCqfRPA6n9ewSp\/QMBkfgDAar1AwCqAACA0g=="},
+  "bootSessionUUID" : "4775904C-34E1-439B-B529-EBA674D1008C",
+  "basebandVersion" : "5.51.03",
+  "exception" : {"codes":"0x0000000000000001, 0x0000000102add440","rawCodes":[1,4339913792],"type":"EXC_BREAKPOINT","signal":"SIGTRAP"},
+  "termination" : {"flags":0,"code":5,"namespace":"SIGNAL","indicator":"Trace\/BPT trap: 5","byProc":"exc handler","byPid":8997},
+  "os_fault" : {"process":"Gosuslugi"},
+  "faultingThread" : 0,
+  "threads" : [{"triggered":true,"id":1457085,"threadState":{"x":[{"value":6127001668},{"value":0},{"value":0},{"value":6127001688},{"value":0},{"value":1},{"value":1},{"value":1},{"value":0},{"value":7},{"value":0},{"value":1},{"value":11},{"value":4294967295},{"value":245760},{"value":4518363136},{"value":11521797120,"symbolLocation":0,"symbol":"__bzero"},{"value":8469105480},{"value":0},{"value":6127001696},{"value":4703779104},{"value":6127001664},{"value":11},{"value":4458759464},{"value":8443191296,"symbolLocation":16,"symbol":"_MergedGlobals"},{"value":176},{"value":16},{"value":1},{"value":9475}],"flavor":"ARM_THREAD_STATE64","lr":{"value":4339913640},"cpsr":{"value":1610616832},"fp":{"value":6127001776},"sp":{"value":6127001664},"esr":{"value":4060086273,"description":"(Breakpoint) brk 1"},"pc":{"value":4339913792,"matchesCrashFrame":1},"far":{"value":0}},"queue":"com.apple.main-thread","frames":[{"imageOffset":37952,"imageIndex":0},{"imageOffset":34012,"imageIndex":0},{"imageOffset":23065668,"symbol":"-[UIApplication _terminateWithStatus:]","symbolLocation":196,"imageIndex":58},{"imageOffset":1669032,"symbol":"-[_UISceneLifecycleMultiplexer _evalTransitionToSettings:fromSettings:forceExit:withTransitionStore:]","symbolLocation":108,"imageIndex":58},{"imageOffset":14270468,"symbol":"-[_UISceneLifecycleMultiplexer forceExitWithTransitionContext:scene:]","symbolLocation":156,"imageIndex":58},{"imageOffset":23054012,"symbol":"-[UIApplication workspaceShouldExit:withTransitionContext:]","symbolLocation":180,"imageIndex":58},{"imageOffset":368636,"symbol":"__63-[FBSWorkspaceScenesClient willTerminateWithTransitionContext:]_block_invoke","symbolLocation":76,"imageIndex":59},{"imageOffset":148768,"symbol":"-[FBSWorkspace _calloutQueue_executeCalloutFromSource:withBlock:]","symbolLocation":176,"imageIndex":59},{"imageOffset":111076,"symbol":"_dispatch_client_callout","symbolLocation":16,"imageIndex":60},{"imageOffset":26260,"symbol":"_dispatch_block_invoke_direct","symbolLocation":284,"imageIndex":60},{"imageOffset":180100,"symbol":"__BSSERVICEMAINRUNLOOPQUEUE_IS_CALLING_OUT_TO_A_BLOCK__","symbolLocation":52,"imageIndex":61},{"imageOffset":179712,"symbol":"BSServiceMainRunLoopSourceHandler","symbolLocation":224,"imageIndex":61},{"imageOffset":656216,"symbol":"__CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__","symbolLocation":28,"imageIndex":62},{"imageOffset":656076,"symbol":"__CFRunLoopDoSource0","symbolLocation":172,"imageIndex":62},{"imageOffset":415144,"symbol":"__CFRunLoopDoSources0","symbolLocation":232,"imageIndex":62},{"imageOffset":192928,"symbol":"__CFRunLoopRun","symbolLocation":820,"imageIndex":62},{"imageOffset":189772,"symbol":"_CFRunLoopRunSpecificWithOptions","symbolLocation":532,"imageIndex":62},{"imageOffset":5272,"symbol":"GSEventRunModal","symbolLocation":120,"imageIndex":63},{"imageOffset":1184324,"symbol":"-[UIApplication _run]","symbolLocation":796,"imageIndex":58},{"imageOffset":573784,"symbol":"UIApplicationMain","symbolLocation":332,"imageIndex":58},{"imageOffset":34868,"imageIndex":0},{"imageOffset":19484,"symbol":"start","symbolLocation":6928,"imageIndex":64}]},{"id":1457111,"frames":[],"threadState":{"x":[{"value":6127562752},{"value":5635},{"value":6127026176},{"value":0},{"value":409604},{"value":18446744073709551615},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0}],"flavor":"ARM_THREAD_STATE64","lr":{"value":0},"cpsr":{"value":4096},"fp":{"value":0},"sp":{"value":6127562752},"esr":{"value":1442840704,"description":"(Syscall)"},"pc":{"value":8277018808},"far":{"value":0}}},{"id":1457112,"frames":[],"threadState":{"x":[{"value":6128136192},{"value":4867},{"value":6127599616},{"value":0},{"value":409604},{"value":18446744073709551615},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0}],"flavor":"ARM_THREAD_STATE64","lr":{"value":0},"cpsr":{"value":4096},"fp":{"value":0},"sp":{"value":6128136192},"esr":{"value":1442840704,"description":"(Syscall)"},"pc":{"value":8277018808},"far":{"value":0}}},{"id":1457113,"frames":[],"threadState":{"x":[{"value":6128709632},{"value":10499},{"value":6128173056},{"value":0},{"value":409604},{"value":18446744073709551615},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0}],"flavor":"ARM_THREAD_STATE64","lr":{"value":0},"cpsr":{"value":4096},"fp":{"value":0},"sp":{"value":6128709632},"esr":{"value":1442840704,"description":"(Syscall)"},"pc":{"value":8277018808},"far":{"value":0}}},{"id":1457115,"threadState":{"x":[{"value":6129280152},{"value":6693838848,"symbolLocation":100,"symbol":"CA::WindowServer::IOMFBFlipBook::draw_debug_overlay(CA::WindowServer::FlipBook::Frame const&, __IOSurface*, unsigned int)"},{"value":410240},{"value":6625813336},{"value":6625957192},{"value":6129279919},{"value":5},{"value":5},{"value":283976},{"value":6626850600,"symbolLocation":0,"symbol":"invocation function for block in dyld4::APIs::findImageMappedAt(void const*, dyld3::MachOLoaded const**, bool*, char const**, void const**, unsigned long long*, unsigned char*, dyld4::Loader const**)"},{"value":6129279535},{"value":6625949704},{"value":6627476694},{"value":8192},{"value":0},{"value":4518363136},{"value":6626850600,"symbolLocation":0,"symbol":"invocation function for block in dyld4::APIs::findImageMappedAt(void const*, dyld3::MachOLoaded const**, bool*, char const**, void const**, unsigned long long*, unsigned char*, dyld4::Loader const**)"},{"value":7701436843909538968},{"value":0},{"value":6129280152},{"value":6625673216},{"value":6625813336},{"value":6129280168},{"value":136224},{"value":6129280520},{"value":6129280535},{"value":6129280536},{"value":6625673216},{"value":0}],"flavor":"ARM_THREAD_STATE64","lr":{"value":6626850548},"cpsr":{"value":536877056},"fp":{"value":6129279968},"sp":{"value":6129279904},"esr":{"value":1442840704,"description":"(Syscall)"},"pc":{"value":6626850600},"far":{"value":0}},"queue":"AXBinaryMonitorQueue","frames":[{"imageOffset":10024,"symbol":"invocation function for block in dyld4::APIs::findImageMappedAt(void const*, dyld3::MachOLoaded const**, bool*, char const**, void const**, unsigned long long*, unsigned char*, dyld4::Loader const**)","symbolLocation":0,"imageIndex":64},{"imageOffset":9972,"symbol":"DyldSharedCache::forEachImageTextSegment(void (unsigned long long, unsigned long long, unsigned char const*, char const*, bool&) block_pointer) const","symbolLocation":112,"imageIndex":64},{"imageOffset":5064,"symbol":"dyld4::APIs::findImageMappedAt(void const*, dyld3::MachOLoaded const**, bool*, char const**, void const**, unsigned long long*, unsigned char*, dyld4::Loader const**)","symbolLocation":384,"imageIndex":64},{"imageOffset":75388,"symbol":"dyld4::APIs::dyld_image_path_containing_address(void const*)","symbolLocation":76,"imageIndex":64},{"imageOffset":240504,"symbol":"objc_copyImageNames","symbolLocation":404,"imageIndex":67},{"imageOffset":10075664,"symbol":"__25+[NSBundle allFrameworks]_block_invoke","symbolLocation":120,"imageIndex":68},{"imageOffset":111076,"symbol":"_dispatch_client_callout","symbolLocation":16,"imageIndex":60},{"imageOffset":17840,"symbol":"_dispatch_once_callout","symbolLocation":32,"imageIndex":60},{"imageOffset":10075540,"symbol":"+[NSBundle allFrameworks]","symbolLocation":84,"imageIndex":68},{"imageOffset":160428,"symbol":"__43-[AXBinaryMonitor evaluateExistingBinaries]_block_invoke","symbolLocation":100,"imageIndex":69},{"imageOffset":6568,"symbol":"_dispatch_call_block_and_release","symbolLocation":32,"imageIndex":60},{"imageOffset":111076,"symbol":"_dispatch_client_callout","symbolLocation":16,"imageIndex":60},{"imageOffset":40880,"symbol":"_dispatch_lane_serial_drain","symbolLocation":740,"imageIndex":60},{"imageOffset":43748,"symbol":"_dispatch_lane_invoke","symbolLocation":448,"imageIndex":60},{"imageOffset":85420,"symbol":"_dispatch_root_queue_drain_deferred_wlh","symbolLocation":284,"imageIndex":60},{"imageOffset":83628,"symbol":"_dispatch_workloop_worker_thread","symbolLocation":720,"imageIndex":60},{"imageOffset":5040,"symbol":"_pthread_wqthread","symbolLocation":292,"imageIndex":70},{"imageOffset":2240,"symbol":"start_wqthread","symbolLocation":8,"imageIndex":70}]},{"id":1457116,"name":"com.apple.uikit.eventfetch-thread","threadState":{"x":[{"value":268451845},{"value":21592279046},{"value":8589934592},{"value":62685047685120},{"value":2162692},{"value":62685047685120},{"value":2},{"value":4294967295},{"value":0},{"value":0},{"value":2},{"value":0},{"value":0},{"value":14595},{"value":4518579040},{"value":4702650368},{"value":18446744073709551569},{"value":1795163136},{"value":0},{"value":4294967295},{"value":2},{"value":62685047685120},{"value":2162692},{"value":62685047685120},{"value":21592279046},{"value":6129851784},{"value":8589934592},{"value":18446744073709550527},{"value":10920378368,"symbolLocation":0,"symbol":"_libkernel_string_functions"}],"flavor":"ARM_THREAD_STATE64","lr":{"value":9614689036},"cpsr":{"value":4096},"fp":{"value":6129851632},"sp":{"value":6129851552},"esr":{"value":1442840704,"description":"(Syscall)"},"pc":{"value":9614675156},"far":{"value":0}},"frames":[{"imageOffset":3284,"symbol":"mach_msg2_trap","symbolLocation":8,"imageIndex":72},{"imageOffset":17164,"symbol":"mach_msg2_internal","symbolLocation":76,"imageIndex":72},{"imageOffset":16940,"symbol":"mach_msg_overwrite","symbolLocation":424,"imageIndex":72},{"imageOffset":16504,"symbol":"mach_msg","symbolLocation":24,"imageIndex":72},{"imageOffset":414532,"symbol":"__CFRunLoopServiceMachPort","symbolLocation":160,"imageIndex":62},{"imageOffset":193296,"symbol":"__CFRunLoopRun","symbolLocation":1188,"imageIndex":62},{"imageOffset":189772,"symbol":"_CFRunLoopRunSpecificWithOptions","symbolLocation":532,"imageIndex":62},{"imageOffset":44272,"symbol":"-[NSRunLoop(NSRunLoop) runMode:beforeDate:]","symbolLocation":212,"imageIndex":68},{"imageOffset":43992,"symbol":"-[NSRunLoop(NSRunLoop) runUntilDate:]","symbolLocation":64,"imageIndex":68},{"imageOffset":944764,"symbol":"-[UIEventFetcher threadMain]","symbolLocation":420,"imageIndex":58},{"imageOffset":583716,"symbol":"__NSThread__start__","symbolLocation":732,"imageIndex":68},{"imageOffset":17464,"symbol":"_pthread_start","symbolLocation":136,"imageIndex":70},{"imageOffset":2252,"symbol":"thread_start","symbolLocation":8,"imageIndex":70}]},{"id":1457117,"frames":[],"threadState":{"x":[{"value":6130429952},{"value":16643},{"value":6129893376},{"value":0},{"value":409604},{"value":18446744073709551615},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0}],"flavor":"ARM_THREAD_STATE64","lr":{"value":0},"cpsr":{"value":4096},"fp":{"value":0},"sp":{"value":6130429952},"esr":{"value":1442840704,"description":"(Syscall)"},"pc":{"value":8277018808},"far":{"value":0}}},{"id":1457118,"frames":[],"threadState":{"x":[{"value":6131003392},{"value":19971},{"value":6130466816},{"value":0},{"value":409604},{"value":18446744073709551615},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0}],"flavor":"ARM_THREAD_STATE64","lr":{"value":0},"cpsr":{"value":4096},"fp":{"value":0},"sp":{"value":6131003392},"esr":{"value":1442840704,"description":"(Syscall)"},"pc":{"value":8277018808},"far":{"value":0}}},{"id":1457119,"frames":[],"threadState":{"x":[{"value":6131576832},{"value":19715},{"value":6131040256},{"value":0},{"value":409604},{"value":18446744073709551615},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0},{"value":0}],"flavor":"ARM_THREAD_STATE64","lr":{"value":0},"cpsr":{"value":4096},"fp":{"value":0},"sp":{"value":6131576832},"esr":{"value":1442840704,"description":"(Syscall)"},"pc":{"value":8277018808},"far":{"value":0}}}],
+  "usedImages" : [
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4339875840,
+    "size" : 109527040,
+    "uuid" : "3150e18c-bd2b-3735-a642-ef4cf1ba74c7",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Gosuslugi",
+    "name" : "Gosuslugi"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4476698624,
+    "size" : 98304,
+    "uuid" : "8b51ba36-3670-37e9-93b8-50c738f20e97",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/GUNetworkInterface.framework\/GUNetworkInterface",
+    "name" : "GUNetworkInterface"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4477042688,
+    "size" : 163840,
+    "uuid" : "5c86e674-68e1-362a-a345-b8a5da2b4ac7",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/KeychainAccess_2B8FF55066FFBF8C_PackageProduct.framework\/KeychainAccess_2B8FF55066FFBF8C_PackageProduct",
+    "name" : "KeychainAccess_2B8FF55066FFBF8C_PackageProduct"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4479762432,
+    "size" : 458752,
+    "uuid" : "f9431bc0-3c51-34e3-93aa-dea0ea389a2c",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/CryptoSwift.framework\/CryptoSwift",
+    "name" : "CryptoSwift"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4480794624,
+    "size" : 655360,
+    "uuid" : "2863be91-02d4-3aeb-bb80-1810e96480ac",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/UserXKit.framework\/UserXKit",
+    "name" : "UserXKit"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4477304832,
+    "size" : 98304,
+    "uuid" : "4410eec0-b470-3958-9215-f67ddbd8b31b",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/GUMetricsImplementation.framework\/GUMetricsImplementation",
+    "name" : "GUMetricsImplementation"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4476452864,
+    "size" : 32768,
+    "uuid" : "61b270c1-b641-340c-8048-420a6d2cfd6a",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/SKZIContractsUmbrella.framework\/SKZIContractsUmbrella",
+    "name" : "SKZIContractsUmbrella"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4477681664,
+    "size" : 81920,
+    "uuid" : "b738290e-f2db-339b-996d-6b8b5aa74f72",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/SKZIContracts.framework\/SKZIContracts",
+    "name" : "SKZIContracts"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4483072000,
+    "size" : 868352,
+    "uuid" : "5fb67658-1d1b-387d-9992-6a5dd04242c0",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/SKZIContainer.framework\/SKZIContainer",
+    "name" : "SKZIContainer"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4478107648,
+    "size" : 131072,
+    "uuid" : "554b1305-3716-3ce1-a5bb-5fccfac178f4",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/IDPointCoreAuth.framework\/IDPointCoreAuth",
+    "name" : "IDPointCoreAuth"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4477861888,
+    "size" : 81920,
+    "uuid" : "a2e90550-a79d-3ac9-a686-d5eff2b68c7d",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/IDPointCoreCrypto.framework\/IDPointCoreCrypto",
+    "name" : "IDPointCoreCrypto"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4477501440,
+    "size" : 32768,
+    "uuid" : "92ea3f7a-06b8-3dc5-80ef-91ff7e91d8a7",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/IDPointCoreIntegrity.framework\/IDPointCoreIntegrity",
+    "name" : "IDPointCoreIntegrity"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4479107072,
+    "size" : 49152,
+    "uuid" : "8824a00b-c32a-3428-994f-11b54c6ffb24",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/IDPointCorePKI.framework\/IDPointCorePKI",
+    "name" : "IDPointCorePKI"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4484399104,
+    "size" : 786432,
+    "uuid" : "04afe2fb-1973-3631-b75d-c20994d3ba19",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/IDPointCoreRequest.framework\/IDPointCoreRequest",
+    "name" : "IDPointCoreRequest"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4482138112,
+    "size" : 229376,
+    "uuid" : "34c8cd77-7045-3475-990f-6f7454eb094b",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/IDPointCoreStorage.framework\/IDPointCoreStorage",
+    "name" : "IDPointCoreStorage"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4482498560,
+    "size" : 98304,
+    "uuid" : "b70934ae-36f0-3b5d-ac4c-1c5c3d93d664",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/IDPointDomain.framework\/IDPointDomain",
+    "name" : "IDPointDomain"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4482695168,
+    "size" : 65536,
+    "uuid" : "169615fd-8922-398b-8d02-576e698f7fe3",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/IDPointDomainDataSource.framework\/IDPointDomainDataSource",
+    "name" : "IDPointDomainDataSource"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4485513216,
+    "size" : 81920,
+    "uuid" : "8b41ebda-c925-3969-9c99-ba16282b7aa1",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/IDPointDomainInteractor.framework\/IDPointDomainInteractor",
+    "name" : "IDPointDomainInteractor"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4485726208,
+    "size" : 147456,
+    "uuid" : "7b1a5331-856c-32fa-b9bc-bd2a486bea82",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/IDPointDomainUseCase.framework\/IDPointDomainUseCase",
+    "name" : "IDPointDomainUseCase"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4487184384,
+    "size" : 671744,
+    "uuid" : "d61590dd-5d3c-3daa-a01c-ff53d7d5efd9",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/IDPointImplCollaboration.framework\/IDPointImplCollaboration",
+    "name" : "IDPointImplCollaboration"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4486529024,
+    "size" : 278528,
+    "uuid" : "8d1bbb90-3514-3a0f-abbc-188659a7d86a",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/IDPointImplInfrastructure.framework\/IDPointImplInfrastructure",
+    "name" : "IDPointImplInfrastructure"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4489674752,
+    "size" : 671744,
+    "uuid" : "986ca9c1-e36e-32ad-9d18-a0c2fc1e9cf1",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/IDPointImplInteractor.framework\/IDPointImplInteractor",
+    "name" : "IDPointImplInteractor"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4546887680,
+    "size" : 23789568,
+    "uuid" : "e24e48ef-407a-3bf9-84b6-f48477855609",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/IDPointImplWindow.framework\/IDPointImplWindow",
+    "name" : "IDPointImplWindow"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4486037504,
+    "size" : 196608,
+    "uuid" : "bc12f79c-c540-34a4-af60-fdebcbaaa313",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/TrustAux.framework\/TrustAux",
+    "name" : "TrustAux"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4488347648,
+    "size" : 114688,
+    "uuid" : "492780e2-d6a9-35b7-a226-351a1f09976d",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/TrustCertificateVerifier.framework\/TrustCertificateVerifier",
+    "name" : "TrustCertificateVerifier"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4489068544,
+    "size" : 212992,
+    "uuid" : "213ec298-606d-3632-85df-f4b3493febb6",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/TrustCryptoApp.framework\/TrustCryptoApp",
+    "name" : "TrustCryptoApp"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4488560640,
+    "size" : 98304,
+    "uuid" : "313df3c6-bd68-3689-b8cc-29c20b241c35",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/TrustCryptoSDK.framework\/TrustCryptoSDK",
+    "name" : "TrustCryptoSDK"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4476551168,
+    "size" : 32768,
+    "uuid" : "10a5f3ab-9255-31da-9c1d-77a6184eca1f",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/TrustIntegrityCalculator.framework\/TrustIntegrityCalculator",
+    "name" : "TrustIntegrityCalculator"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4492132352,
+    "size" : 720896,
+    "uuid" : "e66888d7-4b0c-3361-af90-bfa1a9cba4bd",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/TrustKit.framework\/TrustKit",
+    "name" : "TrustKit"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4488773632,
+    "size" : 180224,
+    "uuid" : "9c68a912-c0cc-3428-8e50-8a7f1e159048",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/TrustLib.framework\/TrustLib",
+    "name" : "TrustLib"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4479238144,
+    "size" : 32768,
+    "uuid" : "01847ec8-f110-38a6-902f-85f81719b1c7",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/TrustSSLCADES.framework\/TrustSSLCADES",
+    "name" : "TrustSSLCADES"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4481957888,
+    "size" : 81920,
+    "uuid" : "d0b9769f-7d09-36e7-bba4-54f6472a6e84",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/TrustSSLConnect.framework\/TrustSSLConnect",
+    "name" : "TrustSSLConnect"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4491264000,
+    "size" : 114688,
+    "uuid" : "9a4d27c9-4642-3018-87ed-fdd50be5dfb2",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/TrustSSLEngine.framework\/TrustSSLEngine",
+    "name" : "TrustSSLEngine"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4482891776,
+    "size" : 65536,
+    "uuid" : "c5cc789a-0302-3d35-aceb-b25db37d6c60",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/TrustSSLX509.framework\/TrustSSLX509",
+    "name" : "TrustSSLX509"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4481777664,
+    "size" : 32768,
+    "uuid" : "4a0d5aa6-df34-3969-aa6f-5c264453f209",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/TrustSSLXMLSec.framework\/TrustSSLXMLSec",
+    "name" : "TrustSSLXMLSec"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4491476992,
+    "size" : 114688,
+    "uuid" : "1bc53264-2ad5-36e7-8af4-e756b8d4452a",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/TrustSecureTransport.framework\/TrustSecureTransport",
+    "name" : "TrustSecureTransport"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4491689984,
+    "size" : 81920,
+    "uuid" : "4e7a37b7-7ec0-32e2-aad4-15aa957e50b7",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/TrustSimpleTransport.framework\/TrustSimpleTransport",
+    "name" : "TrustSimpleTransport"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4487020544,
+    "size" : 65536,
+    "uuid" : "5978907d-8978-36fe-b979-842909cc89af",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/TrustZip.framework\/TrustZip",
+    "name" : "TrustZip"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4481875968,
+    "size" : 32768,
+    "uuid" : "7c821a90-2ed0-3536-bbce-1285dab42ddd",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/crypt_known_path.framework\/crypt_known_path",
+    "name" : "crypt_known_path"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4493672448,
+    "size" : 229376,
+    "uuid" : "532fe40f-9206-30c4-9b3f-0a30cff47042",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/itp11engine.framework\/itp11engine",
+    "name" : "itp11engine"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4501766144,
+    "size" : 4702208,
+    "uuid" : "58eaee27-4566-3ae0-b5fe-d4cd993d8fb5",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/ixs_gost.framework\/ixs_gost",
+    "name" : "ixs_gost"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4496932864,
+    "size" : 2080768,
+    "uuid" : "823db880-5f0c-364f-a900-5af7ea4ca5ee",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/openssl.framework\/openssl",
+    "name" : "openssl"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4491051008,
+    "size" : 81920,
+    "uuid" : "2db19008-6a24-3b42-b0da-969d10759408",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/ossl_cades.framework\/ossl_cades",
+    "name" : "ossl_cades"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4512759808,
+    "size" : 2916352,
+    "uuid" : "25689321-1be9-356c-91be-d59a41dd0d31",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/pkcs11_vccc.framework\/pkcs11_vccc",
+    "name" : "pkcs11_vccc"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4494671872,
+    "size" : 409600,
+    "uuid" : "f9a60496-1016-3d3e-a692-0ad4f5a41b77",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/soft_token.framework\/soft_token",
+    "name" : "soft_token"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4495196160,
+    "size" : 425984,
+    "uuid" : "9bc96092-e839-3cb2-ab73-9b4aa65f2162",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/uprng.framework\/uprng",
+    "name" : "uprng"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4522508288,
+    "size" : 3506176,
+    "uuid" : "5c171f41-2490-334b-83d7-197a69a5a80e",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/YandexPaySDK.framework\/YandexPaySDK",
+    "name" : "YandexPaySDK"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4509401088,
+    "size" : 999424,
+    "uuid" : "3a2c83e7-6038-30a6-b7df-ec67a2960bb4",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/RSASDK.framework\/RSASDK",
+    "name" : "RSASDK"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4493213696,
+    "size" : 98304,
+    "uuid" : "45ba13a2-03f9-365b-9a4f-ef6d1a76d2eb",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/IOSSecuritySuite_-5B594600D65C7EA3_PackageProduct.framework\/IOSSecuritySuite_-5B594600D65C7EA3_PackageProduct",
+    "name" : "IOSSecuritySuite_-5B594600D65C7EA3_PackageProduct"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4537253888,
+    "size" : 7028736,
+    "uuid" : "58f70241-ecbb-3217-a5a0-c6ae952b3d1d",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/fsdk.framework\/fsdk",
+    "name" : "fsdk"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4528979968,
+    "size" : 3686400,
+    "uuid" : "fcab6b6c-a8e8-3eb1-955a-76b42d1b44d9",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/tsdk.framework\/tsdk",
+    "name" : "tsdk"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4495736832,
+    "size" : 147456,
+    "uuid" : "67cb84b1-ef8d-32a6-846d-0ab65365bb9b",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/LunaCore.framework\/LunaCore",
+    "name" : "LunaCore"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4602822656,
+    "size" : 3866624,
+    "uuid" : "9fa477b6-9eeb-341f-a013-62b6d23e3696",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/flower.framework\/flower",
+    "name" : "flower"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4491870208,
+    "size" : 65536,
+    "uuid" : "22feb895-67c9-3bc9-9bcb-ddbdbbf4b417",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/GUStaticManager.framework\/GUStaticManager",
+    "name" : "GUStaticManager"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4615438336,
+    "size" : 4227072,
+    "uuid" : "5fbe8af1-7c7d-390c-b466-79288a5640fd",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/GuMetricaIOS.framework\/GuMetricaIOS",
+    "name" : "GuMetricaIOS"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4607082496,
+    "size" : 2916352,
+    "uuid" : "f7375fbb-ae60-377e-a8e7-8542937c01d0",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/65E2E041-EB85-4EC0-AB22-B4DF7E86DDE4\/Gosuslugi.app\/Frameworks\/GustManagerForIOS.framework\/GustManagerForIOS",
+    "name" : "GustManagerForIOS"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 4489592832,
+    "size" : 49152,
+    "uuid" : "3702c305-c51e-37d5-9a22-55cef15e974a",
+    "path" : "\/private\/preboot\/Cryptexes\/OS\/usr\/lib\/libobjc-trampolines.dylib",
+    "name" : "libobjc-trampolines.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 4475666432,
+    "size" : 98304,
+    "uuid" : "520976f0-31c3-3a3e-9ffc-5a0ff7cab8be",
+    "path" : "\/System\/Library\/AccessibilityBundles\/GAXClient.bundle\/GAXClient",
+    "name" : "GAXClient"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 6777630720,
+    "size" : 39062912,
+    "uuid" : "9ee8c19a-a370-3599-823b-34b84131aad7",
+    "path" : "\/System\/Library\/PrivateFrameworks\/UIKitCore.framework\/UIKitCore",
+    "name" : "UIKitCore"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 7230271488,
+    "size" : 929920,
+    "uuid" : "d784c2ab-3079-3f2f-ae2e-1b12852f9a9b",
+    "path" : "\/System\/Library\/PrivateFrameworks\/FrontBoardServices.framework\/FrontBoardServices",
+    "name" : "FrontBoardServices"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 7658545152,
+    "size" : 288256,
+    "uuid" : "e1a24fa0-2160-3366-ae7e-420f0fa3c5bc",
+    "path" : "\/usr\/lib\/system\/libdispatch.dylib",
+    "name" : "libdispatch.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 7085330432,
+    "size" : 544096,
+    "uuid" : "c69ae856-f57a-36c9-8708-38c757922a51",
+    "path" : "\/System\/Library\/PrivateFrameworks\/BoardServices.framework\/BoardServices",
+    "name" : "BoardServices"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 6681137152,
+    "size" : 5883808,
+    "uuid" : "fe9658b2-9de6-3fa5-907b-0b3a3bcbb0b7",
+    "path" : "\/System\/Library\/Frameworks\/CoreFoundation.framework\/CoreFoundation",
+    "name" : "CoreFoundation"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 9457246208,
+    "size" : 34752,
+    "uuid" : "d0a89589-718a-3d3a-96da-d2c99bb19040",
+    "path" : "\/System\/Library\/PrivateFrameworks\/GraphicsServices.framework\/GraphicsServices",
+    "name" : "GraphicsServices"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 6626840576,
+    "size" : 676224,
+    "uuid" : "41de795b-9283-37fd-917e-d674bb73f541",
+    "path" : "\/usr\/lib\/dyld",
+    "name" : "dyld"
+  },
+  {
+    "size" : 0,
+    "source" : "A",
+    "base" : 0,
+    "uuid" : "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 11521794048,
+    "size" : 33844,
+    "uuid" : "bdcdc3c3-cfac-3030-958f-49047f12c464",
+    "path" : "\/usr\/lib\/system\/libsystem_platform.dylib",
+    "name" : "libsystem_platform.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 6626295808,
+    "size" : 332928,
+    "uuid" : "0ab507cf-cb12-3ccd-9967-9aac912af8e1",
+    "path" : "\/usr\/lib\/libobjc.A.dylib",
+    "name" : "libobjc.A.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 6633500672,
+    "size" : 15238880,
+    "uuid" : "2f9c66e8-7a0e-379e-8608-f42ef19f0c33",
+    "path" : "\/System\/Library\/Frameworks\/Foundation.framework\/Foundation",
+    "name" : "Foundation"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 6925484032,
+    "size" : 1100416,
+    "uuid" : "78a7c163-7098-3102-9491-9132a74e3ef5",
+    "path" : "\/System\/Library\/PrivateFrameworks\/AXCoreUtilities.framework\/AXCoreUtilities",
+    "name" : "AXCoreUtilities"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 8277016576,
+    "size" : 50416,
+    "uuid" : "9e89e20f-cf2d-31a9-a23f-158eb5a0affe",
+    "path" : "\/usr\/lib\/system\/libsystem_pthread.dylib",
+    "name" : "libsystem_pthread.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 6691540992,
+    "size" : 4131904,
+    "uuid" : "2bcf094c-81c6-3cbd-ac51-669c99ad7c1c",
+    "path" : "\/System\/Library\/Frameworks\/QuartzCore.framework\/QuartzCore",
+    "name" : "QuartzCore"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 9614671872,
+    "size" : 244456,
+    "uuid" : "eb06421e-7aa8-303f-aaab-b7501b063f9d",
+    "path" : "\/usr\/lib\/system\/libsystem_kernel.dylib",
+    "name" : "libsystem_kernel.dylib"
+  }
+],
+  "sharedCache" : {
+  "base" : 6625673216,
+  "size" : 5386305536,
+  "uuid" : "7b0439f6-a070-3ca7-a5b3-1effbaf7feff"
+},
+  "vmSummary" : "ReadOnly portion of Libraries: Total=2.2G resident=0K(0%) swapped_out_or_unallocated=2.2G(100%)\nWritable regions: Total=100.3M written=513K(0%) resident=513K(0%) swapped_out=0K(0%) unallocated=99.8M(100%)\n\n                                VIRTUAL   REGION \nREGION TYPE                        SIZE    COUNT (non-coalesced) \n===========                     =======  ======= \nActivity Tracing                   256K        1 \nCoreAnimation                       32K        2 \nFoundation                          16K        1 \nKernel Alloc Once                   32K        1 \nMALLOC                            24.8M       12 \nMALLOC guard page                 3456K        4 \nMemory Tag 22                     64.0M        1 \nSTACK GUARD                        144K        9 \nStack                             5360K        9 \nVM_ALLOCATE                        144K        1 \n__AUTH                            11.4M      897 \n__AUTH_CONST                     121.3M     1333 \n__CTF                               824        1 \n__DATA                            75.5M     1357 \n__DATA_CONST                      48.9M     1385 \n__DATA_DIRTY                      11.8M     1169 \n__FONT_DATA                        2352        1 \n__LINKEDIT                       232.9M       59 \n__OBJC_RO                         85.0M        1 \n__OBJC_RW                         3209K        1 \n__TEXT                             1.9G     1420 \n__TPRO_CONST                       132K        2 \ndyld private memory                160K        3 \nmapped file                       34.2M        5 \npage table in kernel               513K        1 \nshared memory                       80K        4 \n===========                     =======  ======= \nTOTAL                              2.6G     7680 \n",
+  "legacyInfo" : {
+  "threadTriggered" : {
+    "queue" : "com.apple.main-thread"
+  }
+},
+  "logWritingSignature" : "060ac62c80bd6ce4ddeb0b4304c94f659d265cf4",
+  "roots_installed" : 0,
+  "bug_type" : "309",
+  "trmStatus" : 1,
+  "sandboxProfileName" : "container",
+  "voucherInfos" : [{"proximateName":"SpringBoard","thread_id":1457085}],
+  "trialInfo" : {
+  "rollouts" : [
+    {
+      "rolloutId" : "65a8173205d942272410674b",
+      "factorPackIds" : [
+        "65d39fa4cb0e2417d11ce5f6"
+      ],
+      "deploymentId" : 240000001
+    },
+    {
+      "rolloutId" : "6081eda9c724863038027c4f",
+      "factorPackIds" : [
+        "6ab32761eddd864dae26c74d"
+      ],
+      "deploymentId" : 240002197
+    }
+  ],
+  "experiments" : [
+
+  ]
+}
+}

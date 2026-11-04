@@ -1,0 +1,115 @@
+{"roots_installed":0,"app_name":"ShadowTrackerExtra","timestamp":"2026-10-13 18:06:17.00 +0300","app_version":"4.6.0","slice_uuid":"DE7BF20F-0EAA-325F-91A8-7FBACC2754BD","adam_id":"1330123889","build_version":"21520","bundleID":"com.tencent.ig","duration_ms":"15558096","is_first_party":0,"share_with_app_devs":0,"bug_type":"145","os_version":"iPhone OS 26.5 (23F77)","distributor_id":"com.apple.AppStore","name":"ShadowTrackerExtra","incident_id":"5BA0258C-6C36-40DF-A86C-BBCDB2959515"}
+Date/Time:        2026-10-13 13:44:24.570 +0300
+End time:         2026-10-13 18:03:42.666 +0300
+OS Version:       iPhone OS 26.5 (Build 23F77)
+Architecture:     arm64e
+Report Version:   72
+Incident Identifier: 5BA0258C-6C36-40DF-A86C-BBCDB2959515
+
+Data Source:      Microstackshots
+Shared Cache:     7B0439F6-A070-3CA7-A5B3-1EFFBAF7FEFF slid base address 0x18cc14000, slide 0xcc14000
+
+Command:          ShadowTrackerExtra
+Path:             /private/var/containers/Bundle/Application/AC7379E5-F855-4EA5-8136-5ED17CF8D684/ShadowTrackerExtra.app/ShadowTrackerExtra
+Identifier:       com.tencent.ig
+Version:          4.6.0 (21520)
+Adam ID:          1330123889
+Is First Party:   No
+Beta Identifier:  C95565B9-F672-4366-A4FB-A0F56E589D9C
+Resource Coalition: "com.tencent.ig"(4220)
+Architecture:     arm64
+PID:              15056
+
+Event:            disk writes
+Action taken:     none
+Writes:           4295.63 MB of file backed memory dirtied over 15558 seconds (276.10 KB per second average), exceeding limit of 49.71 KB per second over 86400 seconds
+Writes limit:     4294.97 MB
+Limit duration:   86400s
+Writes caused:    4295.63 MB
+Writes duration:  15558s
+Duration:         15558.10s
+Duration Sampled: 0.08s (event starts 15553.19s before samples, event ends 4.83s after samples)
+Steps:            5 (17 samples lost, 10.49 MB/step)
+
+Hardware model:   iPhone14,2
+Active cpus:      6
+Memory size:      5.53 GB
+HW page size:     16384
+VM page size:     16384
+Shared cache residency: 12.41% (739.84 MB / 5959.47 MB)
+
+Time Since Boot:  367750s
+Time Awake Since Boot: 188687s
+Time Since Wake:  132s
+
+Total CPU Time:   0.076s
+Advisory levels:  Battery -> 3, User -> 3, ThermalPressure -> 10, Combined -> 1
+Free disk space:  27.96 GB/119.09 GB, low space threshold 150 MB
+Vnodes Available: 70.87% (17009/24000, 12000 allocated, 12000 soft limit)
+Models:           none
+
+Preferred User Language: ru-GB
+Country Code:     GB
+Keyboards:        en_GB QWERTY, ru_RU Russian
+OS Cryptex File Extents: 828
+
+Heaviest stack for the target process:
+  5  ??? (libsystem_pthread.dylib + 2252) [0x1ef2ec8cc]
+  5  ??? (libsystem_pthread.dylib + 17464) [0x1ef2f0438]
+  5  ??? (ShadowTrackerExtra + 85203160) [0x1079ad8d8]
+  5  ??? (ShadowTrackerExtra + 85244556) [0x1079b7a8c]
+  5  ??? (ShadowTrackerExtra + 39193980) [0x104dccd7c]
+  5  ??? (ShadowTrackerExtra + 39192892) [0x104dcc93c]
+  3  ??? (ShadowTrackerExtra + 102234388) [0x1089eb914]
+  3  ??? (ShadowTrackerExtra + 102187344) [0x1089e0150]
+  2  ??? (ShadowTrackerExtra + 102143940) [0x1089d57c4]
+  2  ??? (ShadowTrackerExtra + 85172056) [0x1079a5f58]
+  2  ??? (ShadowTrackerExtra + 85171436) [0x1079a5cec]
+  2  ??? (libsystem_kernel.dylib + 20528) [0x23eea1030]
+
+
+Powerstats for:   ShadowTrackerExtra (PUBG MOBILE) [15056]
+UUID:             DE7BF20F-0EAA-325F-91A8-7FBACC2754BD
+Path:             /private/var/containers/Bundle/Application/AC7379E5-F855-4EA5-8136-5ED17CF8D684/ShadowTrackerExtra.app/ShadowTrackerExtra
+Identifier:       com.tencent.ig
+Version:          4.6.0 (21520)
+Adam ID:          1330123889
+Is First Party:   No
+Beta Identifier:  C95565B9-F672-4366-A4FB-A0F56E589D9C
+Resource Coalition: 5 samples "com.tencent.ig"(4220)
+Architecture:     arm64
+Footprint:        718.39 MB -> 699.69 MB (-18.70 MB) (max 754.66 MB )
+Start time:       2026-10-13 18:03:37.757 +0300
+End time:         2026-10-13 18:03:37.839 +0300
+Num samples:      5 (100%)
+Energy:           96.46 uWh
+Num threads:      1
+Primary state:    5 samples Frontmost App, Non-Suppressed, Kernel mode, Effective Thread QoS Default, Requested Thread QoS Default, Override Thread QoS Unspecified, p-core
+User Activity:    0 samples Idle, 5 samples Active
+Power Source:     0 samples on Battery, 5 samples on AC
+  5  ??? (libsystem_pthread.dylib + 2252) [0x1ef2ec8cc]
+    5  ??? (libsystem_pthread.dylib + 17464) [0x1ef2f0438]
+      5  ??? (ShadowTrackerExtra + 85203160) [0x1079ad8d8]
+        5  ??? (ShadowTrackerExtra + 85244556) [0x1079b7a8c]
+          5  ??? (ShadowTrackerExtra + 39193980) [0x104dccd7c]
+            5  ??? (ShadowTrackerExtra + 39192892) [0x104dcc93c]
+              3  ??? (ShadowTrackerExtra + 102234388) [0x1089eb914]
+                3  ??? (ShadowTrackerExtra + 102187344) [0x1089e0150]
+                  2  ??? (ShadowTrackerExtra + 102143940) [0x1089d57c4]
+                    2  ??? (ShadowTrackerExtra + 85172056) [0x1079a5f58]
+                      2  ??? (ShadowTrackerExtra + 85171436) [0x1079a5cec]
+                        2  ??? (libsystem_kernel.dylib + 20528) [0x23eea1030]
+                  1  ??? (ShadowTrackerExtra + 102144332) [0x1089d594c]
+                    1  ??? (ShadowTrackerExtra + 85171940) [0x1079a5ee4]
+                      1  ??? (libsystem_kernel.dylib + 20528) [0x23eea1030]
+              2  ??? (ShadowTrackerExtra + 102234480) [0x1089eb970]
+                2  ??? (ShadowTrackerExtra + 85160184) [0x1079a30f8]
+                  2  ??? (ShadowTrackerExtra + 102413844) [0x108a17614]
+                    2  ??? (ShadowTrackerExtra + 85030124) [0x1079834ec]
+                      2  ??? (ShadowTrackerExtra + 85030548) [0x107983694]
+                        2  ??? (libsystem_kernel.dylib + 20528) [0x23eea1030]
+
+  Binary Images:
+           0x10286c000 -                ???  com.tencent.ig 4.6.0 (21520) <DE7BF20F-0EAA-325F-91A8-7FBACC2754BD>  /private/var/containers/Bundle/Application/AC7379E5-F855-4EA5-8136-5ED17CF8D684/ShadowTrackerExtra.app/ShadowTrackerExtra
+           0x1ef2ec000 -        0x1ef2f84ef  libsystem_pthread.dylib      <9E89E20F-CF2D-31A9-A23F-158EB5A0AFFE>  /usr/lib/system/libsystem_pthread.dylib
+           0x23ee9c000 -        0x23eed7ae7  libsystem_kernel.dylib       <EB06421E-7AA8-303F-AAAB-B7501B063F9D>  /usr/lib/system/libsystem_kernel.dylib

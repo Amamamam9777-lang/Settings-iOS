@@ -1,0 +1,310 @@
+{"roots_installed":0,"app_name":"ShadowTrackerExtra","timestamp":"2026-10-30 07:47:07.00 +0300","app_version":"4.6.0","slice_uuid":"DE7BF20F-0EAA-325F-91A8-7FBACC2754BD","adam_id":"1330123889","build_version":"21520","bundleID":"com.tencent.ig","duration_ms":"155544","is_first_party":0,"share_with_app_devs":0,"bug_type":"202","os_version":"iPhone OS 26.5 (23F77)","distributor_id":"com.apple.AppStore","name":"ShadowTrackerExtra","incident_id":"05237CE5-F92D-42B5-82FD-9D0D9B8BFDF1"}
+Date/Time:        2026-10-30 04:11:09.678 +0300
+End time:         2026-10-30 04:13:45.222 +0300
+OS Version:       iPhone OS 26.5 (Build 23F77)
+Architecture:     arm64e
+Report Version:   72
+Incident Identifier: 05237CE5-F92D-42B5-82FD-9D0D9B8BFDF1
+
+Data Source:      Microstackshots
+Shared Cache:     7B0439F6-A070-3CA7-A5B3-1EFFBAF7FEFF slid base address 0x199b2c000, slide 0x19b2c000
+
+Command:          ShadowTrackerExtra
+Path:             /private/var/containers/Bundle/Application/AC7379E5-F855-4EA5-8136-5ED17CF8D684/ShadowTrackerExtra.app/ShadowTrackerExtra
+Identifier:       com.tencent.ig
+Version:          4.6.0 (21520)
+Adam ID:          1330123889
+Is First Party:   No
+Beta Identifier:  C95565B9-F672-4366-A4FB-A0F56E589D9C
+Resource Coalition: "com.tencent.ig"(1512)
+Architecture:     arm64
+PID:              2939
+
+Event:            cpu usage
+Action taken:     none
+CPU:              90 seconds cpu time over 156 seconds (58% cpu average), exceeding limit of 50% cpu over 180 seconds
+CPU limit:        90s
+Limit duration:   180s
+CPU used:         90s
+CPU duration:     156s
+Duration:         155.54s
+Duration Sampled: 143.98s (event starts 4.14s before samples, event ends 7.43s after samples)
+Steps:            18 (10 gigacycles/step, 30 samples lost)
+
+Hardware model:   iPhone14,2
+Active cpus:      6
+Memory size:      5.53 GB
+HW page size:     16384
+VM page size:     16384
+Shared cache residency: 16.56% (986.62 MB / 5959.47 MB)
+
+Advisory levels:  Battery -> 3, User -> 3, ThermalPressure -> 0, Combined -> 3
+Free disk space:  4598.57 MB/119.09 GB, low space threshold 150 MB
+Vnodes Available: 69.58% (16699/24000, 12000 allocated, 12000 soft limit)
+Models:           none
+
+Preferred User Language: en-GB, ru-GB
+Country Code:     GB
+Keyboards:        en_GB QWERTY, ru_RU Russian
+OS Cryptex File Extents: 828
+
+Heaviest stack for the target process:
+  17  ??? (libsystem_pthread.dylib + 2252) [0x1fc2048cc]
+  17  ??? (libsystem_pthread.dylib + 17464) [0x1fc208438]
+  8   ??? (ShadowTrackerExtra + 85203160) [0x107d858d8]
+  8   ??? (ShadowTrackerExtra + 85244556) [0x107d8fa8c]
+  6   ??? (ShadowTrackerExtra + 88920060) [0x108110ffc]
+  6   ??? (ShadowTrackerExtra + 88902728) [0x10810cc48]
+  6   ??? (ShadowTrackerExtra + 85093264) [0x107d6ab90]
+  6   ??? (ShadowTrackerExtra + 85093964) [0x107d6ae4c]
+  3   ??? (ShadowTrackerExtra + 95345960) [0x108731d28]
+  3   ??? (ShadowTrackerExtra + 95331424) [0x10872e460]
+  2   ??? (ShadowTrackerExtra + 94664112) [0x10868b5b0]
+  2   ??? (ShadowTrackerExtra + 94697472) [0x108693800]
+  2   ??? (ShadowTrackerExtra + 94699024) [0x108693e10]
+  2   ??? (ShadowTrackerExtra + 94711736) [0x108696fb8]
+  1   ??? (ShadowTrackerExtra + 94695140) [0x108692ee4]
+  1   ??? (ShadowTrackerExtra + 94691644) [0x10869213c]
+  1   ??? (ShadowTrackerExtra + 94693308) [0x1086927bc]
+  1   ??? (ShadowTrackerExtra + 94707308) [0x108695e6c]
+  1   ??? (ShadowTrackerExtra + 94169484) [0x10861298c]
+  1   ??? (ShadowTrackerExtra + 91871152) [0x1083e17b0]
+  1   ??? (ShadowTrackerExtra + 95426084) [0x108745624]
+  1   ??? (ShadowTrackerExtra + 98397892) [0x108a1aec4]
+  1   ??? (ShadowTrackerExtra + 36571732) [0x104f24a54]
+
+
+Powerstats for:   ShadowTrackerExtra (PUBG MOBILE) [2939]
+UUID:             DE7BF20F-0EAA-325F-91A8-7FBACC2754BD
+Path:             /private/var/containers/Bundle/Application/AC7379E5-F855-4EA5-8136-5ED17CF8D684/ShadowTrackerExtra.app/ShadowTrackerExtra
+Identifier:       com.tencent.ig
+Version:          4.6.0 (21520)
+Adam ID:          1330123889
+Is First Party:   No
+Beta Identifier:  C95565B9-F672-4366-A4FB-A0F56E589D9C
+Resource Coalition: 18 samples "com.tencent.ig"(1512)
+Architecture:     arm64
+Footprint:        1277.36 MB
+Start time:       2026-10-30 04:11:13.815 +0300
+End time:         2026-10-30 04:13:37.793 +0300
+Num samples:      18 (100%)
+Energy:           8855.30 uWh
+Num threads:      6
+Primary state:    15 samples Frontmost App, Non-Suppressed, User mode, Effective Thread QoS Unspecified, Requested Thread QoS Unspecified, Override Thread QoS Unspecified, e-core
+User Activity:    0 samples Idle, 18 samples Active
+Power Source:     18 samples on Battery, 0 samples on AC
+  17  ??? (libsystem_pthread.dylib + 2252) [0x1fc2048cc]
+    17  ??? (libsystem_pthread.dylib + 17464) [0x1fc208438]
+      8   ??? (ShadowTrackerExtra + 85203160) [0x107d858d8]
+        8   ??? (ShadowTrackerExtra + 85244556) [0x107d8fa8c]
+          6   ??? (ShadowTrackerExtra + 88920060) [0x108110ffc]
+            6   ??? (ShadowTrackerExtra + 88902728) [0x10810cc48]
+              6   ??? (ShadowTrackerExtra + 85093264) [0x107d6ab90]
+                6   ??? (ShadowTrackerExtra + 85093964) [0x107d6ae4c]
+                  3   ??? (ShadowTrackerExtra + 95345960) [0x108731d28]
+                    3   ??? (ShadowTrackerExtra + 95331424) [0x10872e460]
+                      2   ??? (ShadowTrackerExtra + 94664112) [0x10868b5b0]
+                        2   ??? (ShadowTrackerExtra + 94697472) [0x108693800]
+                          2   ??? (ShadowTrackerExtra + 94699024) [0x108693e10]
+                            2   ??? (ShadowTrackerExtra + 94711736) [0x108696fb8]
+                              1   ??? (ShadowTrackerExtra + 94695140) [0x108692ee4]
+                                1   ??? (ShadowTrackerExtra + 94691644) [0x10869213c]
+                                  1   ??? (ShadowTrackerExtra + 94693308) [0x1086927bc]
+                                    1   ??? (ShadowTrackerExtra + 94707308) [0x108695e6c]
+                                      1   ??? (ShadowTrackerExtra + 94169484) [0x10861298c]
+                                        1   ??? (ShadowTrackerExtra + 91871152) [0x1083e17b0]
+                                          1   ??? (ShadowTrackerExtra + 95426084) [0x108745624]
+                                            1   ??? (ShadowTrackerExtra + 98397892) [0x108a1aec4]
+                                              1   ??? (ShadowTrackerExtra + 36571732) [0x104f24a54]
+                              1   ??? (ShadowTrackerExtra + 94694648) [0x108692cf8]
+                                1   ??? (ShadowTrackerExtra + 94691644) [0x10869213c]
+                                  1   ??? (ShadowTrackerExtra + 94693308) [0x1086927bc]
+                                    1   ??? (ShadowTrackerExtra + 94707420) [0x108695edc]
+                                      1   ??? (ShadowTrackerExtra + 94169876) [0x108612b14]
+                                        1   ??? (ShadowTrackerExtra + 91872224) [0x1083e1be0]
+                                          1   ??? (ShadowTrackerExtra + 91878936) [0x1083e3618]
+                                            1   ??? (ShadowTrackerExtra + 95427080) [0x108745a08]
+                                              1   ??? (ShadowTrackerExtra + 106953288) [0x109243a48]
+                                                1   ??? (ShadowTrackerExtra + 107038208) [0x109258600]
+                                                  1   ??? (ShadowTrackerExtra + 107124604) [0x10926d77c]
+                                                    1   ??? (ShadowTrackerExtra + 106954716) [0x109243fdc]
+                                                      1   ??? (ShadowTrackerExtra + 86160196) [0x107e6f344]
+                                                        1   ??? (ShadowTrackerExtra + 86161104) [0x107e6f6d0]
+                                                          1   ??? (ShadowTrackerExtra + 86161724) [0x107e6f93c]
+                                                            1   ??? (ShadowTrackerExtra + 86169200) [0x107e71670]
+                                                              1   ??? (ShadowTrackerExtra + 86158188) [0x107e6eb6c]
+                                                                1   ??? (ShadowTrackerExtra + 37635696) [0x105028670]
+                                                                  1   <p-core>
+                      1   ??? (ShadowTrackerExtra + 94662532) [0x10868af84]
+                        1   ??? (ShadowTrackerExtra + 93611676) [0x10858a69c]
+                          1   ??? (ShadowTrackerExtra + 94212516) [0x10861d1a4]
+                            1   ??? (ShadowTrackerExtra + 94212792) [0x10861d2b8]
+                              1   ??? (ShadowTrackerExtra + 94215036) [0x10861db7c]
+                                1   ??? (ShadowTrackerExtra + 94219960) [0x10861eeb8]
+                                  1   ??? (ShadowTrackerExtra + 91479032) [0x108381bf8]
+                                    1   ??? (ShadowTrackerExtra + 84739236) [0x107d144a4]
+                                      1   ??? (ShadowTrackerExtra + 84739416) [0x107d14558]
+                                        1   ??? (ShadowTrackerExtra + 84838856) [0x107d2c9c8]
+                                          1   ??? (ShadowTrackerExtra + 84842940) [0x107d2d9bc]
+                                            1   ??? (ShadowTrackerExtra + 84843708) [0x107d2dcbc]
+                                              1   ??? (ShadowTrackerExtra + 84724744) [0x107d10c08]
+                                                1   <p-core>
+                  3   ??? (ShadowTrackerExtra + 100067512) [0x108bb28b8]
+                    2   ??? (ShadowTrackerExtra + 99953756) [0x108b96c5c]
+                      2   ??? (ShadowTrackerExtra + 99960940) [0x108b9886c]
+                        1   ??? (libsystem_platform.dylib + 2532) [0x2bd87a9e4]
+                          1   <p-core>
+                        1   ??? (ShadowTrackerExtra + 88398844) [0x108091bfc]
+                          1   <p-core>
+                    1   ??? (ShadowTrackerExtra + 99957496) [0x108b97af8]
+                      1   ??? (ShadowTrackerExtra + 99925688) [0x108b8feb8]
+                        1   ??? (ShadowTrackerExtra + 99985308) [0x108b9e79c]
+                          1   ??? (libsystem_platform.dylib + 2780) [0x2bd87aadc]
+          2   ??? (ShadowTrackerExtra + 85092244) [0x107d6a794]
+            2   ??? (ShadowTrackerExtra + 85092352) [0x107d6a800]
+              2   ??? (ShadowTrackerExtra + 85092960) [0x107d6aa60]
+                1   ??? (ShadowTrackerExtra + 104961284) [0x10905d504]
+                  1   ??? (ShadowTrackerExtra + 104864212) [0x1090459d4]
+                    1   ??? (ShadowTrackerExtra + 103626436) [0x108f176c4]
+                      1   ??? (ShadowTrackerExtra + 103769036) [0x108f3a3cc]
+                        1   ??? (ShadowTrackerExtra + 103769036) [0x108f3a3cc]
+                          1   ??? (ShadowTrackerExtra + 99338152) [0x108b007a8]
+                            1   ??? (ShadowTrackerExtra + 103715500) [0x108f2d2ac]
+                              1   ??? (ShadowTrackerExtra + 103769036) [0x108f3a3cc]
+                                1   ??? (ShadowTrackerExtra + 103769036) [0x108f3a3cc]
+                                  1   ??? (ShadowTrackerExtra + 103769036) [0x108f3a3cc]
+                                    1   ??? (ShadowTrackerExtra + 103769036) [0x108f3a3cc]
+                                      1   ??? (ShadowTrackerExtra + 99336084) [0x108afff94]
+                                        1   ??? (ShadowTrackerExtra + 103715500) [0x108f2d2ac]
+                                          1   ??? (ShadowTrackerExtra + 99336084) [0x108afff94]
+                                            1   ??? (ShadowTrackerExtra + 103715500) [0x108f2d2ac]
+                                              1   ??? (ShadowTrackerExtra + 99336084) [0x108afff94]
+                                                1   ??? (ShadowTrackerExtra + 103715500) [0x108f2d2ac]
+                                                  1   ??? (ShadowTrackerExtra + 99336084) [0x108afff94]
+                                                    1   ??? (ShadowTrackerExtra + 99347436) [0x108b02bec]
+                                                      1   ??? (ShadowTrackerExtra + 103715500) [0x108f2d2ac]
+                                                        1   ??? (ShadowTrackerExtra + 99336084) [0x108afff94]
+                                                          1   ??? (ShadowTrackerExtra + 99347872) [0x108b02da0]
+                                                            1   ??? (ShadowTrackerExtra + 103436808) [0x108ee9208]
+                1   ??? (ShadowTrackerExtra + 44210364) [0x10566d8bc]
+                  1   ??? (ShadowTrackerExtra + 91720164) [0x1083bc9e4]
+                    1   ??? (ShadowTrackerExtra + 91720140) [0x1083bc9cc]
+                      1   ??? (ShadowTrackerExtra + 91720496) [0x1083bcb30]
+                        1   ??? (ShadowTrackerExtra + 91692424) [0x1083b5d88]
+                          1   ??? (ShadowTrackerExtra + 91683508) [0x1083b3ab4]
+      7   ??? (Foundation + 583716) [0x19a331824]
+        6   ??? (ShadowTrackerExtra + 86568792) [0x107ed2f58]
+          3   ??? (ShadowTrackerExtra + 49157272) [0x105b25498]
+            3   ??? (ShadowTrackerExtra + 71746568) [0x1070b0408]
+              2   ??? (ShadowTrackerExtra + 105617804) [0x1090fd98c]
+                1   ??? (ShadowTrackerExtra + 106603388) [0x1091ee37c]
+                1   ??? (ShadowTrackerExtra + 106603920) [0x1091ee590]
+                  1   ??? (ShadowTrackerExtra + 106599664) [0x1091ed4f0]
+                    1   ??? (ShadowTrackerExtra + 110067588) [0x10953bf84]
+                      1   ??? (ShadowTrackerExtra + 110077388) [0x10953e5cc]
+                        1   ??? (ShadowTrackerExtra + 85091060) [0x107d6a2f4]
+                          1   ??? (ShadowTrackerExtra + 85093264) [0x107d6ab90]
+                            1   ??? (ShadowTrackerExtra + 85093964) [0x107d6ae4c]
+                              1   ??? (ShadowTrackerExtra + 110094032) [0x1095426d0]
+                                1   ??? (ShadowTrackerExtra + 110094688) [0x109542960]
+                                  1   ??? (ShadowTrackerExtra + 104367528) [0x108fcc5a8]
+                                    1   ??? (ShadowTrackerExtra + 51936204) [0x105dcbbcc]
+                                      1   ??? (ShadowTrackerExtra + 104438248) [0x108fdd9e8]
+                                        1   ??? (ShadowTrackerExtra + 104437880) [0x108fdd878]
+                                          1   ??? (ShadowTrackerExtra + 51980380) [0x105dd685c]
+                                            1   ??? (ShadowTrackerExtra + 51860880) [0x105db9590]
+                                              1   ??? (ShadowTrackerExtra + 104457164) [0x108fe23cc]
+                                                1   ??? (ShadowTrackerExtra + 104463288) [0x108fe3bb8]
+                                                  1   ??? (ShadowTrackerExtra + 104476532) [0x108fe6f74]
+                                                    1   ??? (ShadowTrackerExtra + 51891536) [0x105dc0d50]
+                                                      1   ??? (ShadowTrackerExtra + 51903224) [0x105dc3af8]
+                                                        1   ??? (ShadowTrackerExtra + 104624968) [0x10900b348]
+                                                          1   ??? (ShadowTrackerExtra + 104711632) [0x1090205d0]
+                                                            1   ??? (ShadowTrackerExtra + 104353612) [0x108fc8f4c]
+                                                              1   ??? (ShadowTrackerExtra + 116294428) [0x109b2c31c]
+                                                                1   <p-core>
+              1   ??? (ShadowTrackerExtra + 105618536) [0x1090fdc68]
+                1   ??? (ShadowTrackerExtra + 105616380) [0x1090fd3fc]
+                  1   ??? (ShadowTrackerExtra + 105611516) [0x1090fc0fc]
+                    1   ??? (ShadowTrackerExtra + 109975376) [0x109525750]
+                      1   ??? (ShadowTrackerExtra + 105795412) [0x109128f54]
+                        1   ??? (ShadowTrackerExtra + 95329168) [0x10872db90]
+                          1   ??? (ShadowTrackerExtra + 106600732) [0x1091ed91c]
+                            1   ??? (ShadowTrackerExtra + 42261144) [0x105491a98]
+                              1   ??? (ShadowTrackerExtra + 42315460) [0x10549eec4]
+                                1   ??? (ShadowTrackerExtra + 106657192) [0x1091fb5a8]
+                                  1   ??? (ShadowTrackerExtra + 104373176) [0x108fcdbb8]
+                                    1   ??? (ShadowTrackerExtra + 104697224) [0x10901cd88]
+                                      1   ??? (ShadowTrackerExtra + 104697336) [0x10901cdf8]
+          2   ??? (<56BBDA19-2130-38C2-85B3-A2915BFB84BD> + 1663520) [0x10e8da220]
+            2   ??? (<56BBDA19-2130-38C2-85B3-A2915BFB84BD> + 1661992) [0x10e8d9c28]
+              1   ??? (<56BBDA19-2130-38C2-85B3-A2915BFB84BD> + 1390816) [0x10e8978e0]
+              1   ??? (<56BBDA19-2130-38C2-85B3-A2915BFB84BD> + 1662548) [0x10e8d9e54]
+                1   ??? (<56BBDA19-2130-38C2-85B3-A2915BFB84BD> + 1164640) [0x10e860560]
+                  1   ??? (<56BBDA19-2130-38C2-85B3-A2915BFB84BD> + 1165728) [0x10e8609a0]
+                    1   ??? (<56BBDA19-2130-38C2-85B3-A2915BFB84BD> + 1175828) [0x10e863114]
+                      1   ??? (<56BBDA19-2130-38C2-85B3-A2915BFB84BD> + 1182140) [0x10e8649bc]
+                        1   ??? (<56BBDA19-2130-38C2-85B3-A2915BFB84BD> + 1193424) [0x10e8675d0]
+          1   ??? (ShadowTrackerExtra + 49156516) [0x105b251a4]
+            1   ??? (ShadowTrackerExtra + 110007060) [0x10952d314]
+              1   ??? (libsystem_kernel.dylib + 3368) [0x24bdb4d28]
+                1   <p-core>
+        1   ??? (<56BBDA19-2130-38C2-85B3-A2915BFB84BD> + 1289624) [0x10e87ed98]
+          1   ??? (<56BBDA19-2130-38C2-85B3-A2915BFB84BD> + 1295348) [0x10e8803f4]
+            1   ??? (<56BBDA19-2130-38C2-85B3-A2915BFB84BD> + 1164640) [0x10e860560]
+              1   ??? (<56BBDA19-2130-38C2-85B3-A2915BFB84BD> + 1166792) [0x10e860dc8]
+                1   ??? (<56BBDA19-2130-38C2-85B3-A2915BFB84BD> + 1176252) [0x10e8632bc]
+                  1   ??? (<56BBDA19-2130-38C2-85B3-A2915BFB84BD> + 1175956) [0x10e863194]
+      1   ??? (<56BBDA19-2130-38C2-85B3-A2915BFB84BD> + 2075204) [0x10e93ea44]
+        1   ??? (<56BBDA19-2130-38C2-85B3-A2915BFB84BD> + 2118756) [0x10e949464]
+          1   ??? (<56BBDA19-2130-38C2-85B3-A2915BFB84BD> + 2117392) [0x10e948f10]
+            1   ??? (<56BBDA19-2130-38C2-85B3-A2915BFB84BD> + 2116436) [0x10e948b54]
+              1   ??? (<56BBDA19-2130-38C2-85B3-A2915BFB84BD> + 2080312) [0x10e93fe38]
+                1   ??? (<56BBDA19-2130-38C2-85B3-A2915BFB84BD> + 2145016) [0x10e94faf8]
+                  1   ??? (<56BBDA19-2130-38C2-85B3-A2915BFB84BD> + 2147904) [0x10e950640]
+                    1   <Effective Thread QoS Default, Requested Thread QoS Default, p-core>
+      1   ??? (ShadowTrackerExtra + 24049628) [0x1043337dc]
+        1   ??? (ShadowTrackerExtra + 23547644) [0x1042b8efc]
+          1   ??? (ShadowTrackerExtra + 23692792) [0x1042dc5f8]
+            1   ??? (ShadowTrackerExtra + 24057416) [0x104335648]
+              1   ??? (ShadowTrackerExtra + 24148972) [0x10434bbec]
+                1   ??? (ShadowTrackerExtra + 24149260) [0x10434bd0c]
+                  1   ??? (ShadowTrackerExtra + 24152020) [0x10434c7d4]
+                    1   ??? (ShadowTrackerExtra + 24357172) [0x10437e934]
+                      1   ??? (ShadowTrackerExtra + 24094784) [0x10433e840]
+                        1   ??? (ShadowTrackerExtra + 24198684) [0x104357e1c]
+                          1   ??? (ShadowTrackerExtra + 35549476) [0x104e2b124]
+                            1   ??? (ShadowTrackerExtra + 35465496) [0x104e16918]
+                              1   ??? (ShadowTrackerExtra + 102416880) [0x108df01f0]
+                                1   ??? (libsystem_kernel.dylib + 26676) [0x24bdba834]
+                                  1   <Kernel mode>
+  1   ??? (libsystem_pthread.dylib + 2240) [0x1fc2048c0]
+    1   ??? (libsystem_pthread.dylib + 4980) [0x1fc205374]
+      1   ??? (libdispatch.dylib + 82072) [0x1d7446098]
+        1   ??? (libdispatch.dylib + 80128) [0x1d7445900]
+          1   ??? (libdispatch.dylib + 43812) [0x1d743cb24]
+            1   ??? (libdispatch.dylib + 75708) [0x1d74447bc]
+              1   ??? (libdispatch.dylib + 111076) [0x1d744d1e4]
+                1   ??? (libdispatch.dylib + 6568) [0x1d74339a8]
+                  1   ??? (<433BF8D5-66C3-3F6A-BC1D-9E7E81CD3D39> + 295800) [0x10ea60378]
+                    1   ??? (Foundation + 3011604) [0x19a582414]
+                      1   ??? (Foundation + 219176) [0x19a2d8828]
+                        1   ??? (Foundation + 181160) [0x19a2cf3a8]
+                          1   ??? (Foundation + 320148) [0x19a2f1294]
+                            1   ??? (Foundation + 219176) [0x19a2d8828]
+                              1   ??? (Foundation + 180320) [0x19a2cf060]
+                                1   ??? (Foundation + 320148) [0x19a2f1294]
+                                  1   ??? (Foundation + 218976) [0x19a2d8760]
+                                    1   ??? (libobjc.A.dylib + 13380) [0x199bc7444]
+                                      1   <Effective Thread QoS Default, Requested Thread QoS Default>
+
+  Binary Images:
+           0x102c44000 -                ???  com.tencent.ig 4.6.0 (21520) <DE7BF20F-0EAA-325F-91A8-7FBACC2754BD>  /private/var/containers/Bundle/Application/AC7379E5-F855-4EA5-8136-5ED17CF8D684/ShadowTrackerExtra.app/ShadowTrackerExtra
+           0x10e744000 -                ???  ???                          <56BBDA19-2130-38C2-85B3-A2915BFB84BD>
+           0x10ea18000 -                ???  ???                          <433BF8D5-66C3-3F6A-BC1D-9E7E81CD3D39>
+           0x199bc4000 -        0x199c1547f  libobjc.A.dylib              <0AB507CF-CB12-3CCD-9967-9AAC912AF8E1>  /usr/lib/libobjc.A.dylib
+           0x19a2a3000 -        0x19b12b6df  Foundation                   <2F9C66E8-7A0E-379E-8608-F42EF19F0C33>  /System/Library/Frameworks/Foundation.framework/Foundation
+           0x1d7432000 -        0x1d74785ff  libdispatch.dylib            <E1A24FA0-2160-3366-AE7E-420F0FA3C5BC>  /usr/lib/system/libdispatch.dylib
+           0x1fc204000 -        0x1fc2104ef  libsystem_pthread.dylib      <9E89E20F-CF2D-31A9-A23F-158EB5A0AFFE>  /usr/lib/system/libsystem_pthread.dylib
+           0x24bdb4000 -        0x24bdefae7  libsystem_kernel.dylib       <EB06421E-7AA8-303F-AAAB-B7501B063F9D>  /usr/lib/system/libsystem_kernel.dylib
+           0x2bd87a000 -        0x2bd882433  libsystem_platform.dylib     <BDCDC3C3-CFAC-3030-958F-49047F12C464>  /usr/lib/system/libsystem_platform.dylib
