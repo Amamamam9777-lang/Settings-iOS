@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct PrivacySecurityView: View {
     @State private var titleVisible = false
@@ -359,28 +360,41 @@ struct PrivacySecurityView: View {
 // and are not uploaded or sent to any service.
 
 struct AnalyticsImprovementsView: View {
-    @AppStorage("DemoShareiPhoneAnalytics") private var shareiPhoneAnalytics = true
-    @AppStorage("DemoShareWithAppDevelopers") private var shareWithAppDevelopers = true
-    @AppStorage("DemoImproveSiriAndDictation") private var improveSiriAndDictation = false
+    @AppStorage("ShareiPhoneAnalytics") private var shareiPhoneAnalytics = false
+    @AppStorage("ShareiCloudAnalytics") private var shareiCloudAnalytics = false
+    @AppStorage("ImproveSiriAndDictation") private var improveSiriAndDictation = false
+    @AppStorage("ImproveAssistiveVoiceFeatures") private var improveAssistiveVoiceFeatures = false
 
     var body: some View {
         CustomList(title: "Analytics & Improvements") {
             Section {
                 Toggle("Share iPhone Analytics", isOn: $shareiPhoneAnalytics)
-                Toggle("Share with App Developers", isOn: $shareWithAppDevelopers)
-                Toggle("Improve Siri & Dictation", isOn: $improveSiriAndDictation)
-            } footer: {
-                Text("Help Apple improve its products and services by sharing diagnostic and usage information.")
-            }
 
-            Section {
                 NavigationLink {
                     AnalyticsDataView()
                 } label: {
                     Text("Analytics Data")
                 }
             } footer: {
-                Text("View diagnostic reports stored in this demo Settings app.")
+                Text("Help Apple improve its products and services by automatically sending daily diagnostic and usage information. Data may include location.")
+            }
+
+            Section {
+                Toggle("Share iCloud Analytics", isOn: $shareiCloudAnalytics)
+            } footer: {
+                Text("Help Apple improve its products and services by sharing analytics from your iCloud account.")
+            }
+
+            Section {
+                Toggle("Improve Siri & Dictation", isOn: $improveSiriAndDictation)
+            } footer: {
+                Text("Help Apple improve Siri and Dictation by sharing the audio recordings and transcripts of your interactions with Siri, Dictation and Translate.")
+            }
+
+            Section {
+                Toggle("Improve Assistive Voice Features", isOn: $improveAssistiveVoiceFeatures)
+            } footer: {
+                Text("Help Apple improve accessibility features by sharing diagnostic and usage information.")
             }
         }
     }
@@ -3147,54 +3161,86 @@ private enum BundledAnalyticsLogs {
 }
 
 struct AnalyticsDataView: View {
+    @State private var searchText = ""
+
+    private var filteredLogs: [BundledAnalyticsLog] {
+        let logs = BundledAnalyticsLogs.items.sorted {
+            $0.id.localizedStandardCompare($1.id) == .orderedDescending
+        }
+        guard !searchText.isEmpty else { return logs }
+        return logs.filter {
+            $0.id.localizedCaseInsensitiveContains(searchText) ||
+            $0.subtitle.localizedCaseInsensitiveContains(searchText) ||
+            $0.contents.localizedCaseInsensitiveContains(searchText)
+        }
+    }
+
     var body: some View {
-        CustomList(title: "Analytics Data") {
-            Section {
-                ForEach(BundledAnalyticsLogs.items) { log in
-                    NavigationLink {
-                        AnalyticsLogDetailView(log: log)
-                    } label: {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(log.id)
-                                .lineLimit(2)
-                            Text(log.subtitle)
-                                .font(.footnote)
-                                .foregroundStyle(.secondary)
-                        }
-                        .padding(.vertical, 3)
-                    }
+        List {
+            ForEach(filteredLogs) { log in
+                NavigationLink {
+                    AnalyticsLogDetailView(log: log)
+                } label: {
+                    Text(log.id)
+                        .font(.system(size: 15, weight: .regular))
+                        .foregroundStyle(.primary)
+                        .lineLimit(3)
+                        .multilineTextAlignment(.leading)
+                        .padding(.vertical, 8)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
-            } footer: {
-                Text("These diagnostic reports are bundled locally in this demo. They are not live reports from iOS.")
+                .listRowBackground(Color(uiColor: .secondarySystemBackground))
             }
         }
+        .listStyle(.plain)
+        .scrollContentBackground(.hidden)
+        .background(Color(uiColor: .systemBackground))
+        .navigationTitle("Analytics Data")
+        .navigationBarTitleDisplayMode(.inline)
+        .searchable(text: $searchText, placement: .toolbar, prompt: "Search")
+        .autocorrectionDisabled()
     }
 }
 
 private struct AnalyticsLogDetailView: View {
     let log: BundledAnalyticsLog
-    private let lines: [String]
-
-    init(log: BundledAnalyticsLog) {
-        self.log = log
-        self.lines = log.contents.components(separatedBy: .newlines)
-    }
+    @State private var showingShareSheet = false
 
     var body: some View {
-        ScrollView {
-            LazyVStack(alignment: .leading, spacing: 3) {
-                ForEach(lines.indices, id: \.self) { index in
-                    Text(lines[index].isEmpty ? " " : lines[index])
-                        .font(.system(size: 11, weight: .regular, design: .monospaced))
-                        .textSelection(.enabled)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-            }
-            .padding(12)
+        ScrollView([.vertical, .horizontal]) {
+            Text(log.contents)
+                .font(.system(size: 11, weight: .regular, design: .monospaced))
+                .foregroundStyle(.primary)
+                .textSelection(.enabled)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
         }
         .background(Color(uiColor: .systemBackground))
         .navigationTitle(log.id)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    showingShareSheet = true
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                }
+                .accessibilityLabel("Share")
+            }
+        }
+        .sheet(isPresented: $showingShareSheet) {
+            AnalyticsShareSheet(items: [log.contents])
+        }
     }
+}
+
+private struct AnalyticsShareSheet: UIViewControllerRepresentable {
+    let items: [Any]
+
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        UIActivityViewController(activityItems: items, applicationActivities: nil)
+    }
+
+    func updateUIViewController(_ controller: UIActivityViewController, context: Context) {}
 }
