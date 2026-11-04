@@ -12,16 +12,28 @@ jobs:
   prepare:
     name: Prepare project on Ubuntu
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Verify Xcode project
+      - name: Verify project and Analytics logs
         run: |
           test -d Preferences.xcodeproj
           test -f Preferences.xcodeproj/project.pbxproj
-          echo "Xcode project found!"
-          echo "Ubuntu preparation successful."
+          test -d Preferences/AnalyticsLogs
+
+          echo "Analytics reports:"
+          find Preferences/AnalyticsLogs -maxdepth 1 -type f -name '*.ips' -print
+
+          COUNT=$(find Preferences/AnalyticsLogs -maxdepth 1 -type f -name '*.ips' | wc -l)
+
+          if [ "$COUNT" -eq 0 ]; then
+            echo "ERROR: No IPS files found!"
+            exit 1
+          fi
+
+          echo "Found $COUNT reports."
 
   build:
     name: Build IPA on macOS
@@ -45,6 +57,26 @@ jobs:
             -derivedDataPath build \
             CODE_SIGNING_ALLOWED=NO \
             build
+
+      - name: Copy Analytics Data files
+        run: |
+          APP_PATH="build/Build/Products/Release-iphoneos/Preferences.app"
+          SOURCE_PATH="Preferences/AnalyticsLogs"
+
+          mkdir -p "$APP_PATH/AnalyticsLogs"
+
+          find "$SOURCE_PATH" -maxdepth 1 -type f -name '*.ips' \
+            -exec cp {} "$APP_PATH/AnalyticsLogs/" \;
+
+          echo "Reports inside application:"
+          ls -lh "$APP_PATH/AnalyticsLogs"
+
+          COUNT=$(find "$APP_PATH/AnalyticsLogs" -name '*.ips' | wc -l)
+
+          if [ "$COUNT" -eq 0 ]; then
+            echo "ERROR: No reports copied!"
+            exit 1
+          fi
 
       - name: Package IPA
         run: |
