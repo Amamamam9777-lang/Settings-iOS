@@ -640,7 +640,7 @@ private struct AnalyticsLogTextView: UIViewRepresentable {
         let textView = UITextView()
         textView.backgroundColor = .clear
         textView.textColor = .white
-        textView.font = UIFont.monospacedSystemFont(ofSize: 10.5, weight: .regular)
+        textView.font = UIFont.systemFont(ofSize: 10.5, weight: .regular)
         textView.isEditable = false
         textView.isSelectable = true
         textView.isScrollEnabled = true
