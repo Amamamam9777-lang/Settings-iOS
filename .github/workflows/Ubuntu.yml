@@ -1,20 +1,60 @@
 
-name: Test GitHub Ubuntu Runner
+name: Build Settings-iOS for iPhone
 
 on:
   workflow_dispatch:
 
+concurrency:
+  group: settings-ios-build
+  cancel-in-progress: true
+
 jobs:
-  test:
+  prepare:
+    name: Prepare project on Ubuntu
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify Xcode project
+        run: |
+          test -d Preferences.xcodeproj
+          test -f Preferences.xcodeproj/project.pbxproj
+          echo "Xcode project found!"
+          echo "Ubuntu preparation successful."
+
+  build:
+    name: Build IPA on macOS
+    needs: prepare
+    runs-on: macos-26-intel
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Check runner
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Build for iPhone
         run: |
-          echo "Ubuntu runner started!"
-          uname -a
-          nproc
-          free -h
+          xcodebuild \
+            -project Preferences.xcodeproj \
+            -scheme Preferences \
+            -sdk iphoneos \
+            -configuration Release \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      - name: Package IPA
+        run: |
+          mkdir -p Payload
+          cp -R build/Build/Products/Release-iphoneos/Preferences.app Payload/
+          /usr/bin/zip -qr Settings-iOS-unsigned.ipa Payload
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: Settings-iOS-iPhone
+          path: Settings-iOS-unsigned.ipa
+          retention-days: 7
