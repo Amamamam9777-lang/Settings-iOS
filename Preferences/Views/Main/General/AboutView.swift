@@ -139,7 +139,7 @@ struct AboutView: View {
     }
 }
 
-private func generateRandomAddress() -> String {
+func generateRandomAddress() -> String {
     (0..<6)
         .map { _ in String(format: "%02X", Int.random(in: 0...255)) }
         .joined(separator: ":")
