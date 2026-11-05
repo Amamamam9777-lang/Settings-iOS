@@ -58,10 +58,12 @@ struct CustomTouchSettingsView: View {
                 Text("A floating button appears inside this Settings app when AssistiveTouch is enabled.")
             }
 
-            Section("Custom Actions") {
+            Section {
                 actionPicker("Single-Tap", selection: $single)
                 actionPicker("Double-Tap", selection: $double)
                 actionPicker("Long Press", selection: $long)
+            } header: {
+                Text("Custom Actions")
             } footer: {
                 Text("Choose what the floating button does. These actions work inside this app only.")
             }
