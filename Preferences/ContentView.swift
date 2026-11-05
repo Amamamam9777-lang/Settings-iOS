@@ -18,7 +18,6 @@ struct ContentView: View {
     @State private var showingResearchSheet = false
     @State private var showingSupervisedSheet = false
     @State private var showingSearchQueryError = false
-    @AppStorage("AssistiveTouchDarkMode") private var assistiveTouchDarkModeEnabled = false
     
     var body: some View {
         @Bindable var model = model
@@ -120,10 +119,6 @@ struct ContentView: View {
             }
         }
         .accessibilityIdentifier("SettingsList")
-        .overlay(alignment: .bottomTrailing) {
-            AssistiveTouchOverlay()
-        }
-        .preferredColorScheme(assistiveTouchDarkModeEnabled ? .dark : nil)
         .alert(
             .tapToRadar,
             isPresented: $showingSearchQueryError
