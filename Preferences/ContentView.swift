@@ -204,9 +204,7 @@ struct ContentView: View {
     }
 }
 
-/// The single floating AssistiveTouch-style button shown after the existing
-/// AssistiveTouch switch is enabled. It has no menu or additional controls;
-/// it can only be dragged, matching the supplied reference recording.
+/// Minimal in-app AssistiveTouch indicator. No menu or additional window is presented.
 private struct AssistiveTouchFloatingButton: View {
     @AppStorage("SettingsAssistiveTouchButtonX") private var savedX = -1.0
     @AppStorage("SettingsAssistiveTouchButtonY") private var savedY = -1.0
@@ -218,50 +216,36 @@ private struct AssistiveTouchFloatingButton: View {
     var body: some View {
         GeometryReader { geometry in
             let size = geometry.size
-            let currentPosition = position ?? CGPoint(
-                x: savedX > 0
-                    ? min(max(CGFloat(savedX), diameter / 2), size.width - diameter / 2)
-                    : size.width - diameter / 2 - 8,
-                y: savedY > 0
-                    ? min(max(CGFloat(savedY), diameter / 2), size.height - diameter / 2)
-                    : size.height * 0.52
+            let current = position ?? CGPoint(
+                x: savedX > 0 ? min(max(CGFloat(savedX), diameter / 2), size.width - diameter / 2) : size.width - diameter / 2 - 8,
+                y: savedY > 0 ? min(max(CGFloat(savedY), diameter / 2), size.height - diameter / 2) : size.height * 0.52
             )
 
             Circle()
                 .fill(Color.black.opacity(0.48))
-                .overlay {
-                    Circle()
-                        .stroke(Color.white.opacity(0.48), lineWidth: 1.6)
-                }
-                .overlay {
-                    Circle()
-                        .fill(Color.white)
-                        .frame(width: 23, height: 23)
-                }
+                .overlay { Circle().stroke(Color.white.opacity(0.48), lineWidth: 1.6) }
+                .overlay { Circle().fill(Color.white).frame(width: 23, height: 23) }
                 .frame(width: diameter, height: diameter)
                 .shadow(color: .black.opacity(0.24), radius: 4, x: 0, y: 1)
                 .contentShape(Circle())
-                .position(currentPosition)
-                .gesture(
-                    DragGesture(minimumDistance: 2)
-                        .onChanged { value in
-                            let origin = dragOrigin ?? currentPosition
-                            dragOrigin = origin
-                            position = CGPoint(
-                                x: min(max(origin.x + value.translation.width, diameter / 2), size.width - diameter / 2),
-                                y: min(max(origin.y + value.translation.height, diameter / 2), size.height - diameter / 2)
-                            )
+                .position(current)
+                .gesture(DragGesture(minimumDistance: 2)
+                    .onChanged { value in
+                        let origin = dragOrigin ?? current
+                        dragOrigin = origin
+                        position = CGPoint(
+                            x: min(max(origin.x + value.translation.width, diameter / 2), size.width - diameter / 2),
+                            y: min(max(origin.y + value.translation.height, diameter / 2), size.height - diameter / 2)
+                        )
+                    }
+                    .onEnded { _ in
+                        if let position {
+                            savedX = Double(position.x)
+                            savedY = Double(position.y)
                         }
-                        .onEnded { _ in
-                            if let position {
-                                savedX = Double(position.x)
-                                savedY = Double(position.y)
-                            }
-                            dragOrigin = nil
-                        }
-                )
+                        dragOrigin = nil
+                    })
                 .accessibilityLabel("AssistiveTouch")
-                .accessibilityAddTraits(.isButton)
         }
         .ignoresSafeArea()
     }
