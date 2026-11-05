@@ -283,7 +283,6 @@ struct AssistiveTouchOverlay: View {
 
     @State private var committedOffset: CGSize = .zero
     @State private var liveOffset: CGSize = .zero
-    @State private var showingMenu = false
     @State private var showingAnalytics = false
     @State private var actionMessage: String?
 
@@ -321,33 +320,6 @@ struct AssistiveTouchOverlay: View {
                 AnalyticsDataView()
             }
         }
-        .sheet(isPresented: $showingMenu) {
-            NavigationStack {
-                List {
-                    Section {
-                        Button("Analytics") {
-                            showingMenu = false
-                            showingAnalytics = true
-                        }
-                        Button("Home") {
-                            showingMenu = false
-                            actionMessage = "Home is available inside the Settings app navigation."
-                        }
-                        Button("Dark Mode") {
-                            darkModeEnabled.toggle()
-                            showingMenu = false
-                        }
-                    }
-                }
-                .navigationTitle("AssistiveTouch")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button("Done") { showingMenu = false }
-                    }
-                }
-            }
-        }
         .alert("AssistiveTouch", isPresented: Binding(
             get: { actionMessage != nil },
             set: { if !$0 { actionMessage = nil } }
@@ -363,7 +335,8 @@ struct AssistiveTouchOverlay: View {
         case "None", "Pass Through to App":
             break
         case "Open Menu":
-            showingMenu = true
+            // The replica intentionally has no separate top-level menu.
+            break
         case "Analytics":
             showingAnalytics = true
         case "Dark Mode":
