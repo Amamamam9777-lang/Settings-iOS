@@ -119,9 +119,6 @@ struct ContentView: View {
             }
         }
         .accessibilityIdentifier("SettingsList")
-        .overlay(alignment: .bottomTrailing) {
-            AssistiveTouchOverlay()
-        }
         .alert(
             .tapToRadar,
             isPresented: $showingSearchQueryError
