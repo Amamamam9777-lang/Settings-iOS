@@ -76,10 +76,6 @@ private final class AssistiveTouchSwitchMonitorView: UIView {
         }
     }
 
-    deinit {
-        pollingTimer?.invalidate()
-    }
-
     private func startPolling() {
         guard pollingTimer == nil else { return }
         // The native Preferences controller pushes Touch and AssistiveTouch
