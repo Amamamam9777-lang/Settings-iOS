@@ -18,7 +18,6 @@ struct ContentView: View {
     @State private var showingResearchSheet = false
     @State private var showingSupervisedSheet = false
     @State private var showingSearchQueryError = false
-    @AppStorage("AssistiveTouchEnabled") private var assistiveTouchEnabled = false
     
     var body: some View {
         @Bindable var model = model
@@ -120,15 +119,6 @@ struct ContentView: View {
             }
         }
         .accessibilityIdentifier("SettingsList")
-        .overlay(alignment: .bottomTrailing) {
-            if assistiveTouchEnabled && UIDevice.iPhone {
-                AssistiveTouchFloatingButton()
-                    .padding(.trailing, 18)
-                    .padding(.bottom, 34)
-                    .transition(.opacity)
-                    .zIndex(1000)
-            }
-        }
         .alert(
             .tapToRadar,
             isPresented: $showingSearchQueryError
@@ -210,30 +200,4 @@ struct ContentView: View {
 #Preview {
     ContentView()
         .environment(PrimarySettingsListModel())
-}
-
-
-/// Minimal in-app AssistiveTouch indicator. It intentionally has no menu.
-private struct AssistiveTouchFloatingButton: View {
-    var body: some View {
-        Circle()
-            .fill(Color.black.opacity(0.58))
-            .overlay {
-                Circle()
-                    .stroke(Color.white.opacity(0.72), lineWidth: 2)
-                    .padding(1)
-            }
-            .overlay {
-                Circle()
-                    .fill(Color.white.opacity(0.94))
-                    .frame(width: 17, height: 17)
-                    .overlay {
-                        Circle().stroke(Color.black.opacity(0.18), lineWidth: 1)
-                    }
-            }
-            .frame(width: 58, height: 58)
-            .shadow(color: .black.opacity(0.22), radius: 5, y: 2)
-            .accessibilityLabel("AssistiveTouch")
-            .allowsHitTesting(false)
-    }
 }
