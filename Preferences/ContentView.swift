@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct ContentView: View {
     @AppStorage("FollowUpDismissed") private var followUpDismissed = false
@@ -18,7 +19,9 @@ struct ContentView: View {
     @State private var showingResearchSheet = false
     @State private var showingSupervisedSheet = false
     @State private var showingSearchQueryError = false
-    @AppStorage("AssistiveTouchEnabled") private var assistiveTouchEnabled = false
+    @State private var assistiveTouchEnabled = UIAccessibility.isAssistiveTouchRunning
+    @State private var assistiveTouchOffset: CGSize = .zero
+    @State private var assistiveTouchDragOrigin: CGSize = .zero
     
     var body: some View {
         @Bindable var model = model
@@ -120,16 +123,6 @@ struct ContentView: View {
             }
         }
         .accessibilityIdentifier("SettingsList")
-        .overlay(alignment: .bottomTrailing) {
-            if assistiveTouchEnabled {
-                AssistiveTouchFloatingButton()
-                    .padding(.trailing, 28)
-                    .padding(.bottom, 34)
-                    .transition(.opacity.combined(with: .scale))
-                    .zIndex(1000)
-            }
-        }
-        .animation(.easeInOut(duration: 0.2), value: assistiveTouchEnabled)
         .alert(
             .tapToRadar,
             isPresented: $showingSearchQueryError
@@ -205,29 +198,59 @@ struct ContentView: View {
         .sheet(isPresented: $showingSupervisedSheet) {
             DeviceSupervisionView()
         }
+        .overlay(alignment: .bottomTrailing) {
+            if assistiveTouchEnabled {
+                AssistiveTouchFloatingButton()
+                    .offset(assistiveTouchOffset)
+                    .padding(.trailing, 18)
+                    .padding(.bottom, 96)
+                    .gesture(
+                        DragGesture()
+                            .onChanged { value in
+                                assistiveTouchOffset = CGSize(
+                                    width: assistiveTouchDragOrigin.width + value.translation.width,
+                                    height: assistiveTouchDragOrigin.height + value.translation.height
+                                )
+                            }
+                            .onEnded { _ in
+                                assistiveTouchDragOrigin = assistiveTouchOffset
+                            }
+                    )
+                    .transition(.opacity)
+                    .zIndex(1000)
+            }
+        }
+        .onAppear {
+            assistiveTouchEnabled = UIAccessibility.isAssistiveTouchRunning
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIAccessibility.assistiveTouchStatusDidChangeNotification)) { _ in
+            withAnimation(.easeInOut(duration: 0.2)) {
+                assistiveTouchEnabled = UIAccessibility.isAssistiveTouchRunning
+            }
+        }
     }
 }
 
 private struct AssistiveTouchFloatingButton: View {
-    @State private var dragOffset: CGSize = .zero
-
     var body: some View {
-        Image(systemName: "circle.grid.3x3.fill")
-            .font(.system(size: 31, weight: .medium))
-            .foregroundStyle(.white)
-            .frame(width: 76, height: 76)
-            .background(.ultraThinMaterial, in: Circle())
-            .overlay {
-                Circle().stroke(.white.opacity(0.42), lineWidth: 1.5)
-            }
-            .shadow(color: .black.opacity(0.25), radius: 8, y: 3)
-            .offset(dragOffset)
-            .gesture(
-                DragGesture()
-                    .onChanged { value in dragOffset = value.translation }
-                    .onEnded { value in dragOffset = value.translation }
-            )
-            .accessibilityLabel("AssistiveTouch")
+        ZStack {
+            Circle()
+                .fill(Color.black.opacity(0.48))
+                .overlay {
+                    Circle().stroke(Color.white.opacity(0.42), lineWidth: 2)
+                }
+            Circle()
+                .fill(Color.white.opacity(0.96))
+                .frame(width: 25, height: 25)
+                .overlay {
+                    Circle().stroke(Color.gray.opacity(0.65), lineWidth: 4)
+                }
+                .padding(7)
+        }
+        .frame(width: 54, height: 54)
+        .shadow(color: .black.opacity(0.28), radius: 5, y: 2)
+        .contentShape(Circle())
+        .accessibilityLabel("AssistiveTouch")
     }
 }
 
