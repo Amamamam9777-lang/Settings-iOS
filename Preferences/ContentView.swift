@@ -10,7 +10,6 @@ import SwiftUI
 struct ContentView: View {
     @AppStorage("FollowUpDismissed") private var followUpDismissed = false
     @AppStorage("ForceQueryError") private var forceQueryError = false
-    @AppStorage("SettingsAssistiveTouchOverlayEnabled") private var assistiveTouchOverlayEnabled = false
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(PrimarySettingsListModel.self) private var model
     @State private var searchText = ""
@@ -19,6 +18,7 @@ struct ContentView: View {
     @State private var showingResearchSheet = false
     @State private var showingSupervisedSheet = false
     @State private var showingSearchQueryError = false
+    @AppStorage("AssistiveTouchEnabled") private var assistiveTouchEnabled = false
     
     var body: some View {
         @Bindable var model = model
@@ -120,12 +120,16 @@ struct ContentView: View {
             }
         }
         .accessibilityIdentifier("SettingsList")
-        .overlay {
-            if assistiveTouchOverlayEnabled {
+        .overlay(alignment: .bottomTrailing) {
+            if assistiveTouchEnabled {
                 AssistiveTouchFloatingButton()
+                    .padding(.trailing, 28)
+                    .padding(.bottom, 34)
+                    .transition(.opacity.combined(with: .scale))
                     .zIndex(1000)
             }
         }
+        .animation(.easeInOut(duration: 0.2), value: assistiveTouchEnabled)
         .alert(
             .tapToRadar,
             isPresented: $showingSearchQueryError
@@ -204,50 +208,26 @@ struct ContentView: View {
     }
 }
 
-/// Minimal in-app AssistiveTouch indicator. No menu or additional window is presented.
 private struct AssistiveTouchFloatingButton: View {
-    @AppStorage("SettingsAssistiveTouchButtonX") private var savedX = -1.0
-    @AppStorage("SettingsAssistiveTouchButtonY") private var savedY = -1.0
-    @State private var position: CGPoint?
-    @State private var dragOrigin: CGPoint?
-
-    private let diameter: CGFloat = 62
+    @State private var dragOffset: CGSize = .zero
 
     var body: some View {
-        GeometryReader { geometry in
-            let size = geometry.size
-            let current = position ?? CGPoint(
-                x: savedX > 0 ? min(max(CGFloat(savedX), diameter / 2), size.width - diameter / 2) : size.width - diameter / 2 - 8,
-                y: savedY > 0 ? min(max(CGFloat(savedY), diameter / 2), size.height - diameter / 2) : size.height * 0.52
+        Image(systemName: "circle.grid.3x3.fill")
+            .font(.system(size: 31, weight: .medium))
+            .foregroundStyle(.white)
+            .frame(width: 76, height: 76)
+            .background(.ultraThinMaterial, in: Circle())
+            .overlay {
+                Circle().stroke(.white.opacity(0.42), lineWidth: 1.5)
+            }
+            .shadow(color: .black.opacity(0.25), radius: 8, y: 3)
+            .offset(dragOffset)
+            .gesture(
+                DragGesture()
+                    .onChanged { value in dragOffset = value.translation }
+                    .onEnded { value in dragOffset = value.translation }
             )
-
-            Circle()
-                .fill(Color.black.opacity(0.48))
-                .overlay { Circle().stroke(Color.white.opacity(0.48), lineWidth: 1.6) }
-                .overlay { Circle().fill(Color.white).frame(width: 23, height: 23) }
-                .frame(width: diameter, height: diameter)
-                .shadow(color: .black.opacity(0.24), radius: 4, x: 0, y: 1)
-                .contentShape(Circle())
-                .position(current)
-                .gesture(DragGesture(minimumDistance: 2)
-                    .onChanged { value in
-                        let origin = dragOrigin ?? current
-                        dragOrigin = origin
-                        position = CGPoint(
-                            x: min(max(origin.x + value.translation.width, diameter / 2), size.width - diameter / 2),
-                            y: min(max(origin.y + value.translation.height, diameter / 2), size.height - diameter / 2)
-                        )
-                    }
-                    .onEnded { _ in
-                        if let position {
-                            savedX = Double(position.x)
-                            savedY = Double(position.y)
-                        }
-                        dragOrigin = nil
-                    })
-                .accessibilityLabel("AssistiveTouch")
-        }
-        .ignoresSafeArea()
+            .accessibilityLabel("AssistiveTouch")
     }
 }
 
