@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import LocalAuthentication
 
 /// Settings > General
 struct GeneralView: View {
@@ -317,6 +318,23 @@ enum StorageDemoData {
         "pubg": ("4.7.0", "Tencent Mobile International Limited", 3910),
         "swiftgram": ("13.0", "Akentech Ltd", 176.4),
         "ayugram": ("13.0", "Uliana Kulibaba", 170.8),
+        "moymts": ("6.80.0", "Mobile TeleSystems Public Joint Stock Company", 595.7),
+        "capcut": ("20.1.0", "Bytedance Pte. Ltd.", nil),
+        "x": ("12.46", "X Corp.", 721.3),
+        "chatgpt": ("1.2026.315", "OpenAI OpCo, LLC", 306.3),
+        "gosuslugi": ("28.0.1", "Минкомсвязь РФ", 445.6),
+        "youtube": ("21.47.6", "Google", 368.9),
+        "gemini": ("1.2026.4570305", "Google", 371.4),
+        "shadowfight2": ("2.46.0", "Nekki Games", 344.688),
+        "beeline": ("5.51.6", "PJSC VimpelCom", 286.7),
+        "veniceai": ("1.17.20", "VENICE.AI", 192.7),
+        "parallel": ("6.77.0", "Parallel Corp.", 278.5),
+        "piik": ("1.1.38", "Parallel Corp.", 149),
+        "discord": ("355.0", "Discord Inc.", 164.7),
+        "deepseek": ("2.9.0", "杭州深度求索人工智能基础技术研究有限公司", nil),
+        "music": (nil, "Apple Inc.", 105.8),
+        "freeform": (nil, "Apple Inc.", 88.8),
+        "shazam": ("27.3.0", "Apple", 50.4),
     ]
 
     static let apps: [StorageApp] = {
@@ -420,13 +438,52 @@ enum StorageDemoData {
         StorageApp(id: "igwa", name: "Instagram, Inc. and WhatsApp Inc.", megabytes: 0.012, lastUsed: nil),
         ]
         return base.map { app in
-            guard let d = details[app.id] else { return app }
             var copy = app
-            copy.version = d.version
-            copy.developer = d.developer
-            copy.appSizeMB = d.appSizeMB
+            if let d = details[app.id] {
+                copy.version = d.version
+                copy.developer = d.developer
+                copy.appSizeMB = d.appSizeMB
+            }
+            if copy.developer == nil { copy.developer = developers[app.id] }
             return copy
         }
+    }()
+
+    /// Developer names shown on the app detail page. Only filled in where the publisher is
+    /// well known; apps that are missing here simply show no developer line.
+    private static let developers: [String: String] = {
+        var d: [String: String] = [
+            "shareit": "Smart Media4U Technology Pte. Ltd.",
+            "tiktok": "TikTok Ltd.",
+            "capcut": "Bytedance Pte. Ltd.",
+            "x": "X Corp.",
+            "gmail": "Google",
+            "instagram": "Instagram, Inc.",
+            "chatgpt": "OpenAI OpCo, LLC",
+            "whatsapp": "WhatsApp Inc.",
+            "subwaysurf": "SYBO Games ApS",
+            "youtube": "Google LLC",
+            "gemini": "Google LLC",
+            "shadowfight2": "Nekki",
+            "github": "GitHub, Inc.",
+            "discord": "Discord Inc.",
+            "speedtest": "Ookla, LLC",
+            "sendanywhere": "Estmob Inc.",
+            "deepseek": "Hangzhou DeepSeek Artificial Intelligence Co., Ltd.",
+            "beeline": "PJSC VimpelCom",
+            "localsend": "Tien Do Nam",
+            "wireguard": "WireGuard Systems LLC",
+        ]
+        // Built-in Apple apps.
+        for id in ["photos", "onmyiphone", "podcasts", "music", "maps", "books", "freeform", "findmy",
+                   "watch", "safari", "shazam", "journal", "health", "fitness", "mail", "home", "notes",
+                   "appstore", "appstore2", "weather", "settings", "tips", "stocks", "reminders", "news",
+                   "translate", "preview", "messages", "wallet", "calendar", "camera", "tv", "files",
+                   "clock", "voicememos", "games", "calculator", "measure", "contacts", "itunesstore",
+                   "facetime", "passwords", "magnifier", "compass", "phone", "visionpro", "iclouddrive"] {
+            d[id] = "Apple Inc."
+        }
+        return d
     }()
 
     /// How many apps are shown before "Show All" is tapped.
@@ -476,6 +533,7 @@ struct PhoneStorageView: View {
     @State private var sort: StorageSort = .size
     @State private var showAll = false
     @State private var query = ""
+    @State private var openHidden = false
 
     private var sortedApps: [StorageApp] {
         let apps = StorageDemoData.apps
@@ -538,14 +596,21 @@ struct PhoneStorageView: View {
                 }
 
                 Section {
-                    NavigationLink {
-                        HiddenAppsView()
+                    Button {
+                        authenticateAndOpenHiddenApps()
                     } label: {
                         HStack(spacing: 12) {
                             StorageIcon(name: "StorageIcon_hiddenapps")
                             Text("Hidden Apps")
+                            Spacer(minLength: 8)
+                            Image(systemName: "chevron.right")
+                                .font(.footnote.weight(.semibold))
+                                .foregroundStyle(.tertiary)
                         }
+                        .padding(.vertical, 2)
+                        .contentShape(Rectangle())
                     }
+                    .foregroundStyle(.primary)
                 }
 
                 Section {
@@ -567,6 +632,29 @@ struct PhoneStorageView: View {
         .dynamicTypeSize(.xLarge)
         .preferredColorScheme(.dark)
         .scrollDismissesKeyboard(.interactively)
+        .navigationDestination(isPresented: $openHidden) { HiddenAppsView() }
+    }
+
+    /// Real system authentication (Face ID, with passcode fallback) before Hidden Apps opens.
+    /// If the device has no Face ID / passcode set up (e.g. a bare simulator), it just opens.
+    private func authenticateAndOpenHiddenApps() {
+        Task { @MainActor in
+            let context = LAContext()
+            var error: NSError?
+            guard context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) else {
+                openHidden = true
+                return
+            }
+            do {
+                let ok = try await context.evaluatePolicy(
+                    .deviceOwnerAuthentication,
+                    localizedReason: "Authenticate to view Hidden Apps"
+                )
+                if ok { openHidden = true }
+            } catch {
+                // Cancelled or failed: stay on this screen.
+            }
+        }
     }
 
     private var recommendationsSection: some View {
