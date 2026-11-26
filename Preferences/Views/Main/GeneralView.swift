@@ -35,17 +35,12 @@ struct GeneralView: View {
                         icon: "com.apple.graphic-icon.software-update",
                         destination: SoftwareUpdateView()
                     )
-                    SLink(
-                        "Device Storage".localized(path: path),
-                        icon: "com.apple.graphic-icon.external-drive"
-                    ) {
-                        ControllerBridgeView(
-                            "StorageSettingsUI",
-                            controller: "StorageSettingsUIWrapper",
-                            title: "Device Storage".localized(path: path)
-                        )
-                    }
                 }
+                SLink(
+                    UIDevice.iPad ? "iPad Storage" : "iPhone Storage",
+                    icon: "com.apple.graphic-icon.external-drive",
+                    destination: PhoneStorageView()
+                )
             }
             
             if !UIDevice.IsSimulator {
