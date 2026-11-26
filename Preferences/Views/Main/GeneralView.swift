@@ -450,7 +450,7 @@ struct StorageIcon: View {
 
 /// Decodes the embedded icons (see `StorageIconData` at the bottom of the file) once and caches them.
 enum StorageIconStore {
-    private static var cache: [String: UIImage] = [:]
+    nonisolated(unsafe) private static var cache: [String: UIImage] = [:]
 
     static func image(for name: String) -> UIImage {
         let id = name.replacingOccurrences(of: "StorageIcon_", with: "")
